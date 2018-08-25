@@ -3,12 +3,13 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'bulma/css/bulma.css';
+import 'bulma-extensions/src/sass/index.sass'
 import './app.css';
 
 import AppNavbar from '../navbar/navbar'
-import ChooseTemplate from '../chooseTemplate/chooseTemplate'
-import Architecture from "../architecture/architecture";
+import ChooseTemplate from '../template/chooseTemplate'
 import About from '../about/about'
+import BuildNN from "../buildnn/buildnn";
 
 class App extends Component {
   render() {
@@ -18,7 +19,7 @@ class App extends Component {
           <AppNavbar/>
           <Switch>
             <Route exact path="/" component={ChooseTemplate}/>
-            <Route path="/build" component={Architecture}/>
+            <Route path="/build" component={BuildNN}/>
             <Route path="/about" component={About}/>
           </Switch>
         </div>
