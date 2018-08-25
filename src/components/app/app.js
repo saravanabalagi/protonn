@@ -7,6 +7,7 @@ import './app.css';
 
 import AppNavbar from '../navbar/navbar'
 import ChooseTemplate from '../chooseTemplate/chooseTemplate'
+import Architecture from "../architecture/architecture";
 import About from '../about/about'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <AppNavbar/>
           <Switch>
             <Route exact path="/" component={ChooseTemplate}/>
+            <Route path="/build" component={Architecture}/>
             <Route path="/about" component={About}/>
           </Switch>
         </div>

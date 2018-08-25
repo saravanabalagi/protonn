@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {
+  Button,
   Card,
-  CardContent,
+  CardContent, CardFooter,
   CardHeader,
   CardHeaderTitle,
   CardImage,
@@ -22,6 +23,9 @@ class ChooseTemplate extends Component {
   render() {
     return (
       <Container>
+        <Content>
+          <p align="center">Choose a template to begin with</p>
+        </Content>
         <Columns isCentered>
           <Column className="is-4">
             <Card>
@@ -44,6 +48,9 @@ class ChooseTemplate extends Component {
                   Feed-forward Artificial Neural Networks with dense layers
                 </Content>
               </CardContent>
+              <CardFooter>
+                <Button isColor='info' href='/build'>Choose</Button>
+              </CardFooter>
             </Card>
           </Column>
           <Column className="is-4">
@@ -67,6 +74,9 @@ class ChooseTemplate extends Component {
                   Convolutional Neural Networks preserve structural information of images and use shared weights as convolution kernels.
                 </Content>
               </CardContent>
+              <CardFooter>
+                <Button isColor='info' href='/build'>Choose</Button>
+              </CardFooter>
             </Card>
           </Column>
         </Columns>
