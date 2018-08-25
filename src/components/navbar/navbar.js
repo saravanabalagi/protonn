@@ -24,15 +24,16 @@ class AppNavBar extends Component {
         </NavbarBrand>
         <NavbarMenu>
           <NavbarStart>
+            <NavbarItem href='/about'>About</NavbarItem>
             <NavbarItem href='/'>Donate</NavbarItem>
           </NavbarStart>
           <NavbarEnd>
+            <NavbarItem href='/code'>Code</NavbarItem>
             <NavbarItem hasDropdown isHoverable>
               <NavbarLink>Export</NavbarLink>
               <NavbarDropdown>
-                <NavbarItem href='/export'>Code</NavbarItem>
-                <NavbarDivider />
                 <NavbarItem href='/'>SVG</NavbarItem>
+                <NavbarItem href='/'>PNG</NavbarItem>
               </NavbarDropdown>
             </NavbarItem>
           </NavbarEnd>

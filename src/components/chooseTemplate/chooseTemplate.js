@@ -11,6 +11,8 @@ import {
   MediaLeft, Subtitle, Title
 } from "bloomer";
 
+import './chooseTemplate.css'
+
 class ChooseTemplate extends Component {
   render() {
     return (
