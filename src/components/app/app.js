@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import 'font-awesome/css/font-awesome.min.css';
 import 'bulma/css/bulma.css';
 import './app.css';
 
@@ -10,6 +12,7 @@ class App extends Component {
     return (
       <div className="App">
         <AppNavbar/>
+        <div style={{ paddingTop: 80}}/>
         <ChooseTemplate/>
       </div>
     );

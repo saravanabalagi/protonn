@@ -15,7 +15,7 @@ import logo from '../../assets/logo.svg';
 class AppNavBar extends Component {
   render() {
     return (
-      <Navbar>
+      <Navbar className='is-fixed-top'>
         <NavbarBrand>
           <NavbarItem href='/'>
             <img src={logo} style={{ marginRight: 5 }} />
