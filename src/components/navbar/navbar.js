@@ -1,15 +1,5 @@
-import React, { Component } from 'react';
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarDivider,
-  NavbarDropdown,
-  NavbarEnd,
-  NavbarItem,
-  NavbarLink,
-  NavbarMenu,
-  NavbarStart
-} from "bloomer";
+import React, {Component} from 'react';
+import {Navbar, NavbarBrand, NavbarDropdown, NavbarEnd, NavbarItem, NavbarLink, NavbarMenu, NavbarStart} from "bloomer";
 import logo from '../../assets/logo.svg';
 
 class AppNavBar extends Component {

@@ -1,6 +1,6 @@
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { createStore, applyMiddleware } from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import rootReducer from './reducers/reducer';
 
 // Centralized application state

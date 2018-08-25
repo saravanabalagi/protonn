@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Card,
   CardContent,
-  CardHeader, CardHeaderIcon,
+  CardHeader,
   CardHeaderTitle,
   CardImage,
-  Column, Columns, Container, Content, Icon, Image,
+  Column,
+  Columns,
+  Container,
+  Content,
+  Image,
   Media,
   MediaContent,
-  MediaLeft, Subtitle, Title
+  Subtitle,
+  Title
 } from "bloomer";
 
 import './chooseTemplate.css'
