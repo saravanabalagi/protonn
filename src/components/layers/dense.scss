@@ -1,5 +1,26 @@
-.layerSize {
-  width: 70px;
-  text-align: center;
-  margin-right: 10px;
+.denseLayer {
+  margin-bottom: 10px;
+
+  .inputLayerSize {
+    width: 70px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .inputLayerName {
+    display: inline;
+    .label {
+      padding-top: 0.375em;
+      display: inline-block;
+      font-weight: normal;
+    }
+  }
+
+  input[type=range].slider.sliderLayerSpacing {
+    display: inline;
+    width: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 8px;
+  }
 }

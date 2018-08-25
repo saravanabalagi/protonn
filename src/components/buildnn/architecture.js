@@ -12,6 +12,9 @@ class Architecture extends Component {
           <h1>Architecture</h1>
         </Content>
         <DenseLayer/>
+        <DenseLayer/>
+        <DenseLayer/>
+        <div className="is-divider"/>
         <Field isHorizontal>
           <div className="buttons has-addons">
             <Button className="is-success is-selected">Dense</Button>
