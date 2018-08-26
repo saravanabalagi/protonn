@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Navbar, NavbarBrand, NavbarDropdown, NavbarEnd, NavbarItem, NavbarLink, NavbarMenu, NavbarStart} from "bloomer";
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo-white.svg';
 
 class AppNavBar extends Component {
   render() {
     return (
-      <Navbar className='is-fixed-top'>
+      <Navbar className='is-fixed-top is-dark'>
         <NavbarBrand>
           <NavbarItem href='/'>
             <img src={logo} style={{ marginRight: 5 }} />
