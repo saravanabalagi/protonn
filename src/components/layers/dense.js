@@ -2,14 +2,26 @@ import React, {Component} from 'react'
 import {Button} from "bloomer";
 import './dense.css'
 
+import {connect} from "react-redux";
+import {changeNeuron} from "../../reducers/layer/layerActions";
+
 class DenseLayer extends Component {
+
+  handleChangeNeurons = (e) => {
+    let changedNeurons = e.target.value;
+    this.props.dispatch(changeNeuron(changedNeurons));
+  };
+
   render() {
+    let neurons = this.props.neurons;
     return (
       <div className="is-horizontal denseLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">dense_1</label>
         </div>
-        <input className="input inputLayerSize" type="number" placeholder="0" />
+        <input className="input inputLayerSize" type="number" placeholder="0"
+               value={neurons} inputMode="numeric"
+               onChange={this.handleChangeNeurons}/>
         <Button isColor='danger'>
           <span className="icon">
             <i className="fa fa-times-circle"/>
@@ -21,4 +33,8 @@ class DenseLayer extends Component {
   }
 }
 
-export default DenseLayer
+export default connect((store) => {
+  return {
+    neurons: store.layer.neurons
+  }
+})(DenseLayer);
