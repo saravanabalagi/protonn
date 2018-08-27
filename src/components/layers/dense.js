@@ -8,12 +8,12 @@ import {changeNeuron} from "../../reducers/layer/layerActions";
 class DenseLayer extends Component {
 
   handleChangeNeurons = (e) => {
-    let changedNeurons = e.target.value;
-    this.props.dispatch(changeNeuron(changedNeurons));
+    let numberOfNeurons = parseInt(e.target.value);
+    this.props.dispatch(changeNeuron(this.props.layerPosition, numberOfNeurons));
   };
 
   render() {
-    let neurons = this.props.neurons;
+    let neurons = this.props.layer.neurons;
     return (
       <div className="is-horizontal denseLayer">
         <div className="field-label is-normal inputLayerName">
@@ -35,6 +35,5 @@ class DenseLayer extends Component {
 
 export default connect((store) => {
   return {
-    neurons: store.layer.neurons
   }
 })(DenseLayer);

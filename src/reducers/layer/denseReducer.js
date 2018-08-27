@@ -1,5 +1,5 @@
 export default (state={
-  neurons: 0
+  neurons: 1
 }, action) => {
   switch (action.type) {
     case "CHANGE_NEURONS":

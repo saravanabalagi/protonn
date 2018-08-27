@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import layerReducer from "./layer/layerReducer";
+import layersReducer from "./layer/layersReducer";
 
 export default combineReducers({
-  layer: layerReducer
+  layers: layersReducer,
 });
