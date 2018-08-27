@@ -3,7 +3,7 @@ import {Button} from "bloomer";
 import './dense.css'
 
 import {connect} from "react-redux";
-import {changeNeuron} from "../../reducers/layer/layerActions";
+import {changeNeuron, deleteLayer} from "../../reducers/layer/layerActions";
 
 class DenseLayer extends Component {
 
@@ -11,6 +11,10 @@ class DenseLayer extends Component {
     let numberOfNeurons = parseInt(e.target.value);
     if (numberOfNeurons<=0) return;
     this.props.dispatch(changeNeuron(this.props.layerPosition, numberOfNeurons));
+  };
+
+  handleDeleteLayer = () => {
+    this.props.dispatch(deleteLayer(this.props.layerPosition));
   };
 
   render() {
@@ -24,7 +28,7 @@ class DenseLayer extends Component {
         <input className="input inputLayerSize" type="number" placeholder="0"
                value={neurons} inputMode="numeric"
                onChange={this.handleChangeNeurons}/>
-        <Button isColor='danger'>
+        <Button isColor='danger' onClick={this.handleDeleteLayer}>
           <span className="icon">
             <i className="fa fa-times-circle"/>
           </span>

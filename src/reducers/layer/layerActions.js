@@ -14,3 +14,9 @@ export function addLayer() {
     dispatch({type: "ADD_LAYER", layer: { name: newLayerName, neurons: 1 }});
   }
 }
+
+export function deleteLayer(layerPosition) {
+  return (dispatch) => {
+    dispatch({type: "DELETE_LAYER", layerPosition: layerPosition});
+  }
+}
