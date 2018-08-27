@@ -3,7 +3,7 @@ import {Button} from "bloomer";
 import './dense.css'
 
 import {connect} from "react-redux";
-import {changeNeuron, deleteLayer} from "../../reducers/layer/layerActions";
+import {changeNeuron, deleteLayer, getLayerName} from "../../reducers/layer/layerActions";
 
 class DenseLayer extends Component {
 
@@ -19,7 +19,7 @@ class DenseLayer extends Component {
 
   render() {
     let neurons = this.props.layer.neurons;
-    let layerName = this.props.layer.name;
+    let layerName = getLayerName(this.props.layer);
     return (
       <div className="is-horizontal denseLayer">
         <div className="field-label is-normal inputLayerName">

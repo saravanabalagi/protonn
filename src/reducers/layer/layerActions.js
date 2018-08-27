@@ -10,8 +10,8 @@ export function changeNeuron(layerPosition, neurons) {
 
 export function addLayer() {
   return (dispatch) => {
-    let newLayerName = "dense_" + store.getState().layers.layers.length;
-    dispatch({type: "ADD_LAYER", layer: { name: newLayerName, neurons: 1 }});
+    let layerPosition = store.getState().layers.layers.length;
+    dispatch({type: "ADD_LAYER", layer: { neurons: 1, layerPosition: layerPosition }});
   }
 }
 
@@ -19,4 +19,8 @@ export function deleteLayer(layerPosition) {
   return (dispatch) => {
     dispatch({type: "DELETE_LAYER", layerPosition: layerPosition});
   }
+}
+
+export function getLayerName(layer) {
+  return "dense_" + layer.layerPosition;
 }
