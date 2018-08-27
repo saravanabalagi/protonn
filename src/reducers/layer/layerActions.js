@@ -1,3 +1,5 @@
+import store from '../../store';
+
 export function changeNeuron(layerPosition, neurons) {
   return (dispatch) => {
     dispatch({ type: "CHANGE_NEURONS",
@@ -8,6 +10,7 @@ export function changeNeuron(layerPosition, neurons) {
 
 export function addLayer() {
   return (dispatch) => {
-    dispatch({type: "ADD_LAYER", layer:{neurons: 1}});
+    let newLayerName = "dense_" + store.getState().layers.layers.length;
+    dispatch({type: "ADD_LAYER", layer: { name: newLayerName, neurons: 1 }});
   }
 }

@@ -9,15 +9,17 @@ class DenseLayer extends Component {
 
   handleChangeNeurons = (e) => {
     let numberOfNeurons = parseInt(e.target.value);
+    if (numberOfNeurons<=0) return;
     this.props.dispatch(changeNeuron(this.props.layerPosition, numberOfNeurons));
   };
 
   render() {
     let neurons = this.props.layer.neurons;
+    let layerName = this.props.layer.name;
     return (
       <div className="is-horizontal denseLayer">
         <div className="field-label is-normal inputLayerName">
-          <label className="label">dense_1</label>
+          <label className="label">{layerName}</label>
         </div>
         <input className="input inputLayerSize" type="number" placeholder="0"
                value={neurons} inputMode="numeric"
