@@ -7,6 +7,7 @@ export default (state={
       return {...state, neurons: action.neurons};
     case "UPDATE_LAYER_POSITION":
       return {...state, layerPosition: action.layerPosition};
+    default:
+      return state;
   }
-  return state;
 }

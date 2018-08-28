@@ -12,6 +12,7 @@ export default (state={
     case "CHANGE_NEURONS":
       let changedLayer = denseReducer(state.layers[action.layerPosition],action);
       return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+    default:
+      return state;
   }
-  return state;
 }

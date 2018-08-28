@@ -8,7 +8,7 @@ class AppNavBar extends Component {
       <Navbar className='is-fixed-top is-dark'>
         <NavbarBrand>
           <NavbarItem href='/'>
-            <img src={logo} style={{ marginRight: 5 }} />
+            <img src={logo} style={{ marginRight: 5 }} alt="Logo"/>
             <div style={{ marginRight: 30 }}>Protonn</div>
           </NavbarItem>
         </NavbarBrand>
