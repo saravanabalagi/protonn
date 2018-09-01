@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Field} from "bloomer";
 
 import './build.css';
-import {addLayer} from "../../reducers/layer/layerActions";
+import {addLayer} from "../../reducers/layer/architectureActions";
 import {connect} from "react-redux";
 
 class Build extends Component {

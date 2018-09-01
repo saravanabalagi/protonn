@@ -4,7 +4,7 @@ import {Column, Columns, Icon, Tab, TabLink, TabList, Tabs} from "bloomer";
 import Styling from "./styling";
 import {FCNN} from './fcnn';
 import './architecture.css';
-import {addLayer, getArchitecture, getSpacing} from "../../reducers/layer/layerActions";
+import {addLayer, getArchitecture, getSpacing} from "../../reducers/layer/architectureActions";
 import {connect} from "react-redux";
 import Build from "./build";
 

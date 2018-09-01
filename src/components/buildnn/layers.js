@@ -25,6 +25,6 @@ class Layers extends Component {
 
 export default connect((store)=> {
   return {
-    layers: store.layers.layers
+    layers: store.architecture.layers
   }
 })(Layers);
