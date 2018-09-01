@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {
   Button,
   Card,
-  CardContent, CardFooter,
+  CardContent,
+  CardFooter,
   CardHeader,
   CardHeaderTitle,
   CardImage,
@@ -23,7 +24,7 @@ class ChooseTemplate extends Component {
   render() {
     return (
       <Container>
-        <Content>
+        <Content className="containerHeader">
           <p align="center">Choose a template to begin with</p>
         </Content>
         <Columns isCentered>

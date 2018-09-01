@@ -15,7 +15,7 @@ class Architecture extends Component {
     }
   }
 
-  handleAddLayer = () => { this.props.dispatch(addLayer()) };
+  handleAddLayer = () => { this.props.dispatch(addLayer()); this.props.redraw(); };
   handleSwitchNewLayer = (isDense) => { this.setState({ isDense: isDense}) };
 
   render() {
@@ -27,7 +27,7 @@ class Architecture extends Component {
         </Content>
         {
           layers.map((object, index)=>{
-            return <DenseLayer key={index} layerPosition={index} layer={object}/>
+            return <DenseLayer redraw={this.props.redraw} key={index} layerPosition={index} layer={object}/>
           })
         }
         <div className="is-divider" data-content="Add Layer"/>

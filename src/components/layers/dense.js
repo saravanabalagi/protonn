@@ -11,10 +11,12 @@ class DenseLayer extends Component {
     let numberOfNeurons = parseInt(e.target.value);
     if (numberOfNeurons<=0) return;
     this.props.dispatch(changeNeuron(this.props.layerPosition, numberOfNeurons));
+    this.props.redraw();
   };
 
   handleDeleteLayer = () => {
     this.props.dispatch(deleteLayer(this.props.layerPosition));
+    this.props.redraw();
   };
 
   render() {
