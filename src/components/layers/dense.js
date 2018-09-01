@@ -33,18 +33,24 @@ class DenseLayer extends Component {
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
-        <input className="input inputLayerSize" type="number" placeholder="0"
-               value={neurons} inputMode="numeric"
-               onChange={this.handleChangeNeurons}/>
-        <Button isColor='danger' onClick={this.handleDeleteLayer}>
+        {
+          this.props.styling && <input className="slider sliderLayerSpacing"
+                                       onChange={this.handleSliderChange}
+                                       step="1" min="0" max="100"
+                                       defaultValue="50" type="range" />
+        }
+        {
+          !this.props.styling &&
+          <input className="input inputLayerSize" type="number" placeholder="0"
+                 value={neurons} inputMode="numeric"
+                 onChange={this.handleChangeNeurons}/>
+        }
+        <Button isColor='danger' onClick={this.handleDeleteLayer}
+                className={this.props.styling && "invisible"}>
           <span className="icon">
             <i className="fa fa-times-circle"/>
           </span>
         </Button>
-        <input className="slider sliderLayerSpacing"
-               onChange={this.handleSliderChange}
-               step="1" min="0" max="100"
-               defaultValue="50" type="range" />
       </div>
     );
   }

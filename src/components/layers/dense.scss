@@ -19,10 +19,12 @@
   }
 
   input[type=range].slider.sliderLayerSpacing {
-    display: inline;
     width: 100px;
-    margin-left: 30px;
-    margin-right: 10px;
-    margin-top: 8px;
+    margin: 0 10px 0 30px;
+    padding-top: 15px;
+  }
+
+  .invisible {
+    visibility: hidden;
   }
 }

@@ -9,7 +9,7 @@ import './app.css';
 import AppNavbar from '../navbar/navbar'
 import ChooseTemplate from '../template/chooseTemplate'
 import About from '../about/about'
-import BuildNN from "../buildnn/buildnn";
+import BuildNN from "../buildnn/architecture";
 
 class App extends Component {
   render() {
