@@ -21,6 +21,12 @@ export function deleteLayer(layerPosition) {
   }
 }
 
+export function changeSpacing(layerPosition, spacing) {
+  return (dispatch) => {
+    dispatch({type: "CHANGE_SPACING", layerPosition: layerPosition, spacing: spacing});
+  }
+}
+
 export function getLayerName(layer) {
   let no_of_layers = store.getState().layers.layers.length;
   if(layer.layerPosition===0) return 'input_layer';

@@ -24,7 +24,6 @@ class BuildNN extends Component {
   redraw = () => {
     this.fcnn.redraw({architecture_: getArchitecture()});
     this.fcnn.redistribute({betweenNodesInLayer_: getSpacing()});
-    console.log(this.fcnn);
   };
 
   render() {

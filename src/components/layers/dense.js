@@ -3,7 +3,7 @@ import {Button} from "bloomer";
 import './dense.css'
 
 import {connect} from "react-redux";
-import {changeNeuron, deleteLayer, getLayerName} from "../../reducers/layer/layerActions";
+import {changeNeuron, changeSpacing, deleteLayer, getLayerName} from "../../reducers/layer/layerActions";
 
 class DenseLayer extends Component {
 
@@ -16,6 +16,12 @@ class DenseLayer extends Component {
 
   handleDeleteLayer = () => {
     this.props.dispatch(deleteLayer(this.props.layerPosition));
+    this.props.redraw();
+  };
+
+  handleSliderChange = (e) => {
+    let spacing = parseInt(e.target.value);
+    this.props.dispatch(changeSpacing(this.props.layerPosition, spacing));
     this.props.redraw();
   };
 
@@ -35,7 +41,10 @@ class DenseLayer extends Component {
             <i className="fa fa-times-circle"/>
           </span>
         </Button>
-        {/*<input className="slider sliderLayerSpacing" step="1" min="0" max="100" defaultValue="50" type="range" />*/}
+        <input className="slider sliderLayerSpacing"
+               onChange={this.handleSliderChange}
+               step="1" min="0" max="100"
+               defaultValue="50" type="range" />
       </div>
     );
   }
