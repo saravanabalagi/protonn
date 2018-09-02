@@ -25,8 +25,9 @@ class Architecture extends Component {
     this.redraw();
   }
 
-  redraw = () => {
+  redraw = (showLabels=true) => {
     this.fcnn.redraw({architecture_: getArchitecture()});
+    this.fcnn.redraw({showLabels_: showLabels});
     this.fcnn.redistribute({betweenNodesInLayer_: getSpacing()});
   };
 
