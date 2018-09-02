@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+
 export function FCNN() {
 
   /////////////////////////////////////////////////////////////////////////////
@@ -111,11 +112,14 @@ export function FCNN() {
       .merge(node);
 
     text = text.data(label);
-    if (text.empty()) { text = text.enter().append("text").attr("class", "text"); }
-    text = text.text(function(d) { return (showLabels ? d.text : ""); })
+    text.exit().remove();
+    text = text.enter()
+      .append("text")
+      .attr("class", "text")
       .attr("dy", ".35em")
-      .style("font-size", nominal_text_size+"px")
+      .style("font-size", nominal_text_size + "px")
       .merge(text);
+    text.text(function(d) { return (showLabels ? d.text : ""); });
 
     style();
   }
