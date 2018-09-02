@@ -7,6 +7,8 @@ import './architecture.css';
 import {addLayer, getArchitecture, getSpacing} from "../../reducers/layer/architectureActions";
 import {connect} from "react-redux";
 import Build from "./build";
+import Visualize from "./visualize";
+import Code from "./code";
 
 class Architecture extends Component {
 
@@ -14,7 +16,8 @@ class Architecture extends Component {
     super(props);
     this.fcnn = null;
     this.state = {
-      styling: false
+      styling: false,
+      code: false
     };
   }
 
@@ -55,8 +58,25 @@ class Architecture extends Component {
           { !this.state.styling && <Build redraw={this.redraw}/>}
           { this.state.styling && <Styling redraw={this.redraw}/>}
         </Column>
-        <Column>
-          <div id="graph-container" style={{height: "100%"}}/>
+        <Column className="mainPanel">
+          <Tabs isAlign="centered">
+            <TabList>
+              <Tab isActive={!this.state.code}>
+                <TabLink onClick={()=>this.setState({code: false})}>
+                  <Icon isSize='small'><span className='fa fa-eye' aria-hidden='true' /></Icon>
+                  <span>Visualize</span>
+                </TabLink>
+              </Tab>
+              <Tab isActive={this.state.code}>
+                <TabLink onClick={()=>this.setState({code: true})}>
+                  <Icon isSize='small'><span className='fa fa-code' aria-hidden='true' /></Icon>
+                  <span>Code</span>
+                </TabLink>
+              </Tab>
+            </TabList>
+          </Tabs>
+          { !this.state.code && <Visualize/>}
+          { this.state.code && <Code/>}
         </Column>
       </Columns>
     );
