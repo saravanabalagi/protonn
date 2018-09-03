@@ -6,30 +6,30 @@ import {Content} from "bloomer";
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers'
 import 'prismjs/components/prism-python';
+import {getLayerName} from "../../../reducers/layer/architectureActions";
 
 class Code extends Component {
 
   getKerasCode = () => {
-    let layers = this.props.layers.map(layer => layer.neurons);
+    let layers = this.props.layers;
     let kerasCode = '';
     kerasCode += 'from keras.layers import Input\n';
     kerasCode += 'from keras.models import Model\n';
     kerasCode += '\n';
     kerasCode += 'def get_model():\n';
-    kerasCode += '  ' + 'input = Input(shape=(n))\n';
 
-    let last_layer = null;
-    for(let i=0; i<layers.length; i++) {
-      let layer_number = i+1;
-      let prev_layer = 'input';
-      if(layer_number-1>0) prev_layer = `dense_${layer_number-1}`;
-      let current_layer = `dense_${layer_number}`;
-      kerasCode += '  ' + `${current_layer} = Dense(${layers[i]}, activation='relu')(${prev_layer})\n`;
-      if(layer_number===layers.length) last_layer = current_layer;
+    let inputLayer = layers[0];
+    kerasCode += '  ' + `${getLayerName(inputLayer)} = Input(shape=(${inputLayer.neurons}))\n`;
+
+    for(let i=1; i<layers.length-1; i++) {
+      let currentLayer = layers[i];
+      let prevLayer = layers[i - 1];
+      kerasCode += '  ' + `${getLayerName(currentLayer)} = Dense(${currentLayer.neurons}, activation='relu')(${getLayerName(prevLayer)})\n`;
     }
 
-    kerasCode += '  ' + `output = Dense(, activation='relu')(${last_layer})\n`;
-    kerasCode += '  ' + 'model = Model(inputs=input, outputs=output)\n';
+    let outputLayer = layers[layers.length-1];
+    kerasCode += '  ' + `${getLayerName(outputLayer)} = Dense(${outputLayer.neurons}, activation='relu')(${getLayerName(outputLayer)})\n`;
+    kerasCode += '  ' + 'model = Model(inputs=input, outputs=output_layer)\n';
     kerasCode += '  ' + 'return model\n';
     return kerasCode;
   };
