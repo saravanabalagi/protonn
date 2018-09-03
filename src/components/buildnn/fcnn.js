@@ -224,9 +224,11 @@ export function FCNN() {
 
   function resize() {
     let graphContainer = document.getElementById("graph-container");
-    let w = graphContainer.offsetWidth;
-    let h = graphContainer.offsetHeight;
-    svg.attr("width", w).attr("height", h);
+    if(graphContainer!=null) {
+      let w = graphContainer.offsetWidth;
+      let h = graphContainer.offsetHeight;
+      svg.attr("width", w).attr("height", h);
+    }
   }
 
   d3.select(window).on("resize", resize);
