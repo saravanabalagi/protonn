@@ -3,7 +3,7 @@ import {Button} from "bloomer";
 import './dense.css'
 
 import {connect} from "react-redux";
-import {changeNeuron, changeSpacing, deleteLayer, getLayerName} from "../../reducers/layer/architectureActions";
+import {changeNeuron, changeSpacing, deleteLayer, getLayerName} from "src/reducers/layer/architectureActions";
 
 class DenseLayer extends Component {
 

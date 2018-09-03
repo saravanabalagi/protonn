@@ -3,20 +3,20 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'bulma/css/bulma.css';
-import '../../assets/bulma-extensions.min.css';
+import 'src/assets/bulma-extensions.min.css';
 import './app.css';
 
-import AppNavbar from '../navbar/navbar'
-import ChooseTemplate from '../template/chooseTemplate'
-import About from '../about/about'
-import BuildNN from "../buildnn/architecture";
+import AppNavBar from "src/components/navbar/navbar";
+import ChooseTemplate from 'src/components/template/chooseTemplate'
+import About from 'src/components/about/about'
+import BuildNN from "src/components/buildnn/architecture";
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div className="App">
-          <AppNavbar/>
+          <AppNavBar/>
           <Switch>
             <Route exact path="/" component={ChooseTemplate}/>
             <Route path="/build" component={BuildNN}/>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 import './layers.css'
-import DenseLayer from "../layers/dense";
+import DenseLayer from "src/components/layers/dense";
 import {connect} from "react-redux";
 
 class Layers extends Component {

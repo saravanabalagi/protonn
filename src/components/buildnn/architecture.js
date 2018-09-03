@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
-import Layers from "./layers";
+import Layers from "./sidePane/layers";
 import {Column, Columns, Icon, Tab, TabLink, TabList, Tabs} from "bloomer";
-import Styling from "./styling";
+import Styling from "./sidePane/styling";
 import {FCNN} from './fcnn';
 import './architecture.css';
-import {addLayer, getArchitecture, getSpacing} from "../../reducers/layer/architectureActions";
+import {addLayer, getArchitecture, getSpacing} from "src/reducers/layer/architectureActions";
 import {connect} from "react-redux";
-import Build from "./build";
-import Visualize from "./visualize";
-import Code from "./code";
+import Build from "./sidePane/build";
+import Visualize from "./mainPane/visualize";
+import Code from "./mainPane/code";
 
 class Architecture extends Component {
 

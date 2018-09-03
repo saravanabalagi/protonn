@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Navbar, NavbarBrand, NavbarDropdown, NavbarEnd, NavbarItem, NavbarLink, NavbarMenu, NavbarStart} from "bloomer";
-import logo from '../../assets/logo-white.svg';
+import logo from 'src/assets/logo-white.svg';
 
 class AppNavBar extends Component {
   render() {
