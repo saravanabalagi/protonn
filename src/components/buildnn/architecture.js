@@ -21,12 +21,14 @@ class Architecture extends Component {
     };
   }
 
-  componentDidMount() {
+  initialize = () => {
     this.fcnn = FCNN();
-    this.props.dispatch(addLayer());
-    this.props.dispatch(addLayer());
+    if(this.props.layers.length<2) {
+      this.props.dispatch(addLayer());
+      this.props.dispatch(addLayer());
+    }
     this.redraw();
-  }
+  };
 
   redraw = (showLabels=true) => {
     this.fcnn.redraw({architecture_: getArchitecture()});
@@ -75,7 +77,7 @@ class Architecture extends Component {
               </Tab>
             </TabList>
           </Tabs>
-          { !this.state.code && <Visualize/>}
+          { !this.state.code && <Visualize initialize={this.initialize}/>}
           { this.state.code && <Code/>}
         </Column>
       </Columns>
@@ -84,5 +86,7 @@ class Architecture extends Component {
 }
 
 export default connect((store)=>{
-  return {};
+  return {
+    layers: store.architecture.layers
+  };
 })(Architecture);
