@@ -4,18 +4,20 @@ import {Button, Field} from "bloomer";
 import './build.css';
 import {addLayer} from "src/reducers/layer/architectureActions";
 import {connect} from "react-redux";
+import {denseLayer} from "../../../reducers/layer/denseReducer";
+import {conv2dLayer} from "../../../reducers/layer/convReducer";
 
 class Build extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isDense: true
-    }
+      newLayerType: denseLayer
+    };
   }
 
-  handleAddLayer = () => { this.props.dispatch(addLayer()); this.props.redraw(); };
-  handleSwitchNewLayer = (isDense) => { this.setState({ isDense: isDense}) };
+  handleAddLayer = () => { this.props.dispatch(addLayer(this.state.newLayerType)); this.props.redraw(); };
+  handleSwitchNewLayer = (layerType) => { this.setState({ newLayerType: layerType}) };
 
   render() {
     return (
@@ -23,8 +25,8 @@ class Build extends Component {
         <div className="is-divider" data-content="Add Layer"/>
         <Field isHorizontal>
           <div className="buttons has-addons">
-            <Button className={this.state.isDense ? "is-success is-selected" : ""} onClick={()=>this.handleSwitchNewLayer(true)}>Dense</Button>
-            <Button className={this.state.isDense ? "" : "is-success is-selected"} onClick={()=>this.handleSwitchNewLayer(false)}>Conv2D</Button>
+            <Button className={this.state.newLayerType===denseLayer ? "is-success is-selected" : ""} onClick={()=>this.handleSwitchNewLayer(denseLayer)}>Dense</Button>
+            <Button className={this.state.newLayerType===conv2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(conv2dLayer)}>Conv2D</Button>
           </div>
           <Button isColor='info' className="addLayer" onClick={this.handleAddLayer}>
             <span className="icon">

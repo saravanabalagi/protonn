@@ -2,13 +2,12 @@ import React, {Component} from 'react'
 import Layers from "./sidePane/layers";
 import {Column, Columns, Icon, Tab, TabLink, TabList, Tabs} from "bloomer";
 import Styling from "./sidePane/styling";
-import {FCNN} from './fcnn';
 import './architecture.css';
-import {addLayer, getArchitecture, getSpacing} from "src/reducers/layer/architectureActions";
 import {connect} from "react-redux";
 import Build from "./sidePane/build";
 import Visualize from "./mainPane/visualize";
 import Code from "./mainPane/code";
+import {CNN} from "./cnn";
 
 class Architecture extends Component {
 
@@ -22,18 +21,24 @@ class Architecture extends Component {
   }
 
   initialize = () => {
-    this.fcnn = FCNN();
-    if(this.props.layers.length<2) {
-      this.props.dispatch(addLayer());
-      this.props.dispatch(addLayer());
-    }
+    // this.fcnn = FCNN();
+    this.cnn = CNN();
+    console.log(this.cnn);
+    // if(this.props.layers.length<2) {
+    //   this.props.dispatch(addLayer());
+    //   this.props.dispatch(addLayer());
+    // }
     this.redraw();
   };
 
   redraw = (showLabels=true) => {
-    this.fcnn.redraw({architecture_: getArchitecture()});
-    this.fcnn.redraw({showLabels_: showLabels});
-    this.fcnn.redistribute({betweenNodesInLayer_: getSpacing()});
+    this.cnn.redraw({architecture_: [
+                        {widthAndHeight: 224, depth: 3, stride: 11, rel_x: 0.01998581592106652, rel_y: 0.0837101057701986},
+                        {widthAndHeight: 55, depth: 96, stride: 5, rel_x: 0.35794443470524107, rel_y: 0.16453517861071987}],
+        architecture2_: [2048, 2048, 1000]});
+    // this.fcnn.redraw({architecture_: getArchitecture()});
+    // this.fcnn.redraw({showLabels_: showLabels});
+    // this.fcnn.redistribute({betweenNodesInLayer_: getSpacing()});
   };
 
   render() {

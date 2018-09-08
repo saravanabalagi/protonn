@@ -1,8 +1,12 @@
-export default (state={
+export const denseLayer = 'dense';
+export const defaultDenseLayer = {
   layerPosition: null,
+  type: denseLayer,
   neurons: 1,
   spacing: 20
-}, action) => {
+};
+
+export default (state=defaultDenseLayer, action) => {
   switch (action.type) {
     case "CHANGE_NEURONS":
       return {...state, neurons: action.neurons};

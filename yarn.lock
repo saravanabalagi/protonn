@@ -7277,6 +7277,10 @@ text-table@0.2.0, text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
+three-full@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/three-full/-/three-full-11.2.0.tgz#191eb73be5af32351fe273bc386b62afe7bba1f6"
+
 throat@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/throat/-/throat-3.2.0.tgz#50cb0670edbc40237b9e347d7e1f88e4620af836"
