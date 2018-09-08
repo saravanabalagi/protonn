@@ -1,4 +1,5 @@
-import denseReducer from "./denseReducer";
+import denseReducer, {denseLayer} from "./denseReducer";
+import conv2dReducer, {conv2dLayer} from "./convReducer";
 
 export default (state={
   layers: []
@@ -22,15 +23,14 @@ export default (state={
         }))
       };
     }
-    case "CHANGE_NEURONS": {
-      let changedLayer = denseReducer(state.layers[action.layerPosition], action);
-      return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+    default: {
+      if(action!=null && action.layerPosition!=null) {
+        let changedLayer = null;
+        let currentLayer = state.layers[action.layerPosition];
+        if(currentLayer.type===denseLayer) changedLayer = denseReducer(state.layers[action.layerPosition], action);
+        else if(currentLayer.type===conv2dLayer) changedLayer = conv2dReducer(state.layers[action.layerPosition], action);
+        return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+      } else return state
     }
-    case "CHANGE_SPACING": {
-      let changedLayer = denseReducer(state.layers[action.layerPosition], action);
-      return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
-    }
-    default:
-      return state;
   }
 }

@@ -1,7 +1,19 @@
 .denseLayer {
   margin-bottom: 10px;
 
-  .inputLayerSize {
+  .inputFeatureMaps {
+    width: 70px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .inputKernelSize {
+    width: 60px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .inputHeight, .inputWidth {
     width: 70px;
     text-align: center;
     margin-right: 10px;
