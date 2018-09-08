@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import architectureReducer from "./layer/architectureReducer";
+import architectureReducer from "./architectureReducer";
 
 export default combineReducers({
   architecture: architectureReducer

@@ -1,5 +1,5 @@
-import denseReducer, {denseLayer} from "./denseReducer";
-import conv2dReducer, {conv2dLayer} from "./convReducer";
+import denseReducer, {denseLayer} from "./layer/denseReducer";
+import conv2dReducer, {conv2dLayer} from "./layer/convReducer";
 
 export default (state={
   layers: []

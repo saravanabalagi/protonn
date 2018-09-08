@@ -3,7 +3,7 @@ import {Button} from "bloomer";
 import './conv2d.css'
 
 import {connect} from "react-redux";
-import {changeSpacing, deleteLayer, getLayerName} from "src/reducers/layer/architectureActions";
+import {changeSpacing, deleteLayer, getLayerName} from "src/reducers/architectureActions";
 import {changeFeatureMaps, changeHeight, changeKernelSize, changeWidth} from "../../reducers/layer/convActions";
 
 class Conv2DLayer extends Component {

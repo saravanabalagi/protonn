@@ -6,7 +6,7 @@ import {Content} from "bloomer";
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers'
 import 'prismjs/components/prism-python';
-import {getLayerName} from "../../../reducers/layer/architectureActions";
+import {getLayerName} from "../../../reducers/architectureActions";
 
 class Code extends Component {
 

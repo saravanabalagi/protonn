@@ -1,6 +1,6 @@
 import store from 'src/store';
-import {defaultDenseLayer, denseLayer} from "./denseReducer";
-import {conv2dLayer, defaultConv2dLayer} from "./convReducer";
+import {defaultDenseLayer, denseLayer} from "./layer/denseReducer";
+import {conv2dLayer, defaultConv2dLayer} from "./layer/convReducer";
 
 export function changeNeuron(layerPosition, neurons) {
   return (dispatch) => {
