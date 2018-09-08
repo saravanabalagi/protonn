@@ -7,6 +7,8 @@ import {Content} from "bloomer";
 import 'prismjs/plugins/line-numbers/prism-line-numbers'
 import 'prismjs/components/prism-python';
 import {getLayerName} from "../../../reducers/architectureActions";
+import {denseLayer} from "../../../reducers/layer/denseReducer";
+import {conv2dLayer} from "../../../reducers/layer/convReducer";
 
 class Code extends Component {
 
@@ -15,6 +17,8 @@ class Code extends Component {
     let kerasCode = '';
     kerasCode += 'from keras.layers import Input\n';
     kerasCode += 'from keras.models import Model\n';
+    kerasCode += 'from keras.layers import Dense\n';
+    kerasCode += 'from keras.layers import Conv2D\n';
     kerasCode += '\n';
     kerasCode += 'def get_model():\n';
 
@@ -24,7 +28,11 @@ class Code extends Component {
     for(let i=1; i<layers.length-1; i++) {
       let currentLayer = layers[i];
       let prevLayer = layers[i - 1];
-      kerasCode += '  ' + `${getLayerName(currentLayer)} = Dense(${currentLayer.neurons}, activation='relu')(${getLayerName(prevLayer)})\n`;
+      if(currentLayer.type===denseLayer) {
+        kerasCode += '  ' + `${getLayerName(currentLayer)} = Dense(${currentLayer.neurons}, activation='relu')(${getLayerName(prevLayer)})\n`;
+      } else if(currentLayer.type===conv2dLayer) {
+        kerasCode += '  ' + `${getLayerName(currentLayer)} = Conv2D(${currentLayer.featureMaps}, (${currentLayer.kernelSize},${currentLayer.kernelSize}), activation='relu', padding='same')(${getLayerName(prevLayer)})\n`;
+      }
     }
 
     let outputLayer = layers[layers.length-1];
