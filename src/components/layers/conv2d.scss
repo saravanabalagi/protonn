@@ -1,4 +1,4 @@
-.denseLayer {
+.conv2dLayer {
   margin-bottom: 10px;
 
   .inputFeatureMaps {
@@ -31,7 +31,7 @@
   }
 
   input[type=range].slider.sliderLayerSpacing {
-    width: 100px;
+    width: 50px;
     margin: 0 10px 0 30px;
     padding-top: 15px;
   }

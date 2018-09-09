@@ -3,8 +3,15 @@ import {Button} from "bloomer";
 import './conv2d.css'
 
 import {connect} from "react-redux";
-import {changeSpacing, deleteLayer, getLayerName} from "src/reducers/architectureActions";
-import {changeFeatureMaps, changeHeight, changeKernelSize, changeWidth} from "../../reducers/layer/convActions";
+import {deleteLayer, getLayerName} from "src/reducers/architectureActions";
+import {
+  changeDisplayKernelPositionX,
+  changeDisplayKernelPositionY,
+  changeFeatureMaps,
+  changeHeight,
+  changeKernelSize,
+  changeWidth
+} from "../../reducers/layer/convActions";
 
 class Conv2DLayer extends Component {
 
@@ -28,9 +35,15 @@ class Conv2DLayer extends Component {
     this.props.redraw();
   };
 
-  handleSliderChange = (e) => {
-    let spacing = parseInt(e.target.value);
-    this.props.dispatch(changeSpacing(this.props.layerPosition, spacing));
+  handleXSliderChange = (e) => {
+    let xPosition = parseFloat(e.target.value);
+    this.props.dispatch(changeDisplayKernelPositionX(this.props.layerPosition, xPosition));
+    this.props.redraw();
+  };
+
+  handleYSliderChange = (e) => {
+    let yPosition = parseFloat(e.target.value);
+    this.props.dispatch(changeDisplayKernelPositionY(this.props.layerPosition, yPosition));
     this.props.redraw();
   };
 
@@ -41,15 +54,21 @@ class Conv2DLayer extends Component {
     let width = this.props.layer.width;
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal denseLayer">
+      <div className="is-horizontal conv2dLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
         {
           this.props.styling && <input className="slider sliderLayerSpacing"
-                                       onChange={this.handleSliderChange}
-                                       step="1" min="0" max="100"
-                                       defaultValue="50" type="range" />
+                                       onChange={this.handleXSliderChange}
+                                       step="0.01" min="-0.4" max="0.4"
+                                       defaultValue="0" type="range" />
+        }
+        {
+          this.props.styling && <input className="slider sliderLayerSpacing"
+                                       onChange={this.handleYSliderChange}
+                                       step="0.01" min="-0.4" max="0.4"
+                                       defaultValue="0" type="range" />
         }
         {
           !this.props.styling &&

@@ -140,14 +140,14 @@ export function CNN() {
 
     clearThree(scene);
 
-    let z_offset = -(sum(architecture.map(layer => depthFn(layer['depth']))) + (betweenLayers * (architecture.length - 1))) / 3;
-    let layer_offsets = pairWise(architecture).reduce((offsets, layers) => offsets.concat([offsets.last() + depthFn(layers[0]['depth'])/2 + betweenLayers + depthFn(layers[1]['depth'])/2]), [z_offset]);
-    layer_offsets = layer_offsets.concat(architecture2.reduce((offsets, layer) => offsets.concat([offsets.last() + widthFn(2) + betweenLayers]), [layer_offsets.last() + depthFn(architecture.last()['depth'])/2 + betweenLayers + widthFn(2)]));
+    let z_offset = -(sum(architecture.map(layer => depthFn(layer['featureMaps']))) + (betweenLayers * (architecture.length - 1))) / 3;
+    let layer_offsets = pairWise(architecture).reduce((offsets, layers) => offsets.concat([offsets.last() + depthFn(layers[0]['featureMaps'])/2 + betweenLayers + depthFn(layers[1]['featureMaps'])/2]), [z_offset]);
+    layer_offsets = layer_offsets.concat(architecture2.reduce((offsets, layer) => offsets.concat([offsets.last() + widthFn(2) + betweenLayers]), [layer_offsets.last() + depthFn(architecture.last()['featureMaps'])/2 + betweenLayers + widthFn(2)]));
 
     architecture.forEach( function( layer, index ) {
 
       // Layer
-      let layer_geometry = new THREE.BoxGeometry( wh(layer), wh(layer), depthFn(layer['depth']) );
+      let layer_geometry = new THREE.BoxGeometry( wh(layer), wh(layer), depthFn(layer['featureMaps']) );
       let layer_object = new THREE.Mesh( layer_geometry, box_material );
       layer_object.position.set(0, 0, layer_offsets[index]);
       layers.add( layer_object );
@@ -160,29 +160,29 @@ export function CNN() {
       if (index < architecture.length - 1) {
 
         // Conv
-        let conv_geometry = new THREE.BoxGeometry( convFn(layer['stride']), convFn(layer['stride']), depthFn(layer['depth']) );
+        let conv_geometry = new THREE.BoxGeometry( convFn(layer['kernelSize']), convFn(layer['kernelSize']), depthFn(layer['featureMaps']) );
         let conv_object = new THREE.Mesh( conv_geometry, conv_material );
-        conv_object.position.set(layer['rel_x'] * wh(layer), layer['rel_y'] * wh(layer), layer_offsets[index]);
+        conv_object.position.set(layer['kernelDisplayPositionX'] * wh(layer), layer['kernelDisplayPositionY'] * wh(layer), layer_offsets[index]);
         convs.add( conv_object );
 
         let conv_edges_geometry = new THREE.EdgesGeometry( conv_geometry );
         let conv_edges_object = new THREE.LineSegments( conv_edges_geometry, line_material );
-        conv_edges_object.position.set(layer['rel_x'] * wh(layer), layer['rel_y'] * wh(layer), layer_offsets[index]);
+        conv_edges_object.position.set(layer['kernelDisplayPositionX'] * wh(layer), layer['kernelDisplayPositionY'] * wh(layer), layer_offsets[index]);
         convs.add( conv_edges_object );
 
         // Pyramid
         let pyramid_geometry = new THREE.Geometry();
 
-        let base_z = layer_offsets[index] + (depthFn(layer['depth']) / 2);
-        let summit_z = layer_offsets[index] + (depthFn(layer['depth']) / 2) + betweenLayers;
+        let base_z = layer_offsets[index] + (depthFn(layer['featureMaps']) / 2);
+        let summit_z = layer_offsets[index] + (depthFn(layer['featureMaps']) / 2) + betweenLayers;
         let next_layer_wh = widthFn(architecture[index+1]['widthAndHeight']);
 
         pyramid_geometry.vertices = [
-          new THREE.Vector3( (layer['rel_x'] * wh(layer)) + (convFn(layer['stride'])/2), (layer['rel_y'] * wh(layer)) + (convFn(layer['stride'])/2), base_z ),  // base
-          new THREE.Vector3( (layer['rel_x'] * wh(layer)) + (convFn(layer['stride'])/2), (layer['rel_y'] * wh(layer)) - (convFn(layer['stride'])/2), base_z ),  // base
-          new THREE.Vector3( (layer['rel_x'] * wh(layer)) - (convFn(layer['stride'])/2), (layer['rel_y'] * wh(layer)) - (convFn(layer['stride'])/2), base_z ),  // base
-          new THREE.Vector3( (layer['rel_x'] * wh(layer)) - (convFn(layer['stride'])/2), (layer['rel_y'] * wh(layer)) + (convFn(layer['stride'])/2), base_z ),  // base
-          new THREE.Vector3( (layer['rel_x'] * next_layer_wh),                           (layer['rel_y'] * next_layer_wh),                           summit_z)  // summit
+          new THREE.Vector3( (layer['kernelDisplayPositionX'] * wh(layer)) + (convFn(layer['kernelSize'])/2), (layer['kernelDisplayPositionY'] * wh(layer)) + (convFn(layer['kernelSize'])/2), base_z ),  // base
+          new THREE.Vector3( (layer['kernelDisplayPositionX'] * wh(layer)) + (convFn(layer['kernelSize'])/2), (layer['kernelDisplayPositionY'] * wh(layer)) - (convFn(layer['kernelSize'])/2), base_z ),  // base
+          new THREE.Vector3( (layer['kernelDisplayPositionX'] * wh(layer)) - (convFn(layer['kernelSize'])/2), (layer['kernelDisplayPositionY'] * wh(layer)) - (convFn(layer['kernelSize'])/2), base_z ),  // base
+          new THREE.Vector3( (layer['kernelDisplayPositionX'] * wh(layer)) - (convFn(layer['kernelSize'])/2), (layer['kernelDisplayPositionY'] * wh(layer)) + (convFn(layer['kernelSize'])/2), base_z ),  // base
+          new THREE.Vector3( (layer['kernelDisplayPositionX'] * next_layer_wh),                           (layer['kernelDisplayPositionY'] * next_layer_wh),                           summit_z)  // summit
         ];
         pyramid_geometry.faces = [new THREE.Face3(0,1,2),new THREE.Face3(0,2,3),new THREE.Face3(1,0,4),new THREE.Face3(2,1,4),new THREE.Face3(3,2,4),new THREE.Face3(0,3,4)];
 
@@ -198,16 +198,16 @@ export function CNN() {
       if (showDims) {
 
         // Dims
-        let sprite = makeTextSprite(layer['depth'].toString());
+        let sprite = makeTextSprite(layer['featureMaps'].toString());
         sprite.position.copy( layer_object.position ).sub( new THREE.Vector3( wh(layer)/2 + 2, wh(layer)/2 + 2, 0 ) );
         sprites.add( sprite );
 
         sprite = makeTextSprite(layer['widthAndHeight'].toString());
-        sprite.position.copy( layer_object.position ).sub( new THREE.Vector3( wh(layer)/2 + 3, 0, depthFn(layer['depth'])/2 + 3 ) );
+        sprite.position.copy( layer_object.position ).sub( new THREE.Vector3( wh(layer)/2 + 3, 0, depthFn(layer['featureMaps'])/2 + 3 ) );
         sprites.add( sprite );
 
         sprite = makeTextSprite(layer['widthAndHeight'].toString());
-        sprite.position.copy( layer_object.position ).sub( new THREE.Vector3( 0, -wh(layer)/2 - 3, depthFn(layer['depth'])/2 + 3 ) );
+        sprite.position.copy( layer_object.position ).sub( new THREE.Vector3( 0, -wh(layer)/2 - 3, depthFn(layer['featureMaps'])/2 + 3 ) );
         sprites.add( sprite );
 
       }

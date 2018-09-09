@@ -37,7 +37,7 @@ class Code extends Component {
 
     let outputLayer = layers[layers.length-1];
     kerasCode += '  ' + `${getLayerName(outputLayer)} = Dense(${outputLayer.neurons}, activation='relu')(${getLayerName(layers[layers.length-2])})\n`;
-    kerasCode += '  ' + 'model = Model(inputs=input, outputs=output_layer)\n';
+    kerasCode += '  ' + `model = Model(inputs=${getLayerName(inputLayer)}, outputs=${getLayerName(outputLayer)})\n`;
     kerasCode += '  ' + 'return model\n';
     return kerasCode;
   };

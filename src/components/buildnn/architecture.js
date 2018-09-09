@@ -36,8 +36,8 @@ class Architecture extends Component {
 
   redraw = (showLabels=true) => {
     this.cnn.redraw({architecture_: [
-                        {widthAndHeight: 224, depth: 3, stride: 11, rel_x: 0.01998581592106652, rel_y: 0.0837101057701986},
-                        {widthAndHeight: 55, depth: 96, stride: 5, rel_x: 0.35794443470524107, rel_y: 0.16453517861071987}],
+                        {widthAndHeight: 224, featureMaps: 3, kernelSize: 11, kernelDisplayPositionX: 0.01998581592106652, kernelDisplayPositionY: 0.0837101057701986},
+                        {widthAndHeight: 55, featureMaps: 96, kernelSize: 5, kernelDisplayPositionX: 0.35794443470524107, kernelDisplayPositionY: 0.16453517861071987}],
         architecture2_: [2048, 2048, 1000]});
     // this.fcnn.redraw({architecture_: getArchitecture()});
     // this.fcnn.redraw({showLabels_: showLabels});
