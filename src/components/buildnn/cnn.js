@@ -323,7 +323,8 @@ export function CNN() {
   function onWindowResize() {
 
     let graph_container = document.getElementById('graph-container');
-    if(renderer!=null) renderer.setSize(graph_container.offsetWidth, graph_container.offsetHeight);
+    if(renderer==null || graph_container==null) return;
+    renderer.setSize(graph_container.offsetWidth, graph_container.offsetHeight);
 
     let camFactor = window.devicePixelRatio || 1;
     camera.left = -graph_container.offsetWidth / camFactor;

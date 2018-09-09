@@ -1,6 +1,7 @@
 import store from 'src/store';
 import {defaultDenseLayer, denseLayer} from "./layer/denseReducer";
 import {conv2dLayer, defaultConv2dLayer} from "./layer/convReducer";
+import {defaultInputLayer, inputLayer} from "./layer/inputReducer";
 
 export function changeNeuron(layerPosition, neurons) {
   return (dispatch) => {
@@ -13,6 +14,7 @@ export function changeNeuron(layerPosition, neurons) {
 export function addLayer(layerType) {
   return (dispatch) => {
     let layerPosition = store.getState().architecture.layers.length;
+    if(layerType === inputLayer) dispatch({type: "ADD_LAYER", layer: {...defaultInputLayer, layerPosition: 0}});
     if(layerType === denseLayer) dispatch({type: "ADD_LAYER", layer: {...defaultDenseLayer, layerPosition: layerPosition }});
     if(layerType === conv2dLayer) dispatch({type: "ADD_LAYER", layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
   }

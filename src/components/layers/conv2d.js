@@ -59,18 +59,6 @@ class Conv2DLayer extends Component {
         }
         {
           !this.props.styling &&
-          <input className="input inputHeight" type="number" placeholder="0"
-                 value={height} inputMode="numeric"
-                 onChange={(e)=>this.handleChangeParam(this.HEIGHT, e)}/>
-        }
-        {
-          !this.props.styling &&
-          <input className="input inputWidth" type="number" placeholder="0"
-                 value={width} inputMode="numeric"
-                 onChange={(e)=>this.handleChangeParam(this.WIDTH, e)}/>
-        }
-        {
-          !this.props.styling &&
           <input className="input inputFeatureMaps" type="number" placeholder="0"
                  value={featureMaps} inputMode="numeric"
                  onChange={(e)=>this.handleChangeParam(this.FEATURE_MAPS, e)}/>

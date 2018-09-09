@@ -8,6 +8,9 @@ import Build from "./sidePane/build";
 import Visualize from "./mainPane/visualize";
 import Code from "./mainPane/code";
 import {CNN} from "./cnn";
+import {denseLayer} from "../../reducers/layer/denseReducer";
+import {addLayer} from "../../reducers/architectureActions";
+import {inputLayer} from "../../reducers/layer/inputReducer";
 
 class Architecture extends Component {
 
@@ -24,10 +27,10 @@ class Architecture extends Component {
     // this.fcnn = FCNN();
     this.cnn = CNN();
     console.log(this.cnn);
-    // if(this.props.layers.length<2) {
-    //   this.props.dispatch(addLayer());
-    //   this.props.dispatch(addLayer());
-    // }
+    if(this.props.layers.length<2) {
+      this.props.dispatch(addLayer(inputLayer));
+      this.props.dispatch(addLayer(denseLayer));
+    }
     this.redraw();
   };
 

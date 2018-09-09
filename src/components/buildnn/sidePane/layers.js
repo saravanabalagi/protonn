@@ -5,6 +5,9 @@ import DenseLayer from "src/components/layers/dense";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
 import Conv2DLayer from "../../layers/conv2d";
+import {conv2dLayer} from "../../../reducers/layer/convReducer";
+import {inputLayer} from "../../../reducers/layer/inputReducer";
+import InputLayer from "../../layers/input";
 
 class Layers extends Component {
 
@@ -14,19 +17,30 @@ class Layers extends Component {
       <div className="Layers">
         {
           layers.map((layer, index)=>{
-            if(layer.type===denseLayer)
-              return (
-                <DenseLayer redraw={this.props.redraw} key={index}
+            switch (layer.type) {
+              case denseLayer:
+                return (
+                  <DenseLayer redraw={this.props.redraw} key={index}
+                              styling={this.props.styling}
+                              layerPosition={index}
+                              layer={layer}/>
+                );
+              case conv2dLayer:
+                return (
+                  <Conv2DLayer redraw={this.props.redraw} key={index}
                                styling={this.props.styling}
                                layerPosition={index}
                                layer={layer}/>
-              );
-            else return (
-              <Conv2DLayer redraw={this.props.redraw} key={index}
-                                    styling={this.props.styling}
-                                    layerPosition={index}
-                                    layer={layer}/>
-            );
+                );
+              case inputLayer:
+                return (
+                  <InputLayer redraw={this.props.redraw} key={index}
+                               styling={this.props.styling}
+                               layerPosition={index}
+                               layer={layer}/>
+                );
+              default: return "";
+            }
           })
         }
       </div>
