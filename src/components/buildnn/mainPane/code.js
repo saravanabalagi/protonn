@@ -23,7 +23,7 @@ class Code extends Component {
     kerasCode += 'def get_model():\n';
 
     let inputLayer = layers[0];
-    kerasCode += '  ' + `${getLayerName(inputLayer)} = Input(shape=(${inputLayer.neurons}))\n`;
+    kerasCode += '  ' + `${getLayerName(inputLayer)} = Input(shape=(${inputLayer.dimensions}))\n`;
 
     for(let i=1; i<layers.length-1; i++) {
       let currentLayer = layers[i];
@@ -36,7 +36,7 @@ class Code extends Component {
     }
 
     let outputLayer = layers[layers.length-1];
-    kerasCode += '  ' + `${getLayerName(outputLayer)} = Dense(${outputLayer.neurons}, activation='relu')(${getLayerName(outputLayer)})\n`;
+    kerasCode += '  ' + `${getLayerName(outputLayer)} = Dense(${outputLayer.neurons}, activation='relu')(${getLayerName(layers[layers.length-2])})\n`;
     kerasCode += '  ' + 'model = Model(inputs=input, outputs=output_layer)\n';
     kerasCode += '  ' + 'return model\n';
     return kerasCode;
