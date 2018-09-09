@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Button} from "bloomer";
-import './dense.css'
+import './input.css'
 
 import {connect} from "react-redux";
 import {changeSpacing, getLayerName} from "src/reducers/architectureActions";
@@ -35,12 +35,12 @@ class InputLayer extends Component {
     let dimensions = this.props.layer.dimensions;
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal denseLayer">
+      <div className="is-horizontal inputLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
         {
-          dimensions.map((dim, index)=><input className="input inputLayerSize" type="number" placeholder="0"
+          !this.props.styling && dimensions.map((dim, index)=><input className="input inputLayerSize" type="number" placeholder="0"
                                                 key={index}
                                                 value={dim} inputMode="numeric"
                                                 onChange={(e)=>this.handleChangeDimension(e, index)}/>)
@@ -51,13 +51,13 @@ class InputLayer extends Component {
                                        step="1" min="0" max="100"
                                        defaultValue="50" type="range" />
         }
-        <Button isColor='info' onClick={this.handleAddDimension}
-                className={this.props.styling && "invisible"}>
+        <Button isColor='white' onClick={this.handleAddDimension}
+                className={(this.props.styling || dimensions.length>=3) && "invisible"}>
           <span className="icon">
             <i className="fa fa-plus-circle"/>
           </span>
         </Button>
-        <Button isColor='danger' onClick={this.handleDeleteDimension}
+        <Button isColor='white' onClick={this.handleDeleteDimension}
                 className={(this.props.styling || dimensions.length<2) && "invisible"}>
           <span className="icon">
             <i className="fa fa-times-circle"/>

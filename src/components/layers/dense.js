@@ -45,7 +45,7 @@ class DenseLayer extends Component {
                  value={neurons} inputMode="numeric"
                  onChange={this.handleChangeNeurons}/>
         }
-        <Button isColor='danger' onClick={this.handleDeleteLayer}
+        <Button isColor='white' onClick={this.handleDeleteLayer}
                 className={this.props.styling && "invisible"}>
           <span className="icon">
             <i className="fa fa-times-circle"/>

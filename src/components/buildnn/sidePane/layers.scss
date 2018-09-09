@@ -3,6 +3,14 @@
   padding-right: 30px;
 
   button.button {
+
+    &.is-white {
+      color: #bf0000;
+      &:hover {
+        color: #ff0000;
+      }
+    }
+
     margin-right: 10px;
   }
 }

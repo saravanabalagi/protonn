@@ -63,7 +63,7 @@ class Conv2DLayer extends Component {
                  value={featureMaps} inputMode="numeric"
                  onChange={(e)=>this.handleChangeParam(this.FEATURE_MAPS, e)}/>
         }
-        <Button isColor='danger' onClick={this.handleDeleteLayer}
+        <Button isColor='white' onClick={this.handleDeleteLayer}
                 className={this.props.styling && "invisible"}>
           <span className="icon">
             <i className="fa fa-times-circle"/>

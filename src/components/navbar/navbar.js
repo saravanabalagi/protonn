@@ -9,7 +9,7 @@ class AppNavBar extends Component {
         <NavbarBrand>
           <NavbarItem href='/'>
             <img src={logo} style={{ marginRight: 5 }} alt="Logo"/>
-            <div style={{ marginRight: 30 }}>Protonn</div>
+            <div style={{ marginRight: 30 }}>Proto<strong>nn</strong></div>
           </NavbarItem>
         </NavbarBrand>
         <NavbarMenu>

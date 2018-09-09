@@ -1,0 +1,30 @@
+.inputLayer {
+  margin-bottom: 10px;
+
+  .inputLayerSize {
+    width: 70px;
+    text-align: center;
+    margin-right: 10px;
+  }
+
+  .inputLayerName {
+    display: inline;
+    .label {
+      padding-top: 0.375em;
+      display: inline-block;
+      font-weight: normal;
+      width: 100px;
+      text-align: right;
+    }
+  }
+
+  input[type=range].slider.sliderLayerSpacing {
+    width: 100px;
+    margin: 0 10px 0 30px;
+    padding-top: 15px;
+  }
+
+  .invisible {
+    visibility: hidden;
+  }
+}
