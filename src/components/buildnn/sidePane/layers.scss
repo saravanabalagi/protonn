@@ -3,11 +3,13 @@
   padding-right: 30px;
 
   button.button {
-
-    &.is-white {
-      color: #bf0000;
+    &.is-white.icon-button {
+      &.danger { color: #ee0000; }
+      &.info { color: #1496ed; }
+      opacity: 0.5;
+      transition: opacity 0.5s ease-in-out;
       &:hover {
-        color: #ff0000;
+        opacity: 1.0;
       }
     }
 

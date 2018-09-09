@@ -52,13 +52,13 @@ class InputLayer extends Component {
                                        defaultValue="50" type="range" />
         }
         <Button isColor='white' onClick={this.handleAddDimension}
-                className={(this.props.styling || dimensions.length>=3) && "invisible"}>
+                className={`icon-button info ${(this.props.styling || dimensions.length>=3)?"invisible":""}`}>
           <span className="icon">
             <i className="fa fa-plus-circle"/>
           </span>
         </Button>
         <Button isColor='white' onClick={this.handleDeleteDimension}
-                className={(this.props.styling || dimensions.length<2) && "invisible"}>
+                className={`icon-button danger ${(this.props.styling || dimensions.length<2)?"invisible":""}`}>
           <span className="icon">
             <i className="fa fa-times-circle"/>
           </span>
