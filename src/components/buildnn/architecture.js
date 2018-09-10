@@ -7,16 +7,16 @@ import {connect} from "react-redux";
 import Build from "./sidePane/build";
 import Visualize from "./mainPane/visualize";
 import Code from "./mainPane/code";
-import {CNN} from "./cnn";
 import {denseLayer} from "../../reducers/layer/denseReducer";
-import {addLayer} from "../../reducers/architectureActions";
+import {addLayer, getArchitecture, getSpacing} from "../../reducers/architectureActions";
 import {inputLayer} from "../../reducers/layer/inputReducer";
+import {dnn} from "./dnn";
 
 class Architecture extends Component {
 
   constructor(props) {
     super(props);
-    this.fcnn = null;
+    this.dnn = null;
     this.state = {
       styling: false,
       code: false
@@ -24,24 +24,26 @@ class Architecture extends Component {
   }
 
   initialize = () => {
-    // this.fcnn = FCNN();
-    this.cnn = CNN();
-    console.log(this.cnn);
+    this.dnn = dnn();
+    // this.cnn = cnn();
+    // console.log(this.cnn);
     if(this.props.layers.length<2) {
       this.props.dispatch(addLayer(inputLayer));
+      this.props.dispatch(addLayer(denseLayer));
       this.props.dispatch(addLayer(denseLayer));
     }
     this.redraw();
   };
 
   redraw = (showLabels=true) => {
-    this.cnn.redraw({architecture_: [
-                        {widthAndHeight: 224, featureMaps: 3, kernelSize: 11, kernelDisplayPositionX: 0.01998581592106652, kernelDisplayPositionY: 0.0837101057701986},
-                        {widthAndHeight: 55, featureMaps: 96, kernelSize: 5, kernelDisplayPositionX: 0.35794443470524107, kernelDisplayPositionY: 0.16453517861071987}],
-        architecture2_: [2048, 2048, 1000]});
-    // this.fcnn.redraw({architecture_: getArchitecture()});
-    // this.fcnn.redraw({showLabels_: showLabels});
-    // this.fcnn.redistribute({betweenNodesInLayer_: getSpacing()});
+    console.log(getArchitecture(), getSpacing());
+    // this.cnn.redraw({architecture_: [
+    //                     {widthAndHeight: 224, featureMaps: 3, kernelSize: 11, kernelDisplayPositionX: 0.01998581592106652, kernelDisplayPositionY: 0.0837101057701986},
+    //                     {widthAndHeight: 55, featureMaps: 96, kernelSize: 5, kernelDisplayPositionX: 0.35794443470524107, kernelDisplayPositionY: 0.16453517861071987}],
+    //     architecture2_: [2048, 2048, 1000]});
+    this.dnn.redraw({architecture_: getArchitecture()});
+    this.dnn.redraw({showLabels_: showLabels});
+    this.dnn.redistribute({betweenNodesInLayer_: getSpacing()});
   };
 
   render() {

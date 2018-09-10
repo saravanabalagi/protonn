@@ -1,6 +1,6 @@
 import * as THREE from 'three-full';
 
-export function CNN() {
+export function cnn() {
 
   // /////////////////////////////////////////////////////////////////////////////
   //                     ///////    Helper Functions    ///////

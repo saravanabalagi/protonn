@@ -39,4 +39,8 @@ class Build extends Component {
   }
 }
 
-export default connect(()=>{})(Build);
+export default connect((store)=>{
+  return {
+
+  }
+})(Build);

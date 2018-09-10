@@ -2,6 +2,9 @@ import store from 'src/store';
 import {defaultDenseLayer, denseLayer} from "./layer/denseReducer";
 import {conv2dLayer, defaultConv2dLayer} from "./layer/convReducer";
 import {defaultInputLayer, inputLayer} from "./layer/inputReducer";
+import {changeDimensions} from "./layer/inputActions";
+
+export const CHANGE_SPACING = 'CHANGE_SPACING';
 
 export function changeNeuron(layerPosition, neurons) {
   return (dispatch) => {
@@ -16,7 +19,12 @@ export function addLayer(layerType) {
     let layerPosition = store.getState().architecture.layers.length;
     if(layerType === inputLayer) dispatch({type: "ADD_LAYER", layer: {...defaultInputLayer, layerPosition: 0}});
     if(layerType === denseLayer) dispatch({type: "ADD_LAYER", layer: {...defaultDenseLayer, layerPosition: layerPosition }});
-    if(layerType === conv2dLayer) dispatch({type: "ADD_LAYER", layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
+    if(layerType === conv2dLayer) {
+      let inputLayer = store.getState().architecture.layers[0];
+      if(inputLayer.dimensions.length<2)
+        dispatch(changeDimensions([128,128]));
+      dispatch({type: "ADD_LAYER", layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
+    }
   }
 }
 
@@ -28,7 +36,7 @@ export function deleteLayer(layerPosition) {
 
 export function changeSpacing(layerPosition, spacing) {
   return (dispatch) => {
-    dispatch({type: "CHANGE_SPACING", layerPosition: layerPosition, spacing: spacing});
+    dispatch({type: CHANGE_SPACING, layerPosition: layerPosition, spacingWithin: spacing});
   }
 }
 
@@ -61,11 +69,11 @@ export function getLayerName(layer) {
 
 export function getArchitecture() {
   let layers = store.getState().architecture.layers;
-  return layers.map((layer)=>layer.neurons);
+  return layers.map((layer)=>layer.neurons || layer.dimensions[0]);
 }
 
 export function getSpacing() {
   let layers = store.getState().architecture.layers;
-  return layers.map((layer)=>layer.spacing);
+  return layers.map((layer)=>layer.spacingWithin || 20);
 }
 

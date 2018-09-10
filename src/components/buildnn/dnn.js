@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-export function FCNN() {
+export function dnn() {
 
   /////////////////////////////////////////////////////////////////////////////
   ///////    Helper Functions    ///////

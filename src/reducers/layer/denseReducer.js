@@ -3,7 +3,7 @@ export const defaultDenseLayer = {
   layerPosition: null,
   type: denseLayer,
   neurons: 1,
-  spacing: 20
+  spacingWithin: 20
 };
 
 export default (state=defaultDenseLayer, action) => {
@@ -11,7 +11,7 @@ export default (state=defaultDenseLayer, action) => {
     case "CHANGE_NEURONS":
       return {...state, neurons: action.neurons};
     case "CHANGE_SPACING":
-      return {...state, spacing: action.spacing};
+      return {...state, spacingWithin: action.spacingWithin};
     case "UPDATE_LAYER_POSITION":
       return {...state, layerPosition: action.layerPosition};
     default:

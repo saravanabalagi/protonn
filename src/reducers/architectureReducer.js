@@ -42,7 +42,6 @@ export default (state={
             return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
           }
           case inputLayer: {
-            console.log('calling Inputred');
             changedLayer = inputReducer(state.layers[action.layerPosition], action);
             return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
           }

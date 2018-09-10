@@ -28,3 +28,10 @@ export function addDimension() {
     dispatch({type: CHANGE_DIMENSIONS, layerPosition: 0, dimensions: [...dimensionsArray, dimensionsArray[dimensionsArray.length-1]]})
   }
 }
+
+
+export function changeDimensions(dimensions) {
+  return (dispatch) => {
+    dispatch({type: CHANGE_DIMENSIONS, layerPosition: 0, dimensions: dimensions})
+  }
+}

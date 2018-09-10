@@ -26,8 +26,8 @@ class InputLayer extends Component {
   };
 
   handleSliderChange = (e) => {
-    let spacing = parseInt(e.target.value);
-    this.props.dispatch(changeSpacing(this.props.layerPosition, spacing));
+    let spacingWithin = parseInt(e.target.value);
+    this.props.dispatch(changeSpacing(this.props.layerPosition, spacingWithin));
     this.props.redraw();
   };
 
