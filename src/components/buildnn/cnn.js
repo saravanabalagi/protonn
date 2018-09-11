@@ -1,5 +1,7 @@
 import * as THREE from 'three-full';
 
+export const CNN = 'cnn';
+
 export function cnn() {
 
   // /////////////////////////////////////////////////////////////////////////////

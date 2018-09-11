@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {DNN} from "../dnn";
 
 class Visualize extends Component {
 
   componentDidMount() {
-    this.props.initialize();
+    this.props.initialize(DNN);
   }
 
   render() {

@@ -77,3 +77,15 @@ export function getSpacing() {
   return layers.map((layer)=>layer.spacingWithin || 20);
 }
 
+export function hasOnlyDense() {
+  let layers = store.getState().architecture.layers;
+  let hasOnlyDense = true;
+  for(let layer of layers){
+    if(layer.type === inputLayer) continue;
+    if(layer.type !== denseLayer) {
+      hasOnlyDense = false;
+      break;
+    }
+  }
+  return hasOnlyDense;
+}
