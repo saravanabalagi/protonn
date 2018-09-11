@@ -6,14 +6,6 @@ import {changeDimensions} from "./layer/inputActions";
 
 export const CHANGE_SPACING = 'CHANGE_SPACING';
 
-export function changeNeuron(layerPosition, neurons) {
-  return (dispatch) => {
-    dispatch({ type: "CHANGE_NEURONS",
-                  layerPosition: layerPosition,
-                  neurons: neurons });
-  }
-}
-
 export function addLayer(layerType) {
   return (dispatch) => {
     let layerPosition = store.getState().architecture.layers.length;
