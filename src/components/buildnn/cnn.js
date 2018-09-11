@@ -28,6 +28,8 @@ export function cnn() {
   // /////////////////////////////////////////////////////////////////////////////
 
   let graph_container = document.getElementById('graph-container');
+  while (graph_container.firstChild)
+    graph_container.removeChild(graph_container.firstChild);
   var w = graph_container.offsetWidth;
   var h = graph_container.offsetHeight;
 

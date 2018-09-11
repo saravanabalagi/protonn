@@ -8,7 +8,7 @@ import Build from "./sidePane/build";
 import Visualize from "./mainPane/visualize";
 import Code from "./mainPane/code";
 import {denseLayer} from "../../reducers/layer/denseReducer";
-import {addLayer, getArchitecture, getSpacing} from "../../reducers/architectureActions";
+import {addLayer, getArchitecture, getSpacing, hasOnlyDense} from "../../reducers/architectureActions";
 import {inputLayer} from "../../reducers/layer/inputReducer";
 import {DNN, dnn} from "./dnn";
 import {CNN, cnn} from "./cnn";
@@ -41,6 +41,8 @@ class Architecture extends Component {
   };
 
   redraw = (showLabels=true) => {
+    let nnType = hasOnlyDense() ? DNN : CNN;
+    if(nnType !== this.nnType) { this.initialize(nnType); }
     switch (this.nnType) {
       case DNN: {
         console.log(getArchitecture(), getSpacing());

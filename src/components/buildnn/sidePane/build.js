@@ -2,12 +2,10 @@ import React, {Component} from 'react';
 import {Button, Field} from "bloomer";
 
 import './build.css';
-import {addLayer, hasOnlyDense} from "src/reducers/architectureActions";
+import {addLayer} from "src/reducers/architectureActions";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
 import {conv2dLayer} from "../../../reducers/layer/convReducer";
-import {CNN} from "../cnn";
-import {DNN} from "../dnn";
 
 class Build extends Component {
 
@@ -19,15 +17,8 @@ class Build extends Component {
   }
 
   handleAddLayer = (layerType) => {
-    let toReinitialize = false;
-    if(hasOnlyDense() && layerType === conv2dLayer) toReinitialize = true;
-
     this.props.dispatch(addLayer(layerType));
-    if(toReinitialize) {
-      let architectureType = hasOnlyDense() ? DNN : CNN;
-      this.props.initialize(architectureType);
-    }
-    else this.props.redraw();
+    this.props.redraw();
   };
 
   handleSwitchNewLayer = (layerType) => { this.setState({ newLayerType: layerType}) };

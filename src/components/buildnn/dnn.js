@@ -28,6 +28,8 @@ export function dnn() {
   /////////////////////////////////////////////////////////////////////////////
 
   let graphContainer = document.getElementById("graph-container");
+  while (graphContainer.firstChild)
+    graphContainer.removeChild(graphContainer.firstChild);
   var w = graphContainer.offsetWidth;
   var h = graphContainer.offsetHeight;
 
