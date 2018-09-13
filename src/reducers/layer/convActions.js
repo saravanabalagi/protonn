@@ -41,7 +41,7 @@ export function changeDisplayKernelPositionX(layerPosition, xPosition) {
   return (dispatch) => {
     dispatch({ type: CHANGE_DISPLAY_KERNEL_POSITION_X,
       layerPosition: layerPosition,
-      displayKernelPositionX: xPosition });
+      kernelDisplayPositionX: xPosition });
   }
 }
 
@@ -49,6 +49,6 @@ export function changeDisplayKernelPositionY(layerPosition, yPosition) {
   return (dispatch) => {
     dispatch({ type: CHANGE_DISPLAY_KERNEL_POSITION_Y,
       layerPosition: layerPosition,
-      displayKernelPositionY: yPosition });
+      kernelDisplayPositionY: yPosition });
   }
 }

@@ -15,8 +15,8 @@ export const defaultConv2dLayer = {
   featureMaps: 32,
   height: 128,
   width: 128,
-  displayKernelPositionX: 0,
-  displayKernelPositionY: 0
+  kernelDisplayPositionX: 0,
+  kernelDisplayPositionY: 0
 };
 
 export default (state=defaultConv2dLayer, action) => {
@@ -30,9 +30,9 @@ export default (state=defaultConv2dLayer, action) => {
     case CHANGE_WIDTH:
       return {...state, width: action.width};
     case CHANGE_DISPLAY_KERNEL_POSITION_X:
-      return {...state, displayKernelPositionX: action.displayKernelPositionX};
+      return {...state, kernelDisplayPositionX: action.kernelDisplayPositionX};
     case CHANGE_DISPLAY_KERNEL_POSITION_Y:
-      return {...state, displayKernelPositionY: action.displayKernelPositionY};
+      return {...state, kernelDisplayPositionY: action.kernelDisplayPositionY};
     case "UPDATE_LAYER_POSITION":
       return {...state, layerPosition: action.layerPosition};
     default:

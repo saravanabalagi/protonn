@@ -59,9 +59,45 @@ export function getLayerName(layer) {
   return 'layer_' + layer.layerPosition;
 }
 
-export function getArchitecture() {
+export function getDenseArchitecture() {
   let layers = store.getState().architecture.layers;
-  return layers.map((layer)=>layer.neurons || layer.dimensions[0]);
+  return layers.reduce((result, layer)=>{
+    switch (layer.type) {
+      case denseLayer: return [...result, layer.neurons];
+      case inputLayer: return [...result, layer.dimensions[0]];
+      default: return result;
+    }
+  }, []);
+}
+
+export function getConvArchitecture() {
+  let layers = store.getState().architecture.layers;
+  let filtered2dLayers = layers.reduce((result, layer)=>{
+    switch (layer.type) {
+      case conv2dLayer: return [...result, layer];
+      case inputLayer: return [...result, layer];
+      default: return result;
+    }
+  }, []);
+  return filtered2dLayers.map((layer, index, layers)=> {
+    return {
+      widthAndHeight: layer.width || layer.dimensions[0],
+      featureMaps: layer.featureMaps || 1,
+      kernelSize: layers[index + 1] && layers[index + 1].kernelSize,
+      kernelDisplayPositionX: layers[index + 1] && layers[index + 1].kernelDisplayPositionX,
+      kernelDisplayPositionY: layers[index + 1] && layers[index + 1].kernelDisplayPositionY
+    };
+  });
+}
+
+export function getDenseInConvArchitecture() {
+  let layers = store.getState().architecture.layers;
+  return layers.reduce((result, layer)=>{
+    switch (layer.type) {
+      case denseLayer: return [...result, layer.neurons];
+      default: return result;
+    }
+  }, []);
 }
 
 export function getSpacing() {

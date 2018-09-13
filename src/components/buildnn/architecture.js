@@ -8,7 +8,14 @@ import Build from "./sidePane/build";
 import Visualize from "./mainPane/visualize";
 import Code from "./mainPane/code";
 import {denseLayer} from "../../reducers/layer/denseReducer";
-import {addLayer, getArchitecture, getSpacing, hasOnlyDense} from "../../reducers/architectureActions";
+import {
+  addLayer,
+  getConvArchitecture,
+  getDenseArchitecture,
+  getDenseInConvArchitecture,
+  getSpacing,
+  hasOnlyDense
+} from "../../reducers/architectureActions";
 import {inputLayer} from "../../reducers/layer/inputReducer";
 import {DNN, dnn} from "./dnn";
 import {CNN, cnn} from "./cnn";
@@ -45,16 +52,17 @@ class Architecture extends Component {
     if(nnType !== this.nnType) { this.initialize(nnType); }
     switch (this.nnType) {
       case DNN: {
-        console.log(getArchitecture(), getSpacing());
-        this.nn.redraw({architecture_: getArchitecture()});
+        console.log('arch', getDenseArchitecture(), getSpacing());
+        this.nn.redraw({architecture_: getDenseArchitecture()});
         this.nn.redraw({showLabels_: showLabels});
         this.nn.redistribute({betweenNodesInLayer_: getSpacing()});
       } break;
       case CNN: {
-        this.nn.redraw({architecture_: [
-                            {widthAndHeight: 224, featureMaps: 3, kernelSize: 11, kernelDisplayPositionX: 0.01998581592106652, kernelDisplayPositionY: 0.0837101057701986},
-                            {widthAndHeight: 55, featureMaps: 96, kernelSize: 5, kernelDisplayPositionX: 0.35794443470524107, kernelDisplayPositionY: 0.16453517861071987}],
-                        architecture2_: [2048, 2048, 1000]});
+        console.log('arch', getConvArchitecture(), getDenseInConvArchitecture());
+        this.nn.redraw({
+          architecture_: getConvArchitecture(),
+          architecture2_: getDenseInConvArchitecture()
+        });
       } break;
     }
 
