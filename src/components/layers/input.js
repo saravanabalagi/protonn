@@ -3,7 +3,7 @@ import {Button} from "bloomer";
 import './input.css'
 
 import {connect} from "react-redux";
-import {changeSpacing, getLayerName} from "src/reducers/architectureActions";
+import {changeSpacing, getLayerName, hasOnlyDense} from "src/reducers/architectureActions";
 import {addDimension, changeDimension, deleteDimension} from "../../reducers/layer/inputActions";
 
 class InputLayer extends Component {
@@ -58,7 +58,7 @@ class InputLayer extends Component {
           </span>
         </Button>
         <Button isColor='white' onClick={this.handleDeleteDimension}
-                className={`icon-button danger ${(this.props.styling || dimensions.length<2)?"invisible":""}`}>
+                className={`icon-button danger ${(this.props.styling || (hasOnlyDense() && dimensions.length<2) || (!hasOnlyDense() && dimensions.length<3))?"invisible":""}`}>
           <span className="icon">
             <i className="fa fa-times-circle"/>
           </span>
