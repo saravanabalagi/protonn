@@ -43,7 +43,12 @@ export default (state={
           }
           case inputLayer: {
             changedLayer = inputReducer(state.layers[action.layerPosition], action);
-            return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+            let updatedState = {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+            return {...updatedState, layers: updatedState.layers.map(layer => {
+                if(layer.type===conv2dLayer)
+                  return conv2dReducer(layer, {...action, layers: state.layers});
+                return layer;
+              })};
           }
           default:
         }

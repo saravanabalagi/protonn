@@ -6,6 +6,8 @@ import {
   CHANGE_KERNEL_SIZE,
   CHANGE_WIDTH
 } from "./convActions";
+import {CHANGE_DIMENSIONS} from "./inputActions";
+import {inputLayer} from "./inputReducer";
 
 export const conv2dLayer = 'conv2D';
 export const defaultConv2dLayer = {
@@ -35,6 +37,22 @@ export default (state=defaultConv2dLayer, action) => {
       return {...state, kernelDisplayPositionY: action.kernelDisplayPositionY};
     case "UPDATE_LAYER_POSITION":
       return {...state, layerPosition: action.layerPosition};
+    case CHANGE_DIMENSIONS:
+      let previousConvLayerPosition = (state.layerPosition === 0) ? 0 : state.layerPosition - 1;
+      console.log('layers', action.layers);
+      for(; previousConvLayerPosition>0; previousConvLayerPosition--)
+        if(action.layers[previousConvLayerPosition].type===conv2dLayer) break;
+      let prevLayer = action.layers[previousConvLayerPosition];
+      let newHeight = state.height;
+      let newWidth = state.width;
+      if(prevLayer.type===inputLayer) {
+        newWidth = prevLayer.dimensions[0];
+        newHeight = prevLayer.dimensions[1];
+      } else {
+        newHeight = prevLayer.height;
+        newWidth = prevLayer.width;
+      }
+      return {...state, height: newHeight, width: newWidth};
     default:
       return state;
   }
