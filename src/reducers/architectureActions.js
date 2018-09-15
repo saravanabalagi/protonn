@@ -33,30 +33,33 @@ export function changeSpacing(layerPosition, spacing) {
 }
 
 export function getLayerName(layer) {
+  let layers = store.getState().architecture.layers;
   let no_of_layers = store.getState().architecture.layers.length;
 
   // input and output layer
   if(layer.layerPosition===0) return 'input_layer';
   else if(layer.layerPosition===no_of_layers-1) return 'output_layer';
 
-  // //other layers
-  // let denseCount = 1;
-  // let conv2dCount = 1;
-  // let unknownCount = 1;
-  // let layerName = "unknown";
-  // if(layer.type===denseLayer) {
-  //   layerName = 'dense' + '_' + denseCount;
-  //   denseCount += 1;
-  // } else if(layer.type===conv2dLayer) {
-  //   layerName = 'conv' + '_' + conv2dCount;
-  //   conv2dCount += 1;
-  // } else {
-  //   layerName = layerName + '_' + unknownCount;
-  //   unknownCount += 1;
-  // }
-  // return layerName;
-
-  return 'layer_' + layer.layerPosition;
+  //other layers
+  let denseCount = 0;
+  let conv2dCount = 0;
+  let unknownCount = 0;
+  for(let currentLayer of layers) {
+    if(currentLayer.layerPosition===0) continue;
+    switch (currentLayer.type) {
+      case denseLayer: denseCount += 1; break;
+      case conv2dLayer: conv2dCount += 1; break;
+      default: unknownCount += 1;
+    }
+    if(currentLayer.layerPosition === layer.layerPosition) break;
+  }
+  let layerName = '';
+  switch (layer.type) {
+    case denseLayer: layerName = 'dense_' + denseCount; break;
+    case conv2dLayer: layerName = 'conv_' + conv2dCount; break;
+    default: layerName = 'unknown_' + unknownCount;
+  }
+  return layerName;
 }
 
 export function getDenseArchitecture() {
