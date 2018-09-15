@@ -8,7 +8,6 @@ import {
   computeHeightWidth
 } from "./conv2dActions";
 import {CHANGE_DIMENSIONS} from "./inputActions";
-import {UPDATE_LAYER_POSITION} from "../architectureActions";
 
 export const conv2dLayer = 'conv2D';
 export const defaultConv2dLayer = {
@@ -36,8 +35,6 @@ export default (state=defaultConv2dLayer, action) => {
       return {...state, kernelDisplayPositionX: action.kernelDisplayPositionX};
     case CHANGE_DISPLAY_KERNEL_POSITION_Y:
       return {...state, kernelDisplayPositionY: action.kernelDisplayPositionY};
-    case UPDATE_LAYER_POSITION:
-      return {...state, layerPosition: action.layerPosition};
     case CHANGE_DIMENSIONS:
       let {height, width} = computeHeightWidth(action.layers, state);
       return {...state, height: height, width: width};

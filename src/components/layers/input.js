@@ -3,8 +3,9 @@ import {Button} from "bloomer";
 import './input.css'
 
 import {connect} from "react-redux";
-import {changeSpacing, getLayerName, hasOnlyDense} from "src/reducers/architectureActions";
+import {getLayerName, hasOnlyDense} from "src/reducers/architectureActions";
 import {addDimension, changeDimension, deleteDimension} from "../../reducers/layer/inputActions";
+import {changeSpacing} from "../../reducers/layer/denseActions";
 
 class InputLayer extends Component {
 
@@ -68,7 +69,7 @@ class InputLayer extends Component {
   }
 }
 
-export default connect((store) => {
+export default connect(() => {
   return {
   }
 })(InputLayer);

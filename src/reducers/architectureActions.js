@@ -4,16 +4,14 @@ import {conv2dLayer, defaultConv2dLayer} from "./layer/conv2dReducer";
 import {defaultInputLayer, inputLayer} from "./layer/inputReducer";
 import {changeDimensions} from "./layer/inputActions";
 
-export const CHANGE_SPACING = 'CHANGE_SPACING';
-export const UPDATE_LAYER_POSITION = 'UPDATE_LAYER_POSITION';
 export const ADD_LAYER = 'ADD_LAYER';
 export const DELETE_LAYER = 'DELETE_LAYER';
 
 export function addLayer(layerType) {
   return (dispatch) => {
     let layerPosition = store.getState().architecture.layers.length;
-    if(layerType === inputLayer) dispatch({type: "ADD_LAYER", layer: {...defaultInputLayer, layerPosition: 0}});
-    if(layerType === denseLayer) dispatch({type: "ADD_LAYER", layer: {...defaultDenseLayer, layerPosition: layerPosition }});
+    if(layerType === inputLayer) dispatch({type: ADD_LAYER, layer: {...defaultInputLayer, layerPosition: 0}});
+    if(layerType === denseLayer) dispatch({type: ADD_LAYER, layer: {...defaultDenseLayer, layerPosition: layerPosition }});
     if(layerType === conv2dLayer) {
       let inputLayer = store.getState().architecture.layers[0];
       if(inputLayer.dimensions.length<2)
@@ -29,11 +27,6 @@ export function deleteLayer(layerPosition) {
   }
 }
 
-export function changeSpacing(layerPosition, spacing) {
-  return (dispatch) => {
-    dispatch({type: CHANGE_SPACING, layerPosition: layerPosition, spacingWithin: spacing});
-  }
-}
 
 export function getLayerName(layer) {
   let layers = store.getState().architecture.layers;

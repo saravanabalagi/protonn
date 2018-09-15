@@ -1,7 +1,10 @@
 import denseReducer, {denseLayer} from "./layer/denseReducer";
 import conv2dReducer, {conv2dLayer} from "./layer/conv2dReducer";
 import inputReducer, {inputLayer} from "./layer/inputReducer";
-import {ADD_LAYER, DELETE_LAYER, UPDATE_LAYER_POSITION} from "./architectureActions";
+import layerReducer from "./layer/layerReducer";
+
+import {ADD_LAYER, DELETE_LAYER} from "./architectureActions";
+import {UPDATE_LAYER_POSITION} from "./layer/layerActions";
 
 export default (state={
   layers: []
@@ -13,7 +16,7 @@ export default (state={
       } else {
         let newLayers = [...state.layers.slice(0, state.layers.length - 1), action.layer, ...state.layers.slice(state.layers.length - 1)];
         return {...state,
-          layers: newLayers.map((layer, index) => denseReducer(layer, {
+          layers: newLayers.map((layer, index) => layerReducer(layer, {
             type: UPDATE_LAYER_POSITION,
             layerPosition: index
           }))
@@ -23,7 +26,7 @@ export default (state={
     case DELETE_LAYER: {
       let newLayers = [...state.layers.slice(0, action.layerPosition), ...state.layers.slice(action.layerPosition + 1)];
       return {...state,
-        layers: newLayers.map((layer, index) => denseReducer(layer, {
+        layers: newLayers.map((layer, index) => layerReducer(layer, {
           type: UPDATE_LAYER_POSITION,
           layerPosition: index
         }))

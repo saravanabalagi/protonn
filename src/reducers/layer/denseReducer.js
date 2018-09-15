@@ -1,5 +1,4 @@
-import {CHANGE_SPACING, UPDATE_LAYER_POSITION} from "../architectureActions";
-import {CHANGE_NEURONS} from "./denseActions";
+import {CHANGE_NEURONS, CHANGE_SPACING} from "./denseActions";
 
 export const denseLayer = 'dense';
 export const defaultDenseLayer = {
@@ -15,8 +14,6 @@ export default (state=defaultDenseLayer, action) => {
       return {...state, neurons: action.neurons};
     case CHANGE_SPACING:
       return {...state, spacingWithin: action.spacingWithin};
-    case UPDATE_LAYER_POSITION:
-      return {...state, layerPosition: action.layerPosition};
     default:
       return state;
   }

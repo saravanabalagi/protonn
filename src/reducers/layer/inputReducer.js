@@ -1,5 +1,5 @@
 import {CHANGE_DIMENSIONS} from "./inputActions";
-import {CHANGE_SPACING} from "../architectureActions";
+import {CHANGE_SPACING} from "./denseActions";
 
 export const inputLayer = 'input';
 export const defaultInputLayer = {
