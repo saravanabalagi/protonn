@@ -1,3 +1,6 @@
+import {inputLayer} from "./inputReducer";
+import {conv2dLayer} from "./convReducer";
+
 export const CHANGE_HEIGHT = 'CHANGE_HEIGHT';
 export const CHANGE_WIDTH = 'CHANGE_WIDTH';
 export const CHANGE_KERNEL_SIZE = 'CHANGE_KERNEL_SIZE';
@@ -51,4 +54,21 @@ export function changeDisplayKernelPositionY(layerPosition, yPosition) {
       layerPosition: layerPosition,
       kernelDisplayPositionY: yPosition });
   }
+}
+
+export function computeHeightWidth(layers, layer) {
+  let previousConvLayerPosition = (layer.layerPosition === 0) ? 0 : layer.layerPosition - 1;
+  for(; previousConvLayerPosition>0; previousConvLayerPosition--)
+    if(layers[previousConvLayerPosition].type===conv2dLayer) break;
+  let prevLayer = layers[previousConvLayerPosition];
+  let height = layer.height;
+  let width = layer.width;
+  if(prevLayer.type===inputLayer) {
+    width = prevLayer.dimensions[0];
+    height = prevLayer.dimensions[1];
+  } else {
+    height = prevLayer.height;
+    width = prevLayer.width;
+  }
+  return { height, width };
 }
