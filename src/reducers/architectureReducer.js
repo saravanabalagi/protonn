@@ -5,6 +5,8 @@ import layerReducer from "./layer/layerReducer";
 
 import {ADD_LAYER, DELETE_LAYER} from "./architectureActions";
 import {UPDATE_LAYER_POSITION} from "./layer/layerActions";
+import maxPooling2dReducer, {maxPooling2dLayer} from "./layer/maxPooling2dReducer";
+import upSampling2dReducer, {upSampling2dLayer} from "./layer/upSampling2dReducer";
 
 export default (state={
   layers: []
@@ -34,19 +36,26 @@ export default (state={
     }
     default: {
       if(action!=null && action.layerPosition!=null) {
-        let changedLayer = null;
         let currentLayer = state.layers[action.layerPosition];
         switch (currentLayer.type) {
           case denseLayer: {
-            changedLayer = denseReducer(state.layers[action.layerPosition], action);
+            let changedLayer = denseReducer(state.layers[action.layerPosition], action);
             return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
           }
           case conv2dLayer: {
-            changedLayer = conv2dReducer(state.layers[action.layerPosition], action);
+            let changedLayer = conv2dReducer(state.layers[action.layerPosition], action);
+            return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+          }
+          case maxPooling2dLayer: {
+            let changedLayer = maxPooling2dReducer(state.layers[action.layerPosition], action);
+            return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+          }
+          case upSampling2dLayer: {
+            let changedLayer = upSampling2dReducer(state.layers[action.layerPosition], action);
             return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
           }
           case inputLayer: {
-            changedLayer = inputReducer(state.layers[action.layerPosition], action);
+            let changedLayer = inputReducer(state.layers[action.layerPosition], action);
             let updatedState = {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
             return {...updatedState, layers: updatedState.layers.map(layer => {
                 if(layer.type===conv2dLayer)

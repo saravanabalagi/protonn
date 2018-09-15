@@ -8,6 +8,10 @@ import Conv2DLayer from "../../layers/conv2d";
 import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 import {inputLayer} from "../../../reducers/layer/inputReducer";
 import InputLayer from "../../layers/input";
+import {upSampling2dLayer} from "../../../reducers/layer/upSampling2dReducer";
+import {maxPooling2dLayer} from "../../../reducers/layer/maxPooling2dReducer";
+import UpSampling2dLayer from "../../layers/upSampling2d";
+import MaxPooling2dLayer from "../../layers/maxPooling2d";
 
 class Layers extends Component {
 
@@ -35,6 +39,20 @@ class Layers extends Component {
               case inputLayer:
                 return (
                   <InputLayer redraw={this.props.redraw} key={index}
+                               styling={this.props.styling}
+                               layerPosition={index}
+                               layer={layer}/>
+                );
+              case upSampling2dLayer:
+                return (
+                  <UpSampling2dLayer redraw={this.props.redraw} key={index}
+                               styling={this.props.styling}
+                               layerPosition={index}
+                               layer={layer}/>
+                );
+              case maxPooling2dLayer:
+                return (
+                  <MaxPooling2dLayer redraw={this.props.redraw} key={index}
                                styling={this.props.styling}
                                layerPosition={index}
                                layer={layer}/>

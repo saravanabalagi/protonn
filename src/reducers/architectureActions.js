@@ -3,6 +3,8 @@ import {defaultDenseLayer, denseLayer} from "./layer/denseReducer";
 import {conv2dLayer, defaultConv2dLayer} from "./layer/conv2dReducer";
 import {defaultInputLayer, inputLayer} from "./layer/inputReducer";
 import {changeDimensions} from "./layer/inputActions";
+import {defaultMaxPooling2dLayer, maxPooling2dLayer} from "./layer/maxPooling2dReducer";
+import {defaultUpSampling2dLayer, upSampling2dLayer} from "./layer/upSampling2dReducer";
 
 export const ADD_LAYER = 'ADD_LAYER';
 export const DELETE_LAYER = 'DELETE_LAYER';
@@ -10,13 +12,17 @@ export const DELETE_LAYER = 'DELETE_LAYER';
 export function addLayer(layerType) {
   return (dispatch) => {
     let layerPosition = store.getState().architecture.layers.length;
-    if(layerType === inputLayer) dispatch({type: ADD_LAYER, layer: {...defaultInputLayer, layerPosition: 0}});
-    if(layerType === denseLayer) dispatch({type: ADD_LAYER, layer: {...defaultDenseLayer, layerPosition: layerPosition }});
-    if(layerType === conv2dLayer) {
-      let inputLayer = store.getState().architecture.layers[0];
-      if(inputLayer.dimensions.length<2)
-        dispatch(changeDimensions([128,128]));
-      dispatch({type: ADD_LAYER, layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
+    switch (layerType) {
+      case inputLayer: dispatch({type: ADD_LAYER, layer: {...defaultInputLayer, layerPosition: 0}}); break;
+      case denseLayer: dispatch({type: ADD_LAYER, layer: {...defaultDenseLayer, layerPosition: layerPosition }}); break;
+      case conv2dLayer: {
+        let inputLayer = store.getState().architecture.layers[0];
+        if(inputLayer.dimensions.length<2)
+          dispatch(changeDimensions([128,128]));
+        dispatch({type: ADD_LAYER, layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
+      } break;
+      case maxPooling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultMaxPooling2dLayer, layerPosition: layerPosition }}); break;
+      case upSampling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultUpSampling2dLayer, layerPosition: layerPosition }}); break;
     }
   }
 }
@@ -39,12 +45,16 @@ export function getLayerName(layer) {
   //other layers
   let denseCount = 0;
   let conv2dCount = 0;
+  let maxPooling2dCount = 0;
+  let upSampling2dCount = 0;
   let unknownCount = 0;
   for(let currentLayer of layers) {
     if(currentLayer.layerPosition===0) continue;
     switch (currentLayer.type) {
       case denseLayer: denseCount += 1; break;
       case conv2dLayer: conv2dCount += 1; break;
+      case maxPooling2dLayer: maxPooling2dCount += 1; break;
+      case upSampling2dLayer: upSampling2dCount += 1; break;
       default: unknownCount += 1;
     }
     if(currentLayer.layerPosition === layer.layerPosition) break;
@@ -53,6 +63,8 @@ export function getLayerName(layer) {
   switch (layer.type) {
     case denseLayer: layerName = 'dense_' + denseCount; break;
     case conv2dLayer: layerName = 'conv_' + conv2dCount; break;
+    case maxPooling2dLayer: layerName = 'maxPooling_' + maxPooling2dCount; break;
+    case upSampling2dLayer: layerName = 'upSampling_' + upSampling2dCount; break;
     default: layerName = 'unknown_' + unknownCount;
   }
   return layerName;
