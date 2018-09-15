@@ -1,5 +1,5 @@
 import {inputLayer} from "./inputReducer";
-import {conv2dLayer} from "./convReducer";
+import {conv2dLayer} from "./conv2dReducer";
 
 export const CHANGE_HEIGHT = 'CHANGE_HEIGHT';
 export const CHANGE_WIDTH = 'CHANGE_WIDTH';

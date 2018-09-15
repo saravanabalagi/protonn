@@ -1,10 +1,13 @@
 import store from 'src/store';
 import {defaultDenseLayer, denseLayer} from "./layer/denseReducer";
-import {conv2dLayer, defaultConv2dLayer} from "./layer/convReducer";
+import {conv2dLayer, defaultConv2dLayer} from "./layer/conv2dReducer";
 import {defaultInputLayer, inputLayer} from "./layer/inputReducer";
 import {changeDimensions} from "./layer/inputActions";
 
 export const CHANGE_SPACING = 'CHANGE_SPACING';
+export const UPDATE_LAYER_POSITION = 'UPDATE_LAYER_POSITION';
+export const ADD_LAYER = 'ADD_LAYER';
+export const DELETE_LAYER = 'DELETE_LAYER';
 
 export function addLayer(layerType) {
   return (dispatch) => {
@@ -15,14 +18,14 @@ export function addLayer(layerType) {
       let inputLayer = store.getState().architecture.layers[0];
       if(inputLayer.dimensions.length<2)
         dispatch(changeDimensions([128,128]));
-      dispatch({type: "ADD_LAYER", layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
+      dispatch({type: ADD_LAYER, layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
     }
   }
 }
 
 export function deleteLayer(layerPosition) {
   return (dispatch) => {
-    dispatch({type: "DELETE_LAYER", layerPosition: layerPosition});
+    dispatch({type: DELETE_LAYER, layerPosition: layerPosition});
   }
 }
 

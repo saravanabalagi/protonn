@@ -5,7 +5,7 @@ import DenseLayer from "src/components/layers/dense";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
 import Conv2DLayer from "../../layers/conv2d";
-import {conv2dLayer} from "../../../reducers/layer/convReducer";
+import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 import {inputLayer} from "../../../reducers/layer/inputReducer";
 import InputLayer from "../../layers/input";
 

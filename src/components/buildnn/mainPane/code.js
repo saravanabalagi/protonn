@@ -8,7 +8,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers'
 import 'prismjs/components/prism-python';
 import {getLayerName} from "../../../reducers/architectureActions";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
-import {conv2dLayer} from "../../../reducers/layer/convReducer";
+import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 
 class Code extends Component {
 

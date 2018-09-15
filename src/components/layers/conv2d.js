@@ -11,7 +11,7 @@ import {
   changeHeight,
   changeKernelSize,
   changeWidth
-} from "../../reducers/layer/convActions";
+} from "../../reducers/layer/conv2dActions";
 
 class Conv2DLayer extends Component {
 

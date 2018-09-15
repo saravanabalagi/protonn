@@ -5,7 +5,7 @@ import './build.css';
 import {addLayer} from "src/reducers/architectureActions";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
-import {conv2dLayer} from "../../../reducers/layer/convReducer";
+import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 
 class Build extends Component {
 
