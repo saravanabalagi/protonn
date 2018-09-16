@@ -12,6 +12,8 @@ import {upSampling2dLayer} from "../../../reducers/layer/upSampling2dReducer";
 import {maxPooling2dLayer} from "../../../reducers/layer/maxPooling2dReducer";
 import UpSampling2dLayer from "../../layers/upSampling2d";
 import MaxPooling2dLayer from "../../layers/maxPooling2d";
+import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
+import BatchNormLayer from "../../layers/batchNorm";
 
 class Layers extends Component {
 
@@ -56,6 +58,13 @@ class Layers extends Component {
                                styling={this.props.styling}
                                layerPosition={index}
                                layer={layer}/>
+                );
+              case batchNormLayer:
+                return (
+                  <BatchNormLayer redraw={this.props.redraw} key={index}
+                                     styling={this.props.styling}
+                                     layerPosition={index}
+                                     layer={layer}/>
                 );
               default: return "";
             }

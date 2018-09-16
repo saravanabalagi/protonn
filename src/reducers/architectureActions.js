@@ -5,6 +5,7 @@ import {defaultInputLayer, inputLayer} from "./layer/inputReducer";
 import {changeDimensions} from "./layer/inputActions";
 import {defaultMaxPooling2dLayer, maxPooling2dLayer} from "./layer/maxPooling2dReducer";
 import {defaultUpSampling2dLayer, upSampling2dLayer} from "./layer/upSampling2dReducer";
+import {batchNormLayer, defaultBatchNormLayer} from "./layer/batchNormReducer";
 
 export const ADD_LAYER = 'ADD_LAYER';
 export const DELETE_LAYER = 'DELETE_LAYER';
@@ -23,6 +24,7 @@ export function addLayer(layerType) {
       } break;
       case maxPooling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultMaxPooling2dLayer, layerPosition: layerPosition }}); break;
       case upSampling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultUpSampling2dLayer, layerPosition: layerPosition }}); break;
+      case batchNormLayer: dispatch({type: ADD_LAYER, layer: {...defaultBatchNormLayer, layerPosition: layerPosition }}); break;
     }
   }
 }
@@ -47,7 +49,9 @@ export function getLayerName(layer) {
   let conv2dCount = 0;
   let maxPooling2dCount = 0;
   let upSampling2dCount = 0;
+  let batchNormCount = 0;
   let unknownCount = 0;
+
   for(let currentLayer of layers) {
     if(currentLayer.layerPosition===0) continue;
     switch (currentLayer.type) {
@@ -55,6 +59,7 @@ export function getLayerName(layer) {
       case conv2dLayer: conv2dCount += 1; break;
       case maxPooling2dLayer: maxPooling2dCount += 1; break;
       case upSampling2dLayer: upSampling2dCount += 1; break;
+      case batchNormLayer: batchNormCount += 1; break;
       default: unknownCount += 1;
     }
     if(currentLayer.layerPosition === layer.layerPosition) break;
@@ -65,6 +70,7 @@ export function getLayerName(layer) {
     case conv2dLayer: layerName = 'conv_' + conv2dCount; break;
     case maxPooling2dLayer: layerName = 'maxPooling_' + maxPooling2dCount; break;
     case upSampling2dLayer: layerName = 'upSampling_' + upSampling2dCount; break;
+    case batchNormLayer: layerName = 'batchNorm_' + batchNormCount; break;
     default: layerName = 'unknown_' + unknownCount;
   }
   return layerName;

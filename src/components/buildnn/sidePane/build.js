@@ -8,6 +8,7 @@ import {denseLayer} from "../../../reducers/layer/denseReducer";
 import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 import {maxPooling2dLayer} from "../../../reducers/layer/maxPooling2dReducer";
 import {upSampling2dLayer} from "../../../reducers/layer/upSampling2dReducer";
+import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
 
 class Build extends Component {
 
@@ -35,6 +36,7 @@ class Build extends Component {
             <Button className={this.state.newLayerType===conv2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(conv2dLayer)}>Conv2D</Button>
             <Button className={this.state.newLayerType===maxPooling2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(maxPooling2dLayer)}>MaxPooling2D</Button>
             <Button className={this.state.newLayerType===upSampling2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(upSampling2dLayer)}>UpSampling2D</Button>
+            <Button className={this.state.newLayerType===batchNormLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(batchNormLayer)}>BatchNorm</Button>
           </div>
           <Button isColor='info' className="addLayer" onClick={()=>this.handleAddLayer(this.state.newLayerType)}>
             <span className="icon">

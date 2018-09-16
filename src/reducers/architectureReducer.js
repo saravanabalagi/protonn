@@ -7,6 +7,7 @@ import {ADD_LAYER, DELETE_LAYER} from "./architectureActions";
 import {UPDATE_LAYER} from "./layer/layerActions";
 import maxPooling2dReducer, {maxPooling2dLayer} from "./layer/maxPooling2dReducer";
 import upSampling2dReducer, {upSampling2dLayer} from "./layer/upSampling2dReducer";
+import batchNormReducer, {batchNormLayer} from "./layer/batchNormReducer";
 
 export default (state={
   layers: []
@@ -54,6 +55,10 @@ export default (state={
           }
           case upSampling2dLayer: {
             let changedLayer = upSampling2dReducer(state.layers[action.layerPosition], action);
+            return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
+          }
+          case batchNormLayer: {
+            let changedLayer = batchNormReducer(state.layers[action.layerPosition], action);
             return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
           }
           case inputLayer: {

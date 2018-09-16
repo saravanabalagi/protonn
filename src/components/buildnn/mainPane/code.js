@@ -11,6 +11,7 @@ import {denseLayer} from "../../../reducers/layer/denseReducer";
 import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 import {maxPooling2dLayer} from "../../../reducers/layer/maxPooling2dReducer";
 import {upSampling2dLayer} from "../../../reducers/layer/upSampling2dReducer";
+import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
 
 class Code extends Component {
 
@@ -22,6 +23,7 @@ class Code extends Component {
     let conv2dCount = false;
     let upSampling2dCount = false;
     let maxPooling2dCount = false;
+    let batchNormCount = false;
 
     for(let layer of layers)
       switch (layer.type) {
@@ -29,6 +31,7 @@ class Code extends Component {
         case conv2dLayer: conv2dCount += 1; break;
         case upSampling2dLayer: upSampling2dCount += 1; break;
         case maxPooling2dLayer: maxPooling2dCount += 1; break;
+        case batchNormLayer: batchNormCount += 1; break;
       }
 
     kerasCode += 'from keras.layers import Input\n';
@@ -37,6 +40,7 @@ class Code extends Component {
     if(conv2dCount>0) kerasCode += 'from keras.layers import Conv2D\n';
     if(maxPooling2dCount>0) kerasCode += 'from keras.layers import MaxPooling2D\n';
     if(upSampling2dCount>0) kerasCode += 'from keras.layers import UpSampling2D\n';
+    if(batchNormCount>0) kerasCode += 'from keras.layers import BatchNormalization\n';
     kerasCode += '\n';
     kerasCode += 'def get_model():\n';
 
@@ -51,6 +55,7 @@ class Code extends Component {
         case conv2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = Conv2D(${currentLayer.featureMaps}, (${currentLayer.kernelSize},${currentLayer.kernelSize}), activation='relu', padding='same')(${getLayerName(prevLayer)})\n`; break;
         case maxPooling2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = MaxPooling2D((${currentLayer.poolSize}))(${getLayerName(prevLayer)})\n`; break;
         case upSampling2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = UpSampling2D((${currentLayer.upSampleSize}))(${getLayerName(prevLayer)})\n`; break;
+        case batchNormLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = BatchNormalization()(${getLayerName(prevLayer)})\n`; break;
       }
     }
 
