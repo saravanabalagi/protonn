@@ -85,7 +85,6 @@ export function computeHeightWidth(layers, layer) {
           height = height * currentLayer.upSampleSize[1];
           break;
       }
-      console.log('LayerPos, LayerType', currentLayer.layerPosition, currentLayer.type);
     }
   }
   return { height, width };

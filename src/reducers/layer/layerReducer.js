@@ -8,7 +8,6 @@ export default (state, action) => {
     case UPDATE_LAYER:
       switch (state.type) {
         case conv2dLayer:
-          console.log('insideLayerReducer, layers: ', action.layers);
           let {height, width} = computeHeightWidth(action.layers, state);
           newState = {...state, height: height, width: width};
           break;

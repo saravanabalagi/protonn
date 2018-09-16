@@ -30,7 +30,7 @@ class DenseLayer extends Component {
     let neurons = this.props.layer.neurons;
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal denseLayer">
+      <div className="is-horizontal layer denseLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
@@ -42,7 +42,7 @@ class DenseLayer extends Component {
         }
         {
           !this.props.styling &&
-          <input className="input inputLayerSize" type="number" placeholder="0"
+          <input className="input inputParam" type="number" placeholder="0"
                  value={neurons} inputMode="numeric"
                  onChange={this.handleChangeNeurons}/>
         }

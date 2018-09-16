@@ -55,7 +55,7 @@ class Conv2DLayer extends Component {
     let width = this.props.layer.width;
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal conv2dLayer">
+      <div className="is-horizontal layer conv2dLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
@@ -73,14 +73,14 @@ class Conv2DLayer extends Component {
         }
         {
           !this.props.styling &&
-          <input className="input inputKernelSize" type="number" placeholder="0"
+          <input className="input inputParam inputKernelSize" type="number" placeholder="0"
                  value={kernelSize} inputMode="numeric"
                  param={this.KERNEL_SIZE}
                  onChange={this.handleChangeParam}/>
         }
         {
           !this.props.styling &&
-          <input className="input inputFeatureMaps" type="number" placeholder="0"
+          <input className="input inputParam inputFeatureMaps" type="number" placeholder="0"
                  value={featureMaps} inputMode="numeric"
                  param={this.FEATURE_MAPS}
                  onChange={this.handleChangeParam}/>

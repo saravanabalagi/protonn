@@ -37,12 +37,12 @@ class InputLayer extends Component {
     let dimensions = this.props.layer.dimensions;
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal inputLayer">
+      <div className="is-horizontal layer inputLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
         {
-          !this.props.styling && dimensions.map((dim, index)=><input className="input inputLayerSize" type="number"
+          !this.props.styling && dimensions.map((dim, index)=><input className="input inputParam inputLayerSize" type="number"
                                                                       placeholder={dim}
                                                                       key={index}
                                                                       index={index}
