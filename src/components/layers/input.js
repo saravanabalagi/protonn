@@ -20,15 +20,15 @@ class InputLayer extends Component {
   };
 
   handleChangeDimension = (e) => {
-    let numberOfNeurons = parseInt(e.target.value);
-    let dimIndex = e.target.getAttribute('index');
+    let numberOfNeurons = parseInt(e.currentTarget.value);
+    let dimIndex = e.currentTarget.getAttribute('index');
     if (isNaN(numberOfNeurons) || numberOfNeurons<=0) return;
     this.props.dispatch(changeDimension(numberOfNeurons, dimIndex));
     this.props.redraw();
   };
 
   handleSliderChange = (e) => {
-    let spacingWithin = parseInt(e.target.value);
+    let spacingWithin = parseInt(e.currentTarget.value);
     this.props.dispatch(changeSpacing(this.props.layerPosition, spacingWithin));
     this.props.redraw();
   };

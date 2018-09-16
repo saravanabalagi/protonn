@@ -9,7 +9,7 @@ import {Button} from "bloomer";
 class MaxPooling2dLayer extends Component {
 
   handlePoolSize = (e) => {
-    let poolSize = parseInt(e.target.value);
+    let poolSize = parseInt(e.currentTarget.value);
     let layerPosition = this.props.layer.layerPosition;
     if (poolSize<=0) return;
     this.props.dispatch(changePoolSize(layerPosition, [poolSize, poolSize]));

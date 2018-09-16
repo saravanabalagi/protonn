@@ -24,7 +24,7 @@ class Build extends Component {
     this.props.redraw();
   };
 
-  handleSwitchNewLayer = (e) => { this.setState({ newLayerType: e.target.getAttribute('identity')}) };
+  handleSwitchNewLayer = (e) => { this.setState({ newLayerType: e.currentTarget.getAttribute('identity')}) };
 
   render() {
     return (

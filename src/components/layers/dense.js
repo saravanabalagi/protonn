@@ -9,7 +9,7 @@ import {changeNeuron, changeSpacing} from "../../reducers/layer/denseActions";
 class DenseLayer extends Component {
 
   handleChangeNeurons = (e) => {
-    let numberOfNeurons = parseInt(e.target.value);
+    let numberOfNeurons = parseInt(e.currentTarget.value);
     if (numberOfNeurons<=0) return;
     this.props.dispatch(changeNeuron(this.props.layerPosition, numberOfNeurons));
     this.props.redraw();
@@ -21,7 +21,7 @@ class DenseLayer extends Component {
   };
 
   handleSliderChange = (e) => {
-    let spacingWithin = parseInt(e.target.value);
+    let spacingWithin = parseInt(e.currentTarget.value);
     this.props.dispatch(changeSpacing(this.props.layerPosition, spacingWithin));
     this.props.redraw();
   };

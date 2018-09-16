@@ -21,8 +21,8 @@ class Conv2DLayer extends Component {
   FEATURE_MAPS = 'feature_maps';
 
   handleChangeParam = (e) => {
-    let param = parseInt(e.target.value);
-    let paramType = e.target.getAttribute('param');
+    let param = parseInt(e.currentTarget.value);
+    let paramType = e.currentTarget.getAttribute('param');
     if (param<=0) return;
     if(paramType===this.HEIGHT) this.props.dispatch(changeHeight(this.props.layerPosition, param));
     if(paramType===this.WIDTH) this.props.dispatch(changeWidth(this.props.layerPosition, param));
@@ -37,13 +37,13 @@ class Conv2DLayer extends Component {
   };
 
   handleXSliderChange = (e) => {
-    let xPosition = parseFloat(e.target.value);
+    let xPosition = parseFloat(e.currentTarget.value);
     this.props.dispatch(changeDisplayKernelPositionX(this.props.layerPosition, xPosition));
     this.props.redraw();
   };
 
   handleYSliderChange = (e) => {
-    let yPosition = parseFloat(e.target.value);
+    let yPosition = parseFloat(e.currentTarget.value);
     this.props.dispatch(changeDisplayKernelPositionY(this.props.layerPosition, yPosition));
     this.props.redraw();
   };

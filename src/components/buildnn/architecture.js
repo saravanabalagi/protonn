@@ -72,9 +72,14 @@ class Architecture extends Component {
     }
   };
 
-  handleTabSelect = (e) => {
-    let selectedSidePanelTab = e.target.getAttribute('tab');
-    this.setState({sidePanelTab: selectedSidePanelTab});
+  handleSelectSidePaneTab = (e) => {
+    let selectedSidePanelTab = e.currentTarget.getAttribute('tab');
+    this.setState({sidePaneTab: selectedSidePanelTab});
+  };
+
+  handleSelectMainPaneTab = (e) => {
+    let selectedMainPanelTab = e.currentTarget.getAttribute('tab');
+    this.setState({mainPaneTab: selectedMainPanelTab});
   };
 
   render() {
@@ -84,13 +89,13 @@ class Architecture extends Component {
           <Tabs isAlign="centered">
             <TabList>
               <Tab isActive={this.state.sidePaneTab===tabBuild}>
-                <TabLink tab={tabBuild} onClick={this.handleTabSelect}>
+                <TabLink tab={tabBuild} onClick={this.handleSelectSidePaneTab}>
                   <Icon isSize='small'><span className='fa fa-gavel' aria-hidden='true' /></Icon>
                   <span>Build</span>
                 </TabLink>
               </Tab>
               <Tab isActive={this.state.sidePaneTab===tabStyle}>
-                <TabLink tab={tabStyle} onClick={this.handleTabSelect}>
+                <TabLink tab={tabStyle} onClick={this.handleSelectSidePaneTab}>
                   <Icon isSize='small'><span className='fa fa-pie-chart' aria-hidden='true' /></Icon>
                   <span>Style</span>
                 </TabLink>
@@ -104,22 +109,22 @@ class Architecture extends Component {
         <Column className="mainPanel">
           <Tabs isAlign="centered">
             <TabList>
-              <Tab isActive={!this.state.code}>
-                <TabLink tab={tabVisualize} onClick={this.handleTabSelect}>
+              <Tab isActive={this.state.mainPaneTab===tabVisualize}>
+                <TabLink tab={tabVisualize} onClick={this.handleSelectMainPaneTab}>
                   <Icon isSize='small'><span className='fa fa-eye' aria-hidden='true' /></Icon>
                   <span>Visualize</span>
                 </TabLink>
               </Tab>
-              <Tab isActive={this.state.code}>
-                <TabLink tab={tabCode} onClick={this.handleTabSelect}>
+              <Tab isActive={this.state.mainPaneTab===tabCode}>
+                <TabLink tab={tabCode} onClick={this.handleSelectMainPaneTab}>
                   <Icon isSize='small'><span className='fa fa-code' aria-hidden='true' /></Icon>
                   <span>Code</span>
                 </TabLink>
               </Tab>
             </TabList>
           </Tabs>
-          { !this.state.code && <Visualize initialize={this.initialize}/>}
-          { this.state.code && <Code/>}
+          { this.state.mainPaneTab===tabVisualize && <Visualize initialize={this.initialize}/>}
+          { this.state.mainPaneTab===tabCode && <Code/>}
         </Column>
       </Columns>
     );
