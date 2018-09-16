@@ -51,6 +51,8 @@ class Conv2DLayer extends Component {
   render() {
     let featureMaps = this.props.layer.featureMaps;
     let kernelSize = this.props.layer.kernelSize;
+    let xPos = this.props.layer.kernelDisplayPositionX;
+    let yPos = this.props.layer.kernelDisplayPositionY;
     let height = this.props.layer.height;
     let width = this.props.layer.width;
     let layerName = getLayerName(this.props.layer);
@@ -61,12 +63,14 @@ class Conv2DLayer extends Component {
         </div>
         {
           this.props.styling && <input className="slider sliderLayerSpacing"
+                                       value={xPos}
                                        onChange={this.handleXSliderChange}
                                        step="0.01" min="-0.4" max="0.4"
                                        defaultValue="0" type="range" />
         }
         {
           this.props.styling && <input className="slider sliderLayerSpacing"
+                                       value={yPos}
                                        onChange={this.handleYSliderChange}
                                        step="0.01" min="-0.4" max="0.4"
                                        defaultValue="0" type="range" />

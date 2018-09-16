@@ -20,7 +20,13 @@ export function addLayer(layerType) {
         let inputLayer = store.getState().architecture.layers[0];
         if(inputLayer.dimensions.length<2)
           dispatch(changeDimensions([128,128]));
-        dispatch({type: ADD_LAYER, layer: {...defaultConv2dLayer, layerPosition: layerPosition }});
+        dispatch({type: ADD_LAYER,
+          layer: {
+          ...defaultConv2dLayer,
+            layerPosition: layerPosition,
+            kernelDisplayPositionX: Math.random()*0.4*2 - 0.4,
+            kernelDisplayPositionY: Math.random()*0.4*2 - 0.4,
+          }});
       } break;
       case maxPooling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultMaxPooling2dLayer, layerPosition: layerPosition }}); break;
       case upSampling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultUpSampling2dLayer, layerPosition: layerPosition }}); break;
