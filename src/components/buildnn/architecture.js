@@ -20,6 +20,11 @@ import {inputLayer} from "../../reducers/layer/inputReducer";
 import {DNN, dnn} from "./dnn";
 import {CNN, cnn} from "./cnn";
 
+export const tabBuild = 'tabBuild';
+export const tabStyle = 'tabStyle';
+export const tabVisualize = 'tabVisualize';
+export const tabCode = 'tabCode';
+
 class Architecture extends Component {
 
   constructor(props) {
@@ -27,8 +32,8 @@ class Architecture extends Component {
     this.nn = null;
     this.nnType = null;
     this.state = {
-      styling: false,
-      code: false
+      sidePaneTab: tabBuild,
+      mainPaneTab: tabVisualize
     };
   }
 
@@ -65,7 +70,11 @@ class Architecture extends Component {
         });
       } break;
     }
+  };
 
+  handleTabSelect = (e) => {
+    let selectedSidePanelTab = e.target.getAttribute('tab');
+    this.setState({sidePanelTab: selectedSidePanelTab});
   };
 
   render() {
@@ -74,35 +83,35 @@ class Architecture extends Component {
         <Column isSize='1/3' className="sidePanel">
           <Tabs isAlign="centered">
             <TabList>
-              <Tab isActive={!this.state.styling}>
-                <TabLink onClick={()=>this.setState({styling: false})}>
+              <Tab isActive={this.state.sidePaneTab===tabBuild}>
+                <TabLink tab={tabBuild} onClick={this.handleTabSelect}>
                   <Icon isSize='small'><span className='fa fa-gavel' aria-hidden='true' /></Icon>
                   <span>Build</span>
                 </TabLink>
               </Tab>
-              <Tab isActive={this.state.styling}>
-                <TabLink onClick={()=>this.setState({styling: true})}>
+              <Tab isActive={this.state.sidePaneTab===tabStyle}>
+                <TabLink tab={tabStyle} onClick={this.handleTabSelect}>
                   <Icon isSize='small'><span className='fa fa-pie-chart' aria-hidden='true' /></Icon>
                   <span>Style</span>
                 </TabLink>
               </Tab>
             </TabList>
           </Tabs>
-          <Layers redraw={this.redraw} styling={this.state.styling}/>
-          { !this.state.styling && <Build redraw={this.redraw} initialize={this.initialize} />}
-          { this.state.styling && <Styling redraw={this.redraw}/>}
+          <Layers redraw={this.redraw} styling={this.state.sidePaneTab===tabStyle}/>
+          { this.state.sidePaneTab===tabBuild && <Build redraw={this.redraw} initialize={this.initialize} />}
+          { this.state.sidePaneTab===tabStyle && <Styling redraw={this.redraw}/>}
         </Column>
         <Column className="mainPanel">
           <Tabs isAlign="centered">
             <TabList>
               <Tab isActive={!this.state.code}>
-                <TabLink onClick={()=>this.setState({code: false})}>
+                <TabLink tab={tabVisualize} onClick={this.handleTabSelect}>
                   <Icon isSize='small'><span className='fa fa-eye' aria-hidden='true' /></Icon>
                   <span>Visualize</span>
                 </TabLink>
               </Tab>
               <Tab isActive={this.state.code}>
-                <TabLink onClick={()=>this.setState({code: true})}>
+                <TabLink tab={tabCode} onClick={this.handleTabSelect}>
                   <Icon isSize='small'><span className='fa fa-code' aria-hidden='true' /></Icon>
                   <span>Code</span>
                 </TabLink>

@@ -20,8 +20,9 @@ class Conv2DLayer extends Component {
   KERNEL_SIZE = 'kernel_size';
   FEATURE_MAPS = 'feature_maps';
 
-  handleChangeParam = (paramType, e) => {
+  handleChangeParam = (e) => {
     let param = parseInt(e.target.value);
+    let paramType = e.target.getAttribute('param');
     if (param<=0) return;
     if(paramType===this.HEIGHT) this.props.dispatch(changeHeight(this.props.layerPosition, param));
     if(paramType===this.WIDTH) this.props.dispatch(changeWidth(this.props.layerPosition, param));
@@ -74,13 +75,15 @@ class Conv2DLayer extends Component {
           !this.props.styling &&
           <input className="input inputKernelSize" type="number" placeholder="0"
                  value={kernelSize} inputMode="numeric"
-                 onChange={(e)=>this.handleChangeParam(this.KERNEL_SIZE, e)}/>
+                 param={this.KERNEL_SIZE}
+                 onChange={this.handleChangeParam}/>
         }
         {
           !this.props.styling &&
           <input className="input inputFeatureMaps" type="number" placeholder="0"
                  value={featureMaps} inputMode="numeric"
-                 onChange={(e)=>this.handleChangeParam(this.FEATURE_MAPS, e)}/>
+                 param={this.FEATURE_MAPS}
+                 onChange={this.handleChangeParam}/>
         }
         <Button isColor='white' onClick={this.handleDeleteLayer}
                 className={`icon-button danger ${this.props.styling?" invisible":""}`}>

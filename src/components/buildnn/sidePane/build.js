@@ -19,12 +19,12 @@ class Build extends Component {
     };
   }
 
-  handleAddLayer = (layerType) => {
-    this.props.dispatch(addLayer(layerType));
+  handleAddLayer = () => {
+    this.props.dispatch(addLayer(this.state.newLayerType));
     this.props.redraw();
   };
 
-  handleSwitchNewLayer = (layerType) => { this.setState({ newLayerType: layerType}) };
+  handleSwitchNewLayer = (e) => { this.setState({ newLayerType: e.target.getAttribute('identity')}) };
 
   render() {
     return (
@@ -32,13 +32,13 @@ class Build extends Component {
         <div className="is-divider" data-content="Add Layer"/>
         <Field isHorizontal>
           <div className="buttons has-addons">
-            <Button className={this.state.newLayerType===denseLayer ? "is-success is-selected" : ""} onClick={()=>this.handleSwitchNewLayer(denseLayer)}>Dense</Button>
-            <Button className={this.state.newLayerType===conv2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(conv2dLayer)}>Conv2D</Button>
-            <Button className={this.state.newLayerType===maxPooling2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(maxPooling2dLayer)}>MaxPooling2D</Button>
-            <Button className={this.state.newLayerType===upSampling2dLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(upSampling2dLayer)}>UpSampling2D</Button>
-            <Button className={this.state.newLayerType===batchNormLayer ? "is-success is-selected": ""} onClick={()=>this.handleSwitchNewLayer(batchNormLayer)}>BatchNorm</Button>
+            <Button identity={denseLayer} className={this.state.newLayerType===denseLayer ? "is-success is-selected" : ""} onClick={this.handleSwitchNewLayer}>Dense</Button>
+            <Button identity={conv2dLayer} className={this.state.newLayerType===conv2dLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>Conv2D</Button>
+            <Button identity={maxPooling2dLayer} className={this.state.newLayerType===maxPooling2dLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>MaxPooling2D</Button>
+            <Button identity={upSampling2dLayer} className={this.state.newLayerType===upSampling2dLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>UpSampling2D</Button>
+            <Button identity={batchNormLayer} className={this.state.newLayerType===batchNormLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>BatchNorm</Button>
           </div>
-          <Button isColor='info' className="addLayer" onClick={()=>this.handleAddLayer(this.state.newLayerType)}>
+          <Button isColor='info' className="addLayer" onClick={this.handleAddLayer}>
             <span className="icon">
               <i className="fa fa-plus-circle"/>
             </span>

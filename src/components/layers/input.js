@@ -19,10 +19,11 @@ class InputLayer extends Component {
     this.props.redraw();
   };
 
-  handleChangeDimension = (e, index) => {
+  handleChangeDimension = (e) => {
     let numberOfNeurons = parseInt(e.target.value);
-    if (numberOfNeurons<=0) return;
-    this.props.dispatch(changeDimension(numberOfNeurons, index));
+    let dimIndex = e.target.getAttribute('index');
+    if (isNaN(numberOfNeurons) || numberOfNeurons<=0) return;
+    this.props.dispatch(changeDimension(numberOfNeurons, dimIndex));
     this.props.redraw();
   };
 
@@ -41,10 +42,12 @@ class InputLayer extends Component {
           <label className="label">{layerName}</label>
         </div>
         {
-          !this.props.styling && dimensions.map((dim, index)=><input className="input inputLayerSize" type="number" placeholder="0"
-                                                key={index}
-                                                value={dim} inputMode="numeric"
-                                                onChange={(e)=>this.handleChangeDimension(e, index)}/>)
+          !this.props.styling && dimensions.map((dim, index)=><input className="input inputLayerSize" type="number"
+                                                                      placeholder={dim}
+                                                                      key={index}
+                                                                      index={index}
+                                                                      value={dim} inputMode="numeric"
+                                                                      onChange={this.handleChangeDimension}/>)
         }
         {
           this.props.styling && <input className="slider sliderLayerSpacing"
