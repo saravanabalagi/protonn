@@ -86,7 +86,7 @@ class Architecture extends Component {
     return (
       <Columns className="is-fullheight">
         <Column isSize='1/3' className="sidePanel">
-          <Tabs isAlign="centered">
+          <Tabs isAlign="centered" className="sidePanelTabs">
             <TabList>
               <Tab isActive={this.state.sidePaneTab===tabBuild}>
                 <TabLink tab={tabBuild} onClick={this.handleSelectSidePaneTab}>
