@@ -1,5 +1,7 @@
 import {inputLayer} from "./inputReducer";
 import {conv2dLayer} from "./conv2dReducer";
+import {maxPooling2dLayer} from "./maxPooling2dReducer";
+import {upSampling2dLayer} from "./upSampling2dReducer";
 
 export const CHANGE_HEIGHT = 'CHANGE_HEIGHT';
 export const CHANGE_WIDTH = 'CHANGE_WIDTH';
@@ -69,6 +71,22 @@ export function computeHeightWidth(layers, layer) {
   } else {
     height = prevLayer.height;
     width = prevLayer.width;
+  }
+  if(layer.layerPosition - previousConvLayerPosition > 1) {
+    for(let i = previousConvLayerPosition+1; i<layer.layerPosition; i++) {
+      let currentLayer = layers[i];
+      switch (currentLayer.type) {
+        case maxPooling2dLayer:
+          width = width/currentLayer.poolSize[0];
+          height = height/currentLayer.poolSize[1];
+          break;
+        case upSampling2dLayer:
+          width = width * currentLayer.upSampleSize[0];
+          height = height * currentLayer.upSampleSize[1];
+          break;
+      }
+      console.log('LayerPos, LayerType', currentLayer.layerPosition, currentLayer.type);
+    }
   }
   return { height, width };
 }

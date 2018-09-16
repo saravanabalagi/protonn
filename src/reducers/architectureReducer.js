@@ -4,7 +4,7 @@ import inputReducer, {inputLayer} from "./layer/inputReducer";
 import layerReducer from "./layer/layerReducer";
 
 import {ADD_LAYER, DELETE_LAYER} from "./architectureActions";
-import {UPDATE_LAYER_POSITION} from "./layer/layerActions";
+import {UPDATE_LAYER} from "./layer/layerActions";
 import maxPooling2dReducer, {maxPooling2dLayer} from "./layer/maxPooling2dReducer";
 import upSampling2dReducer, {upSampling2dLayer} from "./layer/upSampling2dReducer";
 
@@ -19,8 +19,9 @@ export default (state={
         let newLayers = [...state.layers.slice(0, state.layers.length - 1), action.layer, ...state.layers.slice(state.layers.length - 1)];
         return {...state,
           layers: newLayers.map((layer, index) => layerReducer(layer, {
-            type: UPDATE_LAYER_POSITION,
-            layerPosition: index
+            type: UPDATE_LAYER,
+            layerPosition: index,
+            layers: state.layers
           }))
         };
       }
@@ -29,8 +30,9 @@ export default (state={
       let newLayers = [...state.layers.slice(0, action.layerPosition), ...state.layers.slice(action.layerPosition + 1)];
       return {...state,
         layers: newLayers.map((layer, index) => layerReducer(layer, {
-          type: UPDATE_LAYER_POSITION,
-          layerPosition: index
+          type: UPDATE_LAYER,
+          layerPosition: index,
+          layers: state.layers
         }))
       };
     }
