@@ -29,9 +29,11 @@
       .addLayerButtonAndOptionsWrapper {
         width: 100%;
         button.addLayerButton {
-          font-size: 12px;
+          color: #55aced;
           opacity: 1 !important;
           border: 1px solid #00000033;
+          transition: color 0.5s ease-in-out;
+          &:hover {color: #1496ed;}
         }
         &:hover {
           .addLayerOptions {
@@ -60,7 +62,6 @@
         flex-wrap: wrap;
         .button {
           margin: 5px;
-          font-size: 12px;
         }
       }
     }

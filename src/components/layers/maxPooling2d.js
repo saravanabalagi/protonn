@@ -25,12 +25,12 @@ class MaxPooling2dLayer extends Component {
     let poolSize = this.props.layer.poolSize;
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal inputLayer">
+      <div className="is-horizontal layer maxPooling2dLayer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>
         {
-          !this.props.styling && <input className="input inputLayerSize" type="number" placeholder="0"
+          !this.props.styling && <input className="input inputParam" type="number" placeholder="0"
                                                 inputMode="numeric"
                                                 value={poolSize[0]}
                                                 onChange={this.handlePoolSize}/>

@@ -87,7 +87,7 @@ class Layers extends Component {
                     <div className="addLayerButtonAndOptionsWrapper">
                       <div className="addLayerButtonWrapper">
                         <div className="is-divider addLayerDivider"/>
-                        <Button className="is-white icon-button info is-rounded addLayerButton">
+                        <Button className="is-small is-white icon-button is-rounded addLayerButton">
                           <span className="icon">
                             <i className="fa fa-plus-circle"/>
                           </span>
@@ -95,11 +95,11 @@ class Layers extends Component {
                         </Button>
                       </div>
                       <div className="addLayerOptions">
-                        <Button className="is-light" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
-                        <Button className="is-light" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
-                        <Button className="is-light" identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
-                        <Button className="is-light" identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
-                        <Button className="is-light" identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
+                        <Button className="is-light is-small" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
+                        <Button className="is-light is-small" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
+                        <Button className="is-light is-small" identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
+                        <Button className="is-light is-small" identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
+                        <Button className="is-light is-small" identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
                       </div>
                     </div>
                   </div>
