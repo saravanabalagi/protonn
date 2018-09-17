@@ -15,6 +15,7 @@ import MaxPooling2dLayer from "../../layers/maxPooling2d";
 import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
 import BatchNormLayer from "../../layers/batchNorm";
 import {Button} from "bloomer";
+import {addLayer} from "../../../reducers/architectureActions";
 
 class Layers extends Component {
 
@@ -66,6 +67,11 @@ class Layers extends Component {
     }
   };
 
+  handleAddLayer = (e) => {
+    this.props.dispatch(addLayer(e.currentTarget.getAttribute('identity')));
+    this.props.redraw();
+  };
+
   render() {
     let layers = this.props.layers;
     return (
@@ -78,13 +84,24 @@ class Layers extends Component {
                 {
                   index !== layers.length - 1 &&
                   <div className="addLayerWrapper">
-                    <div className="is-divider addLayerDivider"/>
-                    <Button className="is-white icon-button info is-rounded">
-                      <span className="icon">
-                        <i className="fa fa-plus-circle"/>
-                      </span>
-                      <span>Add Layer</span>
-                    </Button>
+                    <div className="addLayerButtonAndOptionsWrapper">
+                      <div className="addLayerButtonWrapper">
+                        <div className="is-divider addLayerDivider"/>
+                        <Button className="is-white icon-button info is-rounded addLayerButton">
+                          <span className="icon">
+                            <i className="fa fa-plus-circle"/>
+                          </span>
+                          <span>Add Layer</span>
+                        </Button>
+                      </div>
+                      <div className="addLayerOptions">
+                        <Button className="is-light" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
+                        <Button className="is-light" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
+                        <Button className="is-light" identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
+                        <Button className="is-light" identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
+                        <Button className="is-light" identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
+                      </div>
+                    </div>
                   </div>
                 }
               </div>

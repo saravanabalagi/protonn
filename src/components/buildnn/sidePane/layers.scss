@@ -21,22 +21,47 @@
 
   .layerWrapper {
     .addLayerWrapper {
-      position: relative;
       flex-direction: row;
       justify-content: center;
-      padding: 10px;
+      padding: 20px 10px;
       display: none;
 
-      .addLayerDivider {
-        position: absolute;
-        top: 50%;
-        left: 20px;
-        right: 20px;
-        margin: 0;
+      .addLayerButtonAndOptionsWrapper {
+        width: 100%;
+        button.addLayerButton {
+          font-size: 12px;
+          opacity: 1 !important;
+          border: 1px solid #00000033;
+        }
+        &:hover {
+          .addLayerOptions {
+            display: flex;
+          }
+        }
+
+        .addLayerButtonWrapper {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          .addLayerDivider {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            right: 20px;
+            margin: 0;
+          }
+        }
       }
 
-      button.is-rounded {
-        opacity: 1;
+      .addLayerOptions {
+        padding: 10px 20px;
+        display: none;
+        justify-content: center;
+        flex-wrap: wrap;
+        .button {
+          margin: 5px;
+          font-size: 12px;
+        }
       }
     }
 
