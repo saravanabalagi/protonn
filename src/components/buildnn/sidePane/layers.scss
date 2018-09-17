@@ -19,6 +19,18 @@
     margin-right: 10px;
   }
 
+  .layerWrapper {
+    .addLayerWrapper {
+      display: none;
+    }
+
+    &:hover {
+      .addLayerWrapper {
+        display: block;
+      }
+    }
+  }
+
   .layer {
 
     margin-bottom: 10px;

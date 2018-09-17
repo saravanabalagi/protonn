@@ -14,8 +14,57 @@ import UpSampling2dLayer from "../../layers/upSampling2d";
 import MaxPooling2dLayer from "../../layers/maxPooling2d";
 import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
 import BatchNormLayer from "../../layers/batchNorm";
+import {Button} from "bloomer";
 
 class Layers extends Component {
+
+  renderLayer = (layer, index) => {
+    switch (layer.type) {
+      case denseLayer:
+        return (
+          <DenseLayer redraw={this.props.redraw} key={index}
+                      styling={this.props.styling}
+                      layerPosition={index}
+                      layer={layer}/>
+        );
+      case conv2dLayer:
+        return (
+          <Conv2DLayer redraw={this.props.redraw} key={index}
+                       styling={this.props.styling}
+                       layerPosition={index}
+                       layer={layer}/>
+        );
+      case inputLayer:
+        return (
+          <InputLayer redraw={this.props.redraw} key={index}
+                      styling={this.props.styling}
+                      layerPosition={index}
+                      layer={layer}/>
+        );
+      case upSampling2dLayer:
+        return (
+          <UpSampling2dLayer redraw={this.props.redraw} key={index}
+                             styling={this.props.styling}
+                             layerPosition={index}
+                             layer={layer}/>
+        );
+      case maxPooling2dLayer:
+        return (
+          <MaxPooling2dLayer redraw={this.props.redraw} key={index}
+                             styling={this.props.styling}
+                             layerPosition={index}
+                             layer={layer}/>
+        );
+      case batchNormLayer:
+        return (
+          <BatchNormLayer redraw={this.props.redraw} key={index}
+                          styling={this.props.styling}
+                          layerPosition={index}
+                          layer={layer}/>
+        );
+      default: return "";
+    }
+  };
 
   render() {
     let layers = this.props.layers;
@@ -23,51 +72,14 @@ class Layers extends Component {
       <div className="Layers">
         {
           layers.map((layer, index)=>{
-            switch (layer.type) {
-              case denseLayer:
-                return (
-                  <DenseLayer redraw={this.props.redraw} key={index}
-                              styling={this.props.styling}
-                              layerPosition={index}
-                              layer={layer}/>
-                );
-              case conv2dLayer:
-                return (
-                  <Conv2DLayer redraw={this.props.redraw} key={index}
-                               styling={this.props.styling}
-                               layerPosition={index}
-                               layer={layer}/>
-                );
-              case inputLayer:
-                return (
-                  <InputLayer redraw={this.props.redraw} key={index}
-                               styling={this.props.styling}
-                               layerPosition={index}
-                               layer={layer}/>
-                );
-              case upSampling2dLayer:
-                return (
-                  <UpSampling2dLayer redraw={this.props.redraw} key={index}
-                               styling={this.props.styling}
-                               layerPosition={index}
-                               layer={layer}/>
-                );
-              case maxPooling2dLayer:
-                return (
-                  <MaxPooling2dLayer redraw={this.props.redraw} key={index}
-                               styling={this.props.styling}
-                               layerPosition={index}
-                               layer={layer}/>
-                );
-              case batchNormLayer:
-                return (
-                  <BatchNormLayer redraw={this.props.redraw} key={index}
-                                     styling={this.props.styling}
-                                     layerPosition={index}
-                                     layer={layer}/>
-                );
-              default: return "";
-            }
+            return (
+              <div className="layerWrapper">
+                { this.renderLayer(layer, index) }
+                <div className="addLayerWrapper">
+                  <Button>Add Layer</Button>
+                </div>
+              </div>
+            );
           })
         }
       </div>
