@@ -20,34 +20,47 @@
   }
 
   .layerWrapper {
-    .addLayerWrapper {
-      flex-direction: row;
-      justify-content: center;
-      padding: 20px 10px;
-      display: none;
 
-      .addLayerButtonAndOptionsWrapper {
+    .addLayerParentWrapper {
+      position: relative;
+      padding-top: 10px;
+      &:hover {
+        padding-top: 0;
+        .addLayerWrapper{
+          position: static;
+          visibility: visible;
+          padding: 20px 0;
+          opacity: 1;
+          height: auto;
+        }
+      }
+
+      .addLayerWrapper {
+        position: absolute;
         pointer-events: none;
-        width: 100%;
-        button.addLayerButton {
-          pointer-events: auto;
-          color: #55aced;
-          opacity: 1 !important;
-          border: 1px solid #00000033;
-          transition: color 0.5s ease-in-out;
-          &:hover {color: #1496ed;}
-        }
-        &:hover {
-          .addLayerOptions {
-            display: flex;
-          }
-        }
+        opacity: 0;
+        padding: 0;
+        height: 0;
+        visibility: hidden;
+        transition: 1s opacity, 1s padding, 1s height;
+        &:hover { .addLayerOptions {display: flex;} }
 
         .addLayerButtonWrapper {
-          pointer-events: none;
           position: relative;
           display: flex;
           justify-content: center;
+          width: 100%;
+          button.addLayerButton {
+            pointer-events: auto;
+            color: #55aced;
+            opacity: 1 !important;
+            border: 1px solid #00000033;
+            transition: color 0.5s ease-in-out;
+            &:hover {
+              color: #1496ed;
+              transition: 0s all;
+            }
+          }
           .addLayerDivider {
             position: absolute;
             top: 50%;
@@ -56,35 +69,25 @@
             margin: 0;
           }
         }
-      }
 
-      .addLayerOptions {
-        pointer-events: auto;
-        padding: 10px 20px;
-        display: none;
-        justify-content: center;
-        flex-wrap: wrap;
-        .button {
-          margin: 5px;
+        .addLayerOptions {
+          pointer-events: auto;
+          padding: 10px 20px;
+          display: none;
+          justify-content: center;
+          flex-wrap: wrap;
+          .button {
+            margin: 5px;
+          }
         }
-      }
-    }
 
-    &:hover {
-      .addLayerWrapper {
-        display: flex;
       }
 
-      .layer {
-        margin-bottom: 0;
-      }
     }
 
   }
 
   .layer {
-
-    margin-bottom: 10px;
 
     .inputParam {
       width: 70px;
