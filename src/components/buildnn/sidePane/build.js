@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Field} from "bloomer";
+import {Button} from "bloomer";
 
 import './build.css';
 import {addLayer} from "src/reducers/architectureActions";
@@ -19,31 +19,22 @@ class Build extends Component {
     };
   }
 
-  handleAddLayer = () => {
-    this.props.dispatch(addLayer(this.state.newLayerType));
+  handleAddLayer = (e) => {
+    this.props.dispatch(addLayer(e.currentTarget.getAttribute('identity')));
     this.props.redraw();
   };
-
-  handleSwitchNewLayer = (e) => { this.setState({ newLayerType: e.currentTarget.getAttribute('identity')}) };
 
   render() {
     return (
       <div className="Build">
         <div className="is-divider" data-content="Add Layer"/>
-        <Field isHorizontal>
-          <div className="buttons has-addons">
-            <Button identity={denseLayer} className={this.state.newLayerType===denseLayer ? "is-success is-selected" : ""} onClick={this.handleSwitchNewLayer}>Dense</Button>
-            <Button identity={conv2dLayer} className={this.state.newLayerType===conv2dLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>Conv2D</Button>
-            <Button identity={maxPooling2dLayer} className={this.state.newLayerType===maxPooling2dLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>MaxPooling2D</Button>
-            <Button identity={upSampling2dLayer} className={this.state.newLayerType===upSampling2dLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>UpSampling2D</Button>
-            <Button identity={batchNormLayer} className={this.state.newLayerType===batchNormLayer ? "is-success is-selected": ""} onClick={this.handleSwitchNewLayer}>BatchNorm</Button>
-          </div>
-          <Button isColor='info' className="addLayer" onClick={this.handleAddLayer}>
-            <span className="icon">
-              <i className="fa fa-plus-circle"/>
-            </span>
-          </Button>
-        </Field>
+        <div className="addLayerOptions">
+          <Button className="is-light is-small" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
+          <Button className="is-light is-small" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
+          <Button className="is-light is-small" identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
+          <Button className="is-light is-small" identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
+          <Button className="is-light is-small" identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
+        </div>
       </div>
     );
   }

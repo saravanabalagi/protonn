@@ -2,8 +2,12 @@
   flex-shrink: 0;
   padding-left: 30px;
   padding-right: 30px;
-}
 
-.addLayer {
-  margin-left: 20px;
+  .addLayerOptions {
+    justify-content: center;
+    flex-wrap: wrap;
+    .button {
+      margin: 5px;
+    }
+  }
 }
