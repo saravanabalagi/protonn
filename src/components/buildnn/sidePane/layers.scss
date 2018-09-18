@@ -25,30 +25,34 @@
       position: relative;
       padding-top: 10px;
       &:hover {
-        padding-top: 0;
         .addLayerWrapper{
-          position: static;
-          visibility: visible;
-          padding: 20px 0;
           opacity: 1;
-          height: auto;
+          max-height: 500px;
+          transition-delay: 0s, 0s, 0s;
         }
       }
 
       .addLayerWrapper {
-        position: absolute;
+        margin-top: -10px;
         pointer-events: none;
         opacity: 0;
-        padding: 0;
-        height: 0;
-        visibility: hidden;
-        transition: 1s opacity, 1s padding, 1s height;
-        &:hover { .addLayerOptions {display: flex;} }
+        max-height: 0;
+        transition-property: opacity, padding, max-height;
+        transition-duration: 1s;
+        transition-delay: 0.2s;
+        &:hover {
+          .addLayerOptions {
+            opacity: 1;
+            max-height: 200px;
+            padding: 10px 20px 20px 20px;
+            transition-delay: 0s;
+          }
+        }
 
         .addLayerButtonWrapper {
           position: relative;
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           width: 100%;
           button.addLayerButton {
             pointer-events: auto;
@@ -71,10 +75,15 @@
         }
 
         .addLayerOptions {
+          display: flex;
           pointer-events: auto;
-          padding: 10px 20px;
-          display: none;
+          padding: 0 20px;
+          opacity: 0;
+          max-height: 0;
           justify-content: center;
+          transition-property: opacity, padding, max-height;
+          transition-duration: 1s;
+          transition-delay: 0.2s;
           flex-wrap: wrap;
           .button {
             margin: 5px;
