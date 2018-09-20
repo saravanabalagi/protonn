@@ -10,7 +10,7 @@ export const defaultMaxPooling2dLayer = {
 export default (state=defaultMaxPooling2dLayer, action) => {
   switch (action.type) {
     case CHANGE_POOL_SIZE:
-      return {...state, upSampleSize: action.upSampleSize};
+      return {...state, poolSize: action.poolSize};
     default:
       return state;
   }

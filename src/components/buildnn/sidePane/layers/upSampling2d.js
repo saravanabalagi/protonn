@@ -3,7 +3,7 @@ import './input.css'
 
 import {connect} from "react-redux";
 import {deleteLayer, getLayerName} from "src/reducers/architectureActions";
-import {changeUpSampleSize} from "../../reducers/layer/upSampling2dActions";
+import {changeUpSampleSize} from "src/reducers/layer/upSampling2dActions";
 import {Button} from "bloomer";
 
 class UpSampling2dLayer extends Component {

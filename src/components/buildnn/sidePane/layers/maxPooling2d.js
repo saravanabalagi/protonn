@@ -3,7 +3,7 @@ import './input.css'
 
 import {connect} from "react-redux";
 import {deleteLayer, getLayerName} from "src/reducers/architectureActions";
-import {changePoolSize} from "../../reducers/layer/maxPooling2dActions";
+import {changePoolSize} from "src/reducers/layer/maxPooling2dActions";
 import {Button} from "bloomer";
 
 class MaxPooling2dLayer extends Component {

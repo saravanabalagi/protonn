@@ -41,11 +41,13 @@
         transition-duration: 1s;
         transition-delay: 0.2s;
         &:hover {
+          pointer-events: auto;
           .addLayerOptions {
             opacity: 1;
             max-height: 200px;
             padding: 10px 20px 20px 20px;
             transition-delay: 0s;
+            pointer-events: auto;
           }
         }
 
@@ -76,7 +78,7 @@
 
         .addLayerOptions {
           display: flex;
-          pointer-events: auto;
+          pointer-events: none;
           padding: 0 20px;
           opacity: 0;
           max-height: 0;

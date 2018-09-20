@@ -1,23 +1,12 @@
 import React, {Component} from 'react'
-import {Button} from "bloomer";
 import './input.css'
 
 import {connect} from "react-redux";
-import {getLayerName, hasOnlyDense} from "src/reducers/architectureActions";
-import {addDimension, changeDimension, deleteDimension} from "../../reducers/layer/inputActions";
-import {changeSpacing} from "../../reducers/layer/denseActions";
+import {getLayerName} from "src/reducers/architectureActions";
+import {changeDimension} from "src/reducers/layer/inputActions";
+import {changeSpacing} from "src/reducers/layer/denseActions";
 
 class InputLayer extends Component {
-
-  handleAddDimension = () => {
-    this.props.dispatch(addDimension());
-    this.props.redraw();
-  };
-
-  handleDeleteDimension = () => {
-    this.props.dispatch(deleteDimension());
-    this.props.redraw();
-  };
 
   handleChangeDimension = (e) => {
     let numberOfNeurons = parseInt(e.currentTarget.value);
@@ -55,18 +44,6 @@ class InputLayer extends Component {
                                        step="1" min="0" max="100"
                                        defaultValue="50" type="range" />
         }
-        <Button isColor='white' onClick={this.handleAddDimension}
-                className={`icon-button info ${(this.props.styling || dimensions.length>=3)?"invisible":""}`}>
-          <span className="icon">
-            <i className="fa fa-plus-circle"/>
-          </span>
-        </Button>
-        <Button isColor='white' onClick={this.handleDeleteDimension}
-                className={`icon-button danger ${(this.props.styling || (hasOnlyDense() && dimensions.length<2) || (!hasOnlyDense() && dimensions.length<3))?"invisible":""}`}>
-          <span className="icon">
-            <i className="fa fa-times-circle"/>
-          </span>
-        </Button>
       </div>
     );
   }

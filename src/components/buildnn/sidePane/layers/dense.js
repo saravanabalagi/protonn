@@ -4,7 +4,7 @@ import './dense.css'
 
 import {connect} from "react-redux";
 import {deleteLayer, getLayerName} from "src/reducers/architectureActions";
-import {changeNeuron, changeSpacing} from "../../reducers/layer/denseActions";
+import {changeNeuron, changeSpacing} from "src/reducers/layer/denseActions";
 
 class DenseLayer extends Component {
 

@@ -1,19 +1,19 @@
 import React, {Component} from 'react'
 
 import './layers.css'
-import DenseLayer from "src/components/layers/dense";
+import DenseLayer from "src/components/buildnn/sidePane/layers/dense";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
-import Conv2DLayer from "../../layers/conv2d";
+import Conv2DLayer from "./layers/conv2d";
 import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 import {inputLayer} from "../../../reducers/layer/inputReducer";
-import InputLayer from "../../layers/input";
+import InputLayer from "./layers/input";
 import {upSampling2dLayer} from "../../../reducers/layer/upSampling2dReducer";
 import {maxPooling2dLayer} from "../../../reducers/layer/maxPooling2dReducer";
-import UpSampling2dLayer from "../../layers/upSampling2d";
-import MaxPooling2dLayer from "../../layers/maxPooling2d";
+import UpSampling2dLayer from "./layers/upSampling2d";
+import MaxPooling2dLayer from "./layers/maxPooling2d";
 import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
-import BatchNormLayer from "../../layers/batchNorm";
+import BatchNormLayer from "./layers/batchNorm";
 import {Button} from "bloomer";
 import {addLayer} from "../../../reducers/architectureActions";
 
@@ -79,7 +79,7 @@ class Layers extends Component {
         {
           layers.map((layer, index)=>{
             return (
-              <div className="layerWrapper">
+              <div className="layerWrapper" key={index}>
                 { this.renderLayer(layer, index) }
                 {
                   index !== layers.length - 1 &&
