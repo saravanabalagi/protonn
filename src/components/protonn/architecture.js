@@ -7,14 +7,12 @@ import {connect} from "react-redux";
 import Build from "./sidePane/build";
 import Visualize from "./mainPane/visualize";
 import Code from "./mainPane/code";
-import {denseLayer} from "../../reducers/layer/denseReducer";
 import {
   addLayer,
   getConvArchitecture,
   getDenseArchitecture,
   getDenseInConvArchitecture,
-  getSpacing,
-  hasOnlyDense
+  getSpacing
 } from "../../reducers/architectureActions";
 import {inputLayer} from "../../reducers/layer/inputReducer";
 import {DNN, dnn} from "./dnn";
@@ -32,7 +30,6 @@ class Architecture extends Component {
   constructor(props) {
     super(props);
     this.nn = null;
-    this.nnType = null;
     this.state = {
       sidePaneTab: tabBuild,
       mainPaneTab: tabVisualize
@@ -41,23 +38,19 @@ class Architecture extends Component {
 
   initialize = (architectureType) => {
     console.log('initialize called', architectureType);
-    this.nnType = architectureType;
     switch (architectureType) {
       case DNN: this.nn = dnn(); console.log('dnn initialized'); break;
       case CNN: this.nn = cnn(); console.log('cnn initialized'); break;
       default: this.nn = dnn();
     }
-    if(this.props.layers.length<2) {
+    if(this.props.layers.length<1) {
       this.props.dispatch(addLayer(inputLayer));
-      this.props.dispatch(addLayer(denseLayer));
     }
     this.redraw();
   };
 
   redraw = (showLabels=true) => {
-    let nnType = hasOnlyDense() ? DNN : CNN;
-    if(nnType !== this.nnType) { this.initialize(nnType); }
-    switch (this.nnType) {
+    switch (this.props.architectureType) {
       case DNN: {
         console.log('arch', getDenseArchitecture(), getSpacing());
         this.nn.redraw({architecture_: getDenseArchitecture()});
@@ -114,9 +107,9 @@ class Architecture extends Component {
           </Tabs>
           { (sidePaneTab===tabBuild || sidePaneTab===tabStyle)
                 && <Layers redraw={this.redraw} styling={sidePaneTab===tabStyle}/> }
-          { sidePaneTab===tabBuild && <Build redraw={this.redraw} initialize={this.initialize} />}
+          { sidePaneTab===tabBuild && <Build redraw={this.redraw}/>}
           { sidePaneTab===tabStyle && <Styling redraw={this.redraw}/>}
-          { sidePaneTab===tabConvert && <Convert redraw={this.redraw}/>}
+          { sidePaneTab===tabConvert && <Convert redraw={this.redraw} initialize={this.initialize}/>}
         </Column>
         <Column className="mainPanel">
           <Tabs isAlign="centered">
@@ -135,7 +128,7 @@ class Architecture extends Component {
               </Tab>
             </TabList>
           </Tabs>
-          { mainPaneTab===tabVisualize && <Visualize initialize={this.initialize}/>}
+          { mainPaneTab===tabVisualize && <Visualize initialize={this.initialize} />}
           { mainPaneTab===tabCode && <Code/>}
         </Column>
       </Columns>
@@ -145,6 +138,7 @@ class Architecture extends Component {
 
 export default connect((store)=>{
   return {
+    architectureType: store.architecture.type,
     layers: store.architecture.layers
   };
 })(Architecture);

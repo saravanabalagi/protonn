@@ -3,14 +3,17 @@ import conv2dReducer, {conv2dLayer} from "./layer/conv2dReducer";
 import inputReducer, {inputLayer} from "./layer/inputReducer";
 import layerReducer from "./layer/layerReducer";
 
-import {ADD_LAYER, DELETE_LAYER} from "./architectureActions";
+import {ADD_LAYER, CONVERT_TO_CNN, CONVERT_TO_DNN, DELETE_LAYER} from "./architectureActions";
 import {UPDATE_LAYER} from "./layer/layerActions";
 import maxPooling2dReducer, {maxPooling2dLayer} from "./layer/maxPooling2dReducer";
 import upSampling2dReducer, {upSampling2dLayer} from "./layer/upSampling2dReducer";
 import batchNormReducer, {batchNormLayer} from "./layer/batchNormReducer";
+import {CNN} from "../components/protonn/cnn";
+import {DNN} from "../components/protonn/dnn";
 
 export default (state={
-  layers: []
+  layers: [],
+  type: DNN
 },action) => {
   switch (action.type) {
     case ADD_LAYER: {
@@ -36,6 +39,12 @@ export default (state={
           layers: state.layers
         }))
       };
+    }
+    case CONVERT_TO_CNN: {
+      return {...state, type: CNN};
+    }
+    case CONVERT_TO_DNN: {
+      return {...state, type: DNN};
     }
     default: {
       if(action!=null && action.layerPosition!=null) {

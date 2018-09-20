@@ -72,13 +72,26 @@ class Code extends Component {
   };
 
   render() {
+    let layersLength = this.props.layers.length;
     return (
       <Content className="Code">
-        <pre className="language-python">
-          <code className="language-python">
-            {Parser(this.getCodeHtml())}
-          </code>
-        </pre>
+        {
+          layersLength<2 &&
+          <div className="notification is-danger">
+            <span className="icon">
+              <i className="fa fa-exclamation-triangle"/>
+            </span>
+            <span>We need atleast two layers to show code</span>
+          </div>
+        }
+        {
+          layersLength>=2 &&
+          <pre className="language-python">
+            <code className="language-python">
+              {Parser(this.getCodeHtml())}
+            </code>
+          </pre>
+        }
       </Content>
     );
   }

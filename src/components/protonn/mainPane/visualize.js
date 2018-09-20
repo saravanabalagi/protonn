@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import {DNN} from "../dnn";
+import {connect} from "react-redux";
 
 class Visualize extends Component {
 
   componentDidMount() {
-    this.props.initialize(DNN);
+    this.props.initialize(this.props.architectureType);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.architectureType!==this.props.architectureType)
+      this.props.initialize(nextProps.architectureType);
   }
 
   render() {
@@ -14,4 +19,8 @@ class Visualize extends Component {
   }
 }
 
-export default Visualize;
+export default connect((store)=>{
+  return {
+    architectureType: store.architecture.type
+  }
+})(Visualize);

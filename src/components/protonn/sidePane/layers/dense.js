@@ -28,8 +28,6 @@ class DenseLayer extends Component {
 
   render() {
     let neurons = this.props.layer.neurons;
-    let layerPosition = this.props.layer.layerPosition;
-    let isLastLayer = layerPosition === this.props.layers.length-1;
     let layerName = getLayerName(this.props.layer);
     return (
       <div className="is-horizontal layer denseLayer">
@@ -49,7 +47,7 @@ class DenseLayer extends Component {
                  onChange={this.handleChangeNeurons}/>
         }
         <Button isColor='white' onClick={this.handleDeleteLayer}
-                className={`icon-button danger ${(this.props.styling || isLastLayer)?"invisible":""}`}>
+                className={`icon-button danger ${this.props.styling?"invisible":""}`}>
           <span className="icon">
             <i className="fa fa-times-circle"/>
           </span>

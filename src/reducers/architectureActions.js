@@ -9,6 +9,8 @@ import {batchNormLayer, defaultBatchNormLayer} from "./layer/batchNormReducer";
 
 export const ADD_LAYER = 'ADD_LAYER';
 export const DELETE_LAYER = 'DELETE_LAYER';
+export const CONVERT_TO_DNN = 'CONVERT_TO_DNN';
+export const CONVERT_TO_CNN = 'CONVERT_TO_CNN';
 
 export function addLayer(layerType) {
   return (dispatch) => {
@@ -41,6 +43,17 @@ export function deleteLayer(layerPosition) {
   }
 }
 
+export function convertToCnn() {
+  return (dispatch) => {
+    dispatch({type: CONVERT_TO_CNN});
+  }
+}
+
+export function convertToDnn() {
+  return (dispatch) => {
+    dispatch({type: CONVERT_TO_DNN});
+  }
+}
 
 export function getLayerName(layer) {
   let layers = store.getState().architecture.layers;
