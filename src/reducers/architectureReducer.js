@@ -20,7 +20,7 @@ export default (state={
       if(state.layers.length<2) {
         return {...state, layers: [...state.layers, action.layer]};
       } else {
-        let newLayers = [...state.layers.slice(0, state.layers.length - 1), action.layer, ...state.layers.slice(state.layers.length - 1)];
+        let newLayers = [...state.layers.slice(0, action.addPosition), action.layer, ...state.layers.slice(action.addPosition)];
         return {...state,
           layers: newLayers.map((layer, index) => layerReducer(layer, {
             type: UPDATE_LAYER,

@@ -12,17 +12,16 @@ export const DELETE_LAYER = 'DELETE_LAYER';
 export const CONVERT_TO_DNN = 'CONVERT_TO_DNN';
 export const CONVERT_TO_CNN = 'CONVERT_TO_CNN';
 
-export function addLayer(layerType) {
+export function addLayer(layerType, layerPosition) {
   return (dispatch) => {
-    let layerPosition = store.getState().architecture.layers.length;
     switch (layerType) {
-      case inputLayer: dispatch({type: ADD_LAYER, layer: {...defaultInputLayer, layerPosition: 0}}); break;
-      case denseLayer: dispatch({type: ADD_LAYER, layer: {...defaultDenseLayer, layerPosition: layerPosition }}); break;
+      case inputLayer: dispatch({type: ADD_LAYER, addPosition: layerPosition, layer: {...defaultInputLayer, layerPosition: 0}}); break;
+      case denseLayer: dispatch({type: ADD_LAYER, addPosition: layerPosition, layer: {...defaultDenseLayer, layerPosition: layerPosition }}); break;
       case conv2dLayer: {
         let inputLayer = store.getState().architecture.layers[0];
         if(inputLayer.dimensions.length<2)
           dispatch(changeDimensions([128,128]));
-        dispatch({type: ADD_LAYER,
+        dispatch({type: ADD_LAYER, addPosition: layerPosition,
           layer: {
           ...defaultConv2dLayer,
             layerPosition: layerPosition,
@@ -30,9 +29,9 @@ export function addLayer(layerType) {
             kernelDisplayPositionY: Math.random()*0.4*2 - 0.4,
           }});
       } break;
-      case maxPooling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultMaxPooling2dLayer, layerPosition: layerPosition }}); break;
-      case upSampling2dLayer: dispatch({type: ADD_LAYER, layer: {...defaultUpSampling2dLayer, layerPosition: layerPosition }}); break;
-      case batchNormLayer: dispatch({type: ADD_LAYER, layer: {...defaultBatchNormLayer, layerPosition: layerPosition }}); break;
+      case maxPooling2dLayer: dispatch({type: ADD_LAYER, addPosition: layerPosition, layer: {...defaultMaxPooling2dLayer, layerPosition: layerPosition }}); break;
+      case upSampling2dLayer: dispatch({type: ADD_LAYER, addPosition: layerPosition, layer: {...defaultUpSampling2dLayer, layerPosition: layerPosition }}); break;
+      case batchNormLayer: dispatch({type: ADD_LAYER, addPosition: layerPosition, layer: {...defaultBatchNormLayer, layerPosition: layerPosition }}); break;
     }
   }
 }

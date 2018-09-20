@@ -20,7 +20,7 @@ class Build extends Component {
   }
 
   handleAddLayer = (e) => {
-    this.props.dispatch(addLayer(e.currentTarget.getAttribute('identity')));
+    this.props.dispatch(addLayer(e.currentTarget.getAttribute('identity'), this.state.newLayerPosition));
     this.props.redraw();
   };
 
