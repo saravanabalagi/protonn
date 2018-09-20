@@ -19,3 +19,13 @@
   background: inherit;
   margin: inherit;
 }
+
+.notification {
+  .icon {
+    margin-right: 5px;
+  }
+  &.is-small {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

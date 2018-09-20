@@ -20,7 +20,7 @@ class Styling extends Component {
 
   render() {
     return (
-      <div className="Styling">
+      <div className="Styling sidePaneTab">
         <div className="is-divider" data-content="Configure"/>
         <Field>
           <Control>

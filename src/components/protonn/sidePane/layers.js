@@ -75,7 +75,7 @@ class Layers extends Component {
   render() {
     let layers = this.props.layers;
     return (
-      <div className="Layers">
+      <div className="Layers sidePaneTab">
         {
           layers.map((layer, index)=>{
             return (

@@ -1,10 +1,14 @@
-.sidePanel {
+.sidePane {
   padding: 25px 30px 30px 30px;
   display: flex;
   flex-direction: column;
 
-  .sidePanelTabs {
+  .sidePaneTabsBar {
     flex-shrink: 0;
+  }
+
+  .sidePaneTab {
+    padding: 0 30px;
   }
 }
 

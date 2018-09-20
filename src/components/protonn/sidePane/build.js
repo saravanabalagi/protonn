@@ -26,7 +26,7 @@ class Build extends Component {
 
   render() {
     return (
-      <div className="Build">
+      <div className="Build sidePaneTab">
         <div className="is-divider" data-content="Add Layer"/>
         <div className="addLayerOptions">
           <Button className="is-light is-small" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>

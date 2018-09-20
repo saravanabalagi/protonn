@@ -16,3 +16,10 @@
   white-space: inherit;
   background: inherit;
   margin: inherit; }
+
+.notification .icon {
+  margin-right: 5px; }
+
+.notification.is-small {
+  padding: 10px;
+  font-size: 12px; }
