@@ -15,7 +15,7 @@ class Build extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newLayerType: denseLayer
+      newLayerPosition: 1
     };
   }
 
@@ -24,10 +24,28 @@ class Build extends Component {
     this.props.redraw();
   };
 
+  handleChangePosition = (e) => {
+    let newLayerPosition = parseInt(e.currentTarget.value);
+    if(newLayerPosition<1 || newLayerPosition>this.props.layers.length) return;
+    this.setState({newLayerPosition: newLayerPosition});
+  };
+
   render() {
+    let layers = this.props.layers;
+    let lastLayer = layers[layers.length - 1];
     return (
       <div className="Build sidePaneTab">
         <div className="is-divider" data-content="Add Layer"/>
+        <div className="is-horizontal">
+          <div className="field-label is-normal inputLayerName">
+            <label className="label">Add at</label>
+          </div>
+          <input className="input inputParam" type="number"
+               placeholder={lastLayer && lastLayer.layerPosition || 1}
+               inputMode="numeric"
+               value={this.state.newLayerPosition}
+               onChange={this.handleChangePosition}/>
+        </div>
         <div className="addLayerOptions">
           <Button className="is-light is-small" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
           <Button className="is-light is-small" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>

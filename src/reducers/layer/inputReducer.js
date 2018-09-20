@@ -5,7 +5,8 @@ export const inputLayer = 'input';
 export const defaultInputLayer = {
   dimensions: [1],
   type: inputLayer,
-  spacingWithin: 20
+  spacingWithin: 20,
+  layerPosition: 0
 };
 
 export default (state=defaultInputLayer, action) => {

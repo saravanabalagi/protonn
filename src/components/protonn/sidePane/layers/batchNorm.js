@@ -15,7 +15,7 @@ class BatchNormLayer extends Component {
   render() {
     let layerName = getLayerName(this.props.layer);
     return (
-      <div className="is-horizontal inputLayer">
+      <div className="is-horizontal layer">
         <div className="field-label is-normal inputLayerName">
           <label className="label">{layerName}</label>
         </div>

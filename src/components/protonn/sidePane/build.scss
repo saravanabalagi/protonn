@@ -1,10 +1,36 @@
 .Build {
   flex-shrink: 0;
+
   .addLayerOptions {
     justify-content: center;
     flex-wrap: wrap;
     .button {
       margin: 5px;
     }
+  }
+
+  .inputParam {
+    width: 70px;
+    text-align: center;
+    margin-right: 10px;
+    //border: 0;
+    //box-shadow: 0 0;
+    //border-bottom: 1px solid #00000055;
+  }
+
+  .inputLayerName {
+    display: inline;
+    .label {
+      padding-top: 0.375em;
+      display: inline-block;
+      font-weight: normal;
+      width: 100px;
+      text-align: right;
+    }
+  }
+
+  .addLayerOptions {
+    display: flex;
+    padding: 20px;
   }
 }

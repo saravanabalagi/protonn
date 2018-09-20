@@ -82,7 +82,6 @@ class Layers extends Component {
               <div className="layerWrapper" key={index}>
                 { this.renderLayer(layer, index) }
                 {
-                  index !== layers.length - 1 &&
                   <div className="addLayerParentWrapper">
                     <div className="addLayerWrapper">
                       <div className="addLayerButtonWrapper">
