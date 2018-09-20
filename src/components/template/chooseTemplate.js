@@ -50,7 +50,7 @@ class ChooseTemplate extends Component {
                 </Content>
               </CardContent>
               <CardFooter>
-                <Button isColor='info' href='/build'>Choose</Button>
+                <Button isColor='info' href='/prototyping'>Choose</Button>
               </CardFooter>
             </Card>
           </Column>
@@ -76,7 +76,7 @@ class ChooseTemplate extends Component {
                 </Content>
               </CardContent>
               <CardFooter>
-                <Button isColor='info' href='/build'>Choose</Button>
+                <Button isColor='info' href='/prototyping'>Choose</Button>
               </CardFooter>
             </Card>
           </Column>

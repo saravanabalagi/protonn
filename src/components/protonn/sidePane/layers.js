@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
 import './layers.css'
-import DenseLayer from "src/components/buildnn/sidePane/layers/dense";
+import DenseLayer from "src/components/protonn/sidePane/layers/dense";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
 import Conv2DLayer from "./layers/conv2d";

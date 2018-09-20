@@ -9,7 +9,7 @@ import './app.css';
 import AppNavBar from "src/components/navbar/navbar";
 import ChooseTemplate from 'src/components/template/chooseTemplate'
 import About from 'src/components/about/about'
-import BuildNN from "src/components/buildnn/architecture";
+import ProtoNN from "src/components/protonn/architecture";
 
 class App extends Component {
   render() {
@@ -19,7 +19,7 @@ class App extends Component {
           <AppNavBar/>
           <Switch>
             <Route exact path="/" component={ChooseTemplate}/>
-            <Route path="/build" component={BuildNN}/>
+            <Route path="/prototyping" component={ProtoNN}/>
             <Route path="/about" component={About}/>
           </Switch>
         </div>
