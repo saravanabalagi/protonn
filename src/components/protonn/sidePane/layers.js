@@ -16,6 +16,7 @@ import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
 import BatchNormLayer from "./layers/batchNorm";
 import {Button} from "bloomer";
 import {addLayer, isValidAddLayer} from "../../../reducers/architectureActions";
+import {tabBuild} from "../architecture";
 
 class Layers extends Component {
 
@@ -83,6 +84,11 @@ class Layers extends Component {
               <div className="layerWrapper" key={index}>
                 { this.renderLayer(layer, index) }
                 {
+                  (this.props.sidePaneTab !== tabBuild) &&
+                  <div style={{paddingTop: 10}} />
+                }
+                {
+                  (this.props.sidePaneTab === tabBuild) &&
                   <div className="addLayerParentWrapper">
                     <div className="addLayerWrapper">
                       <div className="addLayerButtonWrapper">
