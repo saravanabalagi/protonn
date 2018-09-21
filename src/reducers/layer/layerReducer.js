@@ -31,18 +31,18 @@ export const displayNameActivations = {
 };
 
 export const codeActivations = {
-  reluActivation: 'relu',
-  eluActivation: 'elu',
-  seluActivation: 'selu',
-  sigmoidActivation: 'sigmoid',
-  softmaxActivation: 'softmax',
-  noActivation: 'none',
-  tanhActivation: 'tanh',
-  hardSigmoidActivation: 'hard_sigmoid',
-  softPlusActivation: 'softplus',
-  softSignActivation: 'softsign',
-  exponentialActivation: 'exponential',
-  linearActivation: 'linear'
+  reluActivation: "'relu'",
+  eluActivation: "'elu'",
+  seluActivation: "'selu'",
+  sigmoidActivation: "'sigmoid'",
+  softmaxActivation: "'softmax'",
+  noActivation: "None",
+  tanhActivation: "'tanh'",
+  hardSigmoidActivation: "'hard_sigmoid'",
+  softPlusActivation: "'softplus'",
+  softSignActivation: "'softsign'",
+  exponentialActivation: "'exponential'",
+  linearActivation: "'linear'"
 };
 
 export default (state, action) => {
