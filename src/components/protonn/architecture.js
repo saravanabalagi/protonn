@@ -17,10 +17,11 @@ import {
 import {inputLayer} from "../../reducers/layer/inputReducer";
 import {DNN, dnn} from "./dnn";
 import {CNN, cnn} from "./cnn";
-import Convert from "./sidePane/convert";
+import Convert from "./mainPane/convert";
 
 export const tabBuild = 'tabBuild';
 export const tabStyle = 'tabStyle';
+export const tabActivations = 'tabActivations';
 export const tabConvert = 'tabConvert';
 export const tabVisualize = 'tabVisualize';
 export const tabCode = 'tabCode';
@@ -97,19 +98,17 @@ class Architecture extends Component {
                   <span>Style</span>
                 </TabLink>
               </Tab>
-              <Tab isActive={sidePaneTab===tabConvert}>
-                <TabLink tab={tabConvert} onClick={this.handleSelectSidePaneTab}>
-                  <Icon isSize='small'><span className='fa fa-refresh' aria-hidden='true' /></Icon>
-                  <span>Convert</span>
+              <Tab isActive={sidePaneTab===tabActivations}>
+                <TabLink tab={tabActivations} onClick={this.handleSelectSidePaneTab}>
+                  <Icon isSize='small'><span className='fa fa-line-chart' aria-hidden='true' /></Icon>
+                  <span>Activations</span>
                 </TabLink>
               </Tab>
             </TabList>
           </Tabs>
-          { (sidePaneTab===tabBuild || sidePaneTab===tabStyle)
-                && <Layers redraw={this.redraw} styling={sidePaneTab===tabStyle}/> }
+          <Layers redraw={this.redraw} sidePaneTab={sidePaneTab} />
           { sidePaneTab===tabBuild && <Build redraw={this.redraw}/>}
           { sidePaneTab===tabStyle && <Styling redraw={this.redraw}/>}
-          { sidePaneTab===tabConvert && <Convert redraw={this.redraw} initialize={this.initialize}/>}
         </Column>
         <Column className="mainPanel">
           <Tabs isAlign="centered">
@@ -126,10 +125,17 @@ class Architecture extends Component {
                   <span>Code</span>
                 </TabLink>
               </Tab>
+              <Tab isActive={mainPaneTab===tabConvert}>
+                <TabLink tab={tabConvert} onClick={this.handleSelectMainPaneTab}>
+                  <Icon isSize='small'><span className='fa fa-refresh' aria-hidden='true' /></Icon>
+                  <span>Convert</span>
+                </TabLink>
+              </Tab>
             </TabList>
           </Tabs>
           { mainPaneTab===tabVisualize && <Visualize initialize={this.initialize} />}
           { mainPaneTab===tabCode && <Code/>}
+          { mainPaneTab===tabConvert && <Convert redraw={this.redraw} initialize={this.initialize}/>}
         </Column>
       </Columns>
     );

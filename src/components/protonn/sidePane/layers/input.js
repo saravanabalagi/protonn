@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {getLayerName} from "src/reducers/architectureActions";
 import {changeDimension} from "src/reducers/layer/inputActions";
 import {changeSpacing} from "src/reducers/layer/denseActions";
+import {tabBuild, tabStyle} from "../../architecture";
 
 class InputLayer extends Component {
 
@@ -31,7 +32,7 @@ class InputLayer extends Component {
           <label className="label">{layerName}</label>
         </div>
         {
-          !this.props.styling && dimensions.map((dim, index)=><input className="input inputParam inputLayerSize" type="number"
+          (this.props.sidePaneTab===tabBuild) && dimensions.map((dim, index)=><input className="input inputParam inputLayerSize" type="number"
                                                                       placeholder={dim}
                                                                       key={index}
                                                                       index={index}
@@ -39,7 +40,7 @@ class InputLayer extends Component {
                                                                       onChange={this.handleChangeDimension}/>)
         }
         {
-          this.props.styling && <input className="slider sliderLayerSpacing"
+          (this.props.sidePaneTab===tabStyle) && <input className="slider sliderLayerSpacing"
                                        onChange={this.handleSliderChange}
                                        step="1" min="0" max="100"
                                        defaultValue="50" type="range" />

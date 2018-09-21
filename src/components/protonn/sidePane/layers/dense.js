@@ -5,6 +5,7 @@ import './dense.css'
 import {connect} from "react-redux";
 import {deleteLayer, getLayerName} from "src/reducers/architectureActions";
 import {changeNeuron, changeSpacing} from "src/reducers/layer/denseActions";
+import {tabBuild, tabStyle} from "../../architecture";
 
 class DenseLayer extends Component {
 
@@ -35,23 +36,26 @@ class DenseLayer extends Component {
           <label className="label">{layerName}</label>
         </div>
         {
-          this.props.styling && <input className="slider sliderLayerSpacing"
+          (this.props.sidePaneTab===tabStyle) && <input className="slider sliderLayerSpacing"
                                        onChange={this.handleSliderChange}
                                        step="1" min="0" max="100"
                                        defaultValue="50" type="range" />
         }
         {
-          !this.props.styling &&
+          (this.props.sidePaneTab===tabBuild) &&
           <input className="input inputParam" type="number" placeholder="0"
                  value={neurons} inputMode="numeric"
                  onChange={this.handleChangeNeurons}/>
         }
-        <Button isColor='white' onClick={this.handleDeleteLayer}
-                className={`icon-button danger ${this.props.styling?"invisible":""}`}>
-          <span className="icon">
-            <i className="fa fa-times-circle"/>
-          </span>
-        </Button>
+        {
+          (this.props.sidePaneTab === tabBuild) &&
+          <Button isColor='white' onClick={this.handleDeleteLayer}
+                  className={'icon-button danger'}>
+            <span className="icon">
+              <i className="fa fa-times-circle"/>
+            </span>
+          </Button>
+        }
       </div>
     );
   }

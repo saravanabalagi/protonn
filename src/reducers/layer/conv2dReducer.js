@@ -8,6 +8,7 @@ import {
   computeHeightWidth
 } from "./conv2dActions";
 import {CHANGE_DIMENSIONS} from "./inputActions";
+import {reluActivation} from "./layerReducer";
 
 export const conv2dLayer = 'conv2D';
 export const defaultConv2dLayer = {
@@ -18,7 +19,8 @@ export const defaultConv2dLayer = {
   height: 128,
   width: 128,
   kernelDisplayPositionX: 0,
-  kernelDisplayPositionY: 0
+  kernelDisplayPositionY: 0,
+  activation: reluActivation
 };
 
 export default (state=defaultConv2dLayer, action) => {

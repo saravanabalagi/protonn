@@ -1,11 +1,13 @@
 import {CHANGE_NEURONS, CHANGE_SPACING} from "./denseActions";
+import {reluActivation} from "./layerReducer";
 
 export const denseLayer = 'dense';
 export const defaultDenseLayer = {
   layerPosition: null,
   type: denseLayer,
   neurons: 1,
-  spacingWithin: 20
+  spacingWithin: 20,
+  activation: reluActivation
 };
 
 export default (state=defaultDenseLayer, action) => {

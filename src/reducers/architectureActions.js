@@ -145,7 +145,6 @@ export function getSpacing() {
 export function isValidAddLayer(layerType, layerPosition) {
   let isValid = false;
   let architectureType = store.getState().architecture.type;
-  console.log('getConvEndPosition', getConvEndPosition());
   switch (layerType) {
     case denseLayer:
       switch (architectureType) {

@@ -24,42 +24,42 @@ class Layers extends Component {
       case denseLayer:
         return (
           <DenseLayer redraw={this.props.redraw} key={index}
-                      styling={this.props.styling}
+                      sidePaneTab={this.props.sidePaneTab}
                       layerPosition={index}
                       layer={layer}/>
         );
       case conv2dLayer:
         return (
           <Conv2DLayer redraw={this.props.redraw} key={index}
-                       styling={this.props.styling}
+                       sidePaneTab={this.props.sidePaneTab}
                        layerPosition={index}
                        layer={layer}/>
         );
       case inputLayer:
         return (
           <InputLayer redraw={this.props.redraw} key={index}
-                      styling={this.props.styling}
+                      sidePaneTab={this.props.sidePaneTab}
                       layerPosition={index}
                       layer={layer}/>
         );
       case upSampling2dLayer:
         return (
           <UpSampling2dLayer redraw={this.props.redraw} key={index}
-                             styling={this.props.styling}
+                             sidePaneTab={this.props.sidePaneTab}
                              layerPosition={index}
                              layer={layer}/>
         );
       case maxPooling2dLayer:
         return (
           <MaxPooling2dLayer redraw={this.props.redraw} key={index}
-                             styling={this.props.styling}
+                             sidePaneTab={this.props.sidePaneTab}
                              layerPosition={index}
                              layer={layer}/>
         );
       case batchNormLayer:
         return (
           <BatchNormLayer redraw={this.props.redraw} key={index}
-                          styling={this.props.styling}
+                          sidePaneTab={this.props.sidePaneTab}
                           layerPosition={index}
                           layer={layer}/>
         );

@@ -5,6 +5,8 @@
       <w>convolutional</w>
       <w>keras</w>
       <w>protonn</w>
+      <w>relu</w>
+      <w>selu</w>
     </words>
   </dictionary>
 </component>

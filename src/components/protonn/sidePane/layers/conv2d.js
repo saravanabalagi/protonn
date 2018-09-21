@@ -12,6 +12,7 @@ import {
   changeKernelSize,
   changeWidth
 } from "src/reducers/layer/conv2dActions";
+import {tabBuild, tabStyle} from "../../architecture";
 
 class Conv2DLayer extends Component {
 
@@ -62,39 +63,42 @@ class Conv2DLayer extends Component {
           <label className="label">{layerName}</label>
         </div>
         {
-          this.props.styling && <input className="slider sliderLayerSpacing"
+          (this.props.sidePaneTab===tabStyle) && <input className="slider sliderLayerSpacing"
                                        value={xPos}
                                        onChange={this.handleXSliderChange}
                                        step="0.01" min="-0.4" max="0.4"
                                        defaultValue="0" type="range" />
         }
         {
-          this.props.styling && <input className="slider sliderLayerSpacing"
+          (this.props.sidePaneTab===tabStyle) && <input className="slider sliderLayerSpacing"
                                        value={yPos}
                                        onChange={this.handleYSliderChange}
                                        step="0.01" min="-0.4" max="0.4"
                                        defaultValue="0" type="range" />
         }
         {
-          !this.props.styling &&
+          (this.props.sidePaneTab===tabBuild) &&
           <input className="input inputParam inputKernelSize" type="number" placeholder="0"
                  value={kernelSize} inputMode="numeric"
                  param={this.KERNEL_SIZE}
                  onChange={this.handleChangeParam}/>
         }
         {
-          !this.props.styling &&
+          (this.props.sidePaneTab===tabBuild) &&
           <input className="input inputParam inputFeatureMaps" type="number" placeholder="0"
                  value={featureMaps} inputMode="numeric"
                  param={this.FEATURE_MAPS}
                  onChange={this.handleChangeParam}/>
         }
-        <Button isColor='white' onClick={this.handleDeleteLayer}
-                className={`icon-button danger ${this.props.styling?" invisible":""}`}>
-          <span className="icon">
-            <i className="fa fa-times-circle"/>
-          </span>
-        </Button>
+        {
+          (this.props.sidePaneTab === tabBuild) &&
+          <Button isColor='white' onClick={this.handleDeleteLayer}
+                  className={'icon-button danger'}>
+            <span className="icon">
+              <i className="fa fa-times-circle"/>
+            </span>
+          </Button>
+        }
       </div>
     );
   }

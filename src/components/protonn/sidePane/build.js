@@ -74,7 +74,6 @@ class Build extends Component {
         newLayerPosition = layersLength - offset;
         break;
     }
-    console.log('newLayerPosition', newLayerPosition);
     return newLayerPosition;
   };
 

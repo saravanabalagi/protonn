@@ -110,6 +110,7 @@
     .inputLayerName {
       display: inline;
       .label {
+        height: 36px;
         padding-top: 0.375em;
         display: inline-block;
         font-weight: normal;
@@ -123,10 +124,5 @@
       margin: 0 10px 0 30px;
       padding-top: 15px;
     }
-
-    .invisible {
-      visibility: hidden;
-    }
-
   }
 }
