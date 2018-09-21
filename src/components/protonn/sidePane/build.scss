@@ -1,6 +1,15 @@
 .Build {
   flex-shrink: 0;
 
+  .is-horizontal{
+    &.checkbox-form {
+      margin-bottom: 20px;
+    }
+    .field.inline-block {
+      display: inline-block;
+    }
+  }
+
   .addLayerOptions {
     justify-content: center;
     flex-wrap: wrap;
