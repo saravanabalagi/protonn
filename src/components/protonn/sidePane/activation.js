@@ -55,6 +55,7 @@ class Activation extends Component {
 
   render() {
     let activation = this.props.layer.activation;
+    let isLastLayer = (this.props.layer.layerPosition === this.props.layers.length - 1);
     return (
       <Dropdown className={this.state.dropdownActive?"is-active":""}>
         <DropdownTrigger>
@@ -74,10 +75,15 @@ class Activation extends Component {
             { this.renderDropdownFor(eluActivation) }
             { this.renderDropdownFor(seluActivation) }
             <DropdownDivider />
-            { this.renderDropdownFor(softmaxActivation) }
-            { this.renderDropdownFor(softPlusActivation) }
-            { this.renderDropdownFor(softSignActivation) }
-            <DropdownDivider />
+            {
+              isLastLayer &&
+                <span>
+                  { this.renderDropdownFor(softmaxActivation) }
+                  { this.renderDropdownFor(softPlusActivation) }
+                  { this.renderDropdownFor(softSignActivation) }
+                  <DropdownDivider />
+                </span>
+            }
             { this.renderDropdownFor(exponentialActivation) }
             { this.renderDropdownFor(linearActivation) }
             { this.renderDropdownFor(noActivation) }
