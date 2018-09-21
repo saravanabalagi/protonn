@@ -12,6 +12,7 @@ import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
 import {maxPooling2dLayer} from "../../../reducers/layer/maxPooling2dReducer";
 import {upSampling2dLayer} from "../../../reducers/layer/upSampling2dReducer";
 import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
+import {codeActivations} from "../../../reducers/layer/layerReducer";
 
 class Code extends Component {
 
@@ -51,8 +52,8 @@ class Code extends Component {
       let currentLayer = layers[i];
       let prevLayer = layers[i - 1];
       switch (currentLayer.type) {
-        case denseLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = Dense(${currentLayer.neurons}, activation='relu')(${getLayerName(prevLayer)})\n`; break;
-        case conv2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = Conv2D(${currentLayer.featureMaps}, (${currentLayer.kernelSize},${currentLayer.kernelSize}), activation='relu', padding='same')(${getLayerName(prevLayer)})\n`; break;
+        case denseLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = Dense(${currentLayer.neurons}, activation='${codeActivations[currentLayer.activation]}')(${getLayerName(prevLayer)})\n`; break;
+        case conv2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = Conv2D(${currentLayer.featureMaps}, (${currentLayer.kernelSize},${currentLayer.kernelSize}), activation='${codeActivations[currentLayer.activation]}', padding='same')(${getLayerName(prevLayer)})\n`; break;
         case maxPooling2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = MaxPooling2D((${currentLayer.poolSize}))(${getLayerName(prevLayer)})\n`; break;
         case upSampling2dLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = UpSampling2D((${currentLayer.upSampleSize}))(${getLayerName(prevLayer)})\n`; break;
         case batchNormLayer: kerasCode += '  ' + `${getLayerName(currentLayer)} = BatchNormalization()(${getLayerName(prevLayer)})\n`; break;
@@ -60,7 +61,7 @@ class Code extends Component {
     }
 
     let outputLayer = layers[layers.length-1];
-    kerasCode += '  ' + `${getLayerName(outputLayer)} = Dense(${outputLayer.neurons}, activation='relu')(${getLayerName(layers[layers.length-2])})\n`;
+    kerasCode += '  ' + `${getLayerName(outputLayer)} = Dense(${outputLayer.neurons}, activation='${codeActivations[outputLayer.activation]}')(${getLayerName(layers[layers.length-2])})\n`;
     kerasCode += '  ' + `model = Model(inputs=${getLayerName(inputLayer)}, outputs=${getLayerName(outputLayer)})\n`;
     kerasCode += '  ' + 'return model\n';
     return kerasCode;

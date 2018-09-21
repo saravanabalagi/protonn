@@ -4,7 +4,7 @@ import inputReducer, {inputLayer} from "./layer/inputReducer";
 import layerReducer from "./layer/layerReducer";
 
 import {ADD_LAYER, CONVERT_TO_CNN, CONVERT_TO_DNN, DELETE_LAYER} from "./architectureActions";
-import {UPDATE_LAYER} from "./layer/layerActions";
+import {CHANGE_ACTIVATION, UPDATE_LAYER} from "./layer/layerActions";
 import maxPooling2dReducer, {maxPooling2dLayer} from "./layer/maxPooling2dReducer";
 import upSampling2dReducer, {upSampling2dLayer} from "./layer/upSampling2dReducer";
 import batchNormReducer, {batchNormLayer} from "./layer/batchNormReducer";
@@ -39,6 +39,10 @@ export default (state={
           layers: state.layers
         }))
       };
+    }
+    case CHANGE_ACTIVATION: {
+      let changedLayer = layerReducer(state.layers[action.layerPosition], action);
+      return {...state, layers: Object.assign([], state.layers, {[action.layerPosition]: changedLayer})};
     }
     case CONVERT_TO_CNN: {
       return {...state, type: CNN};
