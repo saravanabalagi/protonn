@@ -1,33 +1,32 @@
 import React, {Component} from 'react';
-import {Navbar, NavbarBrand, NavbarDropdown, NavbarEnd, NavbarItem, NavbarLink, NavbarMenu, NavbarStart} from "bloomer";
-import logo from 'src/assets/logo-white.svg';
+import {Container, Navbar, NavbarBrand, NavbarEnd, NavbarItem, NavbarMenu, NavbarStart} from "bloomer";
+import logo from 'src/assets/logo-white.png';
 
 class AppNavBar extends Component {
   render() {
     return (
       <Navbar className='is-fixed-top is-dark'>
+        <Container>
         <NavbarBrand>
           <NavbarItem href='/'>
             <img src={logo} style={{ marginRight: 5 }} alt="Logo"/>
-            <div style={{ marginRight: 30 }}>Proto<strong>nn</strong></div>
+            {" Protonn"}
           </NavbarItem>
         </NavbarBrand>
         <NavbarMenu>
           <NavbarStart>
-            <NavbarItem href='/about'>About</NavbarItem>
-            <NavbarItem href='/'>Donate</NavbarItem>
+            <NavbarItem href='/code'>Home</NavbarItem>
           </NavbarStart>
           <NavbarEnd>
-            <NavbarItem href='/code'>Code</NavbarItem>
-            <NavbarItem hasDropdown isHoverable>
-              <NavbarLink>Export</NavbarLink>
-              <NavbarDropdown>
-                <NavbarItem href='/'>SVG</NavbarItem>
-                <NavbarItem href='/'>PNG</NavbarItem>
-              </NavbarDropdown>
+            <NavbarItem href='/'>Donate</NavbarItem>
+            <NavbarItem href='/about'>
+              <span className="icon">
+                <i className="fa fa-github"/>
+              </span>
             </NavbarItem>
           </NavbarEnd>
         </NavbarMenu>
+        </Container>
       </Navbar>
     );
   }
