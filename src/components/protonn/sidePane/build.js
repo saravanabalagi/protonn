@@ -26,6 +26,7 @@ class Build extends Component {
 
   handleAddLayer = (e) => {
     let newLayerPosition = this.getNewLayerPosition();
+    if(isNaN(newLayerPosition) || newLayerPosition===null) return;
     if(newLayerPosition<1 || newLayerPosition>this.props.layers.length) return;
     this.props.dispatch(addLayer(e.currentTarget.getAttribute('identity'), newLayerPosition));
     this.props.redraw();
@@ -51,11 +52,13 @@ class Build extends Component {
     let newLayerPosition = null;
     switch (this.state.addLayerFrom) {
       case addLayerFromStart:
-        if(offset===null) offset = this.state.addLayerFromStartOffset;
+        if(typeof offset === 'undefined')
+          offset = this.state.addLayerFromStartOffset;
         newLayerPosition = offset;
         break;
       case addLayerFromEnd:
-        if(offset===null) offset = this.state.addLayerFromEndOffset;
+        if(typeof offset === 'undefined')
+          offset = this.state.addLayerFromEndOffset;
         newLayerPosition = this.props.layers.length - offset;
         break;
     }
