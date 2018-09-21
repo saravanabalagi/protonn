@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Layers from "./sidePane/layers";
 import {Column, Columns, Icon, Tab, TabLink, TabList, Tabs} from "bloomer";
-import Styling from "./sidePane/styling";
+import Style from "./sidePane/style";
 import './architecture.css';
 import {connect} from "react-redux";
 import Build from "./sidePane/build";
@@ -108,7 +108,7 @@ class Architecture extends Component {
           </Tabs>
           <Layers redraw={this.redraw} sidePaneTab={sidePaneTab} />
           { sidePaneTab===tabBuild && <Build redraw={this.redraw}/>}
-          { sidePaneTab===tabStyle && <Styling redraw={this.redraw}/>}
+          { sidePaneTab===tabStyle && <Style redraw={this.redraw}/>}
         </Column>
         <Column className="mainPanel">
           <Tabs isAlign="centered">

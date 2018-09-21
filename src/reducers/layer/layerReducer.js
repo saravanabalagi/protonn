@@ -5,7 +5,14 @@ import {computeHeightWidth} from "./conv2dActions";
 export const reluActivation = 'reluActivation';
 export const eluActivation = 'eluActivation';
 export const seluActivation = 'seluActivation';
+export const tanhActivation = 'tanhActivation';
 export const sigmoidActivation = 'sigmoidActivation';
+export const hardSigmoidActivation = 'hardSigmoidActivation';
+export const softmaxActivation = 'softmaxActivation';
+export const softPlusActivation = 'softPlusActivation';
+export const softSignActivation = 'softSignActivation';
+export const exponentialActivation = 'exponentialActivation';
+export const linearActivation = 'linearActivation';
 export const noActivation = 'noActivation';
 
 export const displayNameActivations = {
@@ -13,7 +20,14 @@ export const displayNameActivations = {
   eluActivation: 'ELU',
   seluActivation: 'SELU',
   sigmoidActivation: 'Sigmoid',
-  noActivation: 'No Activation'
+  softmaxActivation: 'Softmax',
+  noActivation: 'No Activation',
+  tanhActivation: 'Hyperbolic Tan',
+  hardSigmoidActivation: 'Hard Sigmoid',
+  softPlusActivation: 'SoftPlus',
+  softSignActivation: 'SoftSign',
+  exponentialActivation: 'Exponential',
+  linearActivation: 'Linear/Identity'
 };
 
 export const codeActivations = {
@@ -21,7 +35,14 @@ export const codeActivations = {
   eluActivation: 'elu',
   seluActivation: 'selu',
   sigmoidActivation: 'sigmoid',
-  noActivation: 'none'
+  softmaxActivation: 'softmax',
+  noActivation: 'none',
+  tanhActivation: 'tanh',
+  hardSigmoidActivation: 'hard_sigmoid',
+  softPlusActivation: 'softplus',
+  softSignActivation: 'softsign',
+  exponentialActivation: 'exponential',
+  linearActivation: 'linear'
 };
 
 export default (state, action) => {

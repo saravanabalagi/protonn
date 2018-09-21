@@ -7,6 +7,10 @@
       <w>protonn</w>
       <w>relu</w>
       <w>selu</w>
+      <w>softmax</w>
+      <w>softplus</w>
+      <w>softsign</w>
+      <w>tanh</w>
     </words>
   </dictionary>
 </component>

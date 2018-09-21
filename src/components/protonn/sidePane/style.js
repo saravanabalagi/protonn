@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import './styling.css';
 import {Control, Field} from "bloomer";
+import './style.css';
 
-class Styling extends Component {
+class Style extends Component {
 
   constructor(props) {
     super(props);
@@ -35,4 +35,4 @@ class Styling extends Component {
   }
 }
 
-export default Styling;
+export default Style;
