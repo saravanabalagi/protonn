@@ -15,7 +15,7 @@ import MaxPooling2dLayer from "./layers/maxPooling2d";
 import {batchNormLayer} from "../../../reducers/layer/batchNormReducer";
 import BatchNormLayer from "./layers/batchNorm";
 import {Button} from "bloomer";
-import {addLayer} from "../../../reducers/architectureActions";
+import {addLayer, isValidAddLayer} from "../../../reducers/architectureActions";
 
 class Layers extends Component {
 
@@ -95,11 +95,31 @@ class Layers extends Component {
                         </Button>
                       </div>
                       <div className="addLayerOptions">
-                        <Button className="is-light is-small" layer-position={layer.layerPosition} identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
-                        <Button className="is-light is-small" layer-position={layer.layerPosition} identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
-                        <Button className="is-light is-small" layer-position={layer.layerPosition} identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
-                        <Button className="is-light is-small" layer-position={layer.layerPosition} identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
-                        <Button className="is-light is-small" layer-position={layer.layerPosition} identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
+                        {
+                          isValidAddLayer(denseLayer, layer.layerPosition) &&
+                          <Button className="is-light is-small" layer-position={layer.layerPosition}
+                                  identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
+                        }
+                        {
+                          isValidAddLayer(conv2dLayer, layer.layerPosition) &&
+                          <Button className="is-light is-small" layer-position={layer.layerPosition}
+                                  identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
+                        }
+                        {
+                          isValidAddLayer(maxPooling2dLayer, layer.layerPosition) &&
+                          <Button className="is-light is-small" layer-position={layer.layerPosition}
+                                  identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
+                        }
+                        {
+                          isValidAddLayer(upSampling2dLayer, layer.layerPosition) &&
+                          <Button className="is-light is-small" layer-position={layer.layerPosition}
+                                  identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
+                        }
+                        {
+                          isValidAddLayer(batchNormLayer, layer.layerPosition) &&
+                          <Button className="is-light is-small" layer-position={layer.layerPosition}
+                                  identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
+                        }
                       </div>
                     </div>
                   </div>

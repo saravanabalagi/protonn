@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button} from "bloomer";
 
 import './build.css';
-import {addLayer} from "src/reducers/architectureActions";
+import {addLayer, isValidAddLayer} from "src/reducers/architectureActions";
 import {connect} from "react-redux";
 import {denseLayer} from "../../../reducers/layer/denseReducer";
 import {conv2dLayer} from "../../../reducers/layer/conv2dReducer";
@@ -18,14 +18,26 @@ class Build extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      newLayerPosition: null,
       addLayerFromEndOffset: 0,
       addLayerFromStartOffset: 1,
       addLayerFrom: addLayerFromEnd
     };
   }
 
+  componentDidMount() {
+    this.updateNewLayerPosition();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.layers.length!==this.props.layers.length) {
+      let newLayerPosition = this.getNewLayerPosition(null, nextProps.layers.length);
+      this.setState({newLayerPosition: newLayerPosition});
+    }
+  }
+
   handleAddLayer = (e) => {
-    let newLayerPosition = this.getNewLayerPosition();
+    let newLayerPosition = this.state.newLayerPosition;
     if(isNaN(newLayerPosition) || newLayerPosition===null) return;
     if(newLayerPosition<1 || newLayerPosition>this.props.layers.length) return;
     this.props.dispatch(addLayer(e.currentTarget.getAttribute('identity'), newLayerPosition));
@@ -36,7 +48,7 @@ class Build extends Component {
     let offset = parseInt(e.currentTarget.value);
     let newLayerPosition = this.getNewLayerPosition(offset);
     if(newLayerPosition<1 || newLayerPosition>this.props.layers.length) return;
-    console.log('offset, newLayerPosition', offset, newLayerPosition);
+    this.setState({newLayerPosition: newLayerPosition});
     switch (this.state.addLayerFrom) {
       case addLayerFromStart: this.setState({addLayerFromStartOffset: offset}); break;
       case addLayerFromEnd: this.setState({addLayerFromEndOffset: offset}); break;
@@ -45,24 +57,30 @@ class Build extends Component {
 
   handleRadioChange = (e) => {
     let addLayerFrom = e.currentTarget.getAttribute('id');
-    this.setState({addLayerFrom: addLayerFrom});
+    this.setState({addLayerFrom: addLayerFrom}, this.updateNewLayerPosition);
   };
 
-  getNewLayerPosition = (offset) => {
+  getNewLayerPosition = (offset, layersLength=this.props.layers.length) => {
     let newLayerPosition = null;
     switch (this.state.addLayerFrom) {
       case addLayerFromStart:
-        if(typeof offset === 'undefined')
+        if(typeof offset === 'undefined' || offset === null)
           offset = this.state.addLayerFromStartOffset;
         newLayerPosition = offset;
         break;
       case addLayerFromEnd:
-        if(typeof offset === 'undefined')
+        if(typeof offset === 'undefined' || offset === null)
           offset = this.state.addLayerFromEndOffset;
-        newLayerPosition = this.props.layers.length - offset;
+        newLayerPosition = layersLength - offset;
         break;
     }
+    console.log('newLayerPosition', newLayerPosition);
     return newLayerPosition;
+  };
+
+  updateNewLayerPosition = () => {
+    let newLayerPosition = this.getNewLayerPosition();
+    this.setState({newLayerPosition: newLayerPosition});
   };
 
   render() {
@@ -108,11 +126,29 @@ class Build extends Component {
           }
         </div>
         <div className="addLayerOptions">
-          <Button className="is-light is-small" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
-          <Button className="is-light is-small" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
-          <Button className="is-light is-small" identity={maxPooling2dLayer} onClick={this.handleAddLayer}>MaxPooling2D</Button>
-          <Button className="is-light is-small" identity={upSampling2dLayer} onClick={this.handleAddLayer}>UpSampling2D</Button>
-          <Button className="is-light is-small" identity={batchNormLayer} onClick={this.handleAddLayer}>BatchNorm</Button>
+          {
+            isValidAddLayer(denseLayer, this.state.newLayerPosition) &&
+            <Button className="is-light is-small" identity={denseLayer} onClick={this.handleAddLayer}>Dense</Button>
+          }
+          {
+            isValidAddLayer(conv2dLayer, this.state.newLayerPosition) &&
+            <Button className="is-light is-small" identity={conv2dLayer} onClick={this.handleAddLayer}>Conv2D</Button>
+          }
+          {
+            isValidAddLayer(maxPooling2dLayer, this.state.newLayerPosition) &&
+            <Button className="is-light is-small" identity={maxPooling2dLayer}
+                    onClick={this.handleAddLayer}>MaxPooling2D</Button>
+          }
+          {
+            isValidAddLayer(upSampling2dLayer, this.state.newLayerPosition) &&
+            <Button className="is-light is-small" identity={upSampling2dLayer}
+                    onClick={this.handleAddLayer}>UpSampling2D</Button>
+          }
+          {
+            isValidAddLayer(batchNormLayer, this.state.newLayerPosition) &&
+            <Button className="is-light is-small" identity={batchNormLayer}
+                    onClick={this.handleAddLayer}>BatchNorm</Button>
+          }
         </div>
       </div>
     );

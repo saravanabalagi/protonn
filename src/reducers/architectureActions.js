@@ -6,6 +6,8 @@ import {changeDimensions} from "./layer/inputActions";
 import {defaultMaxPooling2dLayer, maxPooling2dLayer} from "./layer/maxPooling2dReducer";
 import {defaultUpSampling2dLayer, upSampling2dLayer} from "./layer/upSampling2dReducer";
 import {batchNormLayer, defaultBatchNormLayer} from "./layer/batchNormReducer";
+import {CNN} from "../components/protonn/cnn";
+import {DNN} from "../components/protonn/dnn";
 
 export const ADD_LAYER = 'ADD_LAYER';
 export const DELETE_LAYER = 'DELETE_LAYER';
@@ -140,15 +142,47 @@ export function getSpacing() {
   return layers.map((layer)=>layer.spacingWithin || 20);
 }
 
-export function hasOnlyDense() {
-  let layers = store.getState().architecture.layers;
-  let hasOnlyDense = true;
-  for(let layer of layers){
-    if(layer.type === inputLayer) continue;
-    if(layer.type !== denseLayer) {
-      hasOnlyDense = false;
+export function isValidAddLayer(layerType, layerPosition) {
+  let isValid = false;
+  let architectureType = store.getState().architecture.type;
+  console.log('getConvEndPosition', getConvEndPosition());
+  switch (layerType) {
+    case denseLayer:
+      switch (architectureType) {
+        case DNN: isValid = true; break;
+        case CNN:if(layerPosition >= getConvEndPosition()) isValid = true; break;
+      }
       break;
-    }
+    case conv2dLayer:
+      switch (architectureType) {
+        case DNN: isValid = false; break;
+        case CNN:if(layerPosition <= getConvEndPosition()) isValid = true; break;
+      }
+      break;
+    case maxPooling2dLayer:
+      switch (architectureType) {
+        case DNN: isValid = false; break;
+        case CNN:if(layerPosition <= getConvEndPosition()) isValid = true; break;
+      }
+      break;
+    case upSampling2dLayer:
+      switch (architectureType) {
+        case DNN: isValid = false; break;
+        case CNN:if(layerPosition <= getConvEndPosition()) isValid = true; break;
+      }
+      break;
+    case batchNormLayer:
+      isValid = true;
+      break;
   }
-  return hasOnlyDense;
+  return isValid;
+}
+
+function getConvEndPosition() {
+  let layers = store.getState().architecture.layers;
+  return layers.reduceRight((result, layer)=>{
+    if([batchNormLayer, denseLayer].includes(layer.type))
+      return layer.layerPosition;
+    return result;
+  }, layers.length);
 }
