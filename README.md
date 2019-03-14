@@ -1,5 +1,5 @@
 # ProtoNN
-ProtoNN provides visual representation of neural networks and helps you modify the same using a simple interface. Finally, you can export code in python, so you can start training the network right away.
+ProtoNN is a Neural Network Prototyping library. ProtoNN provides visual representation of neural networks and helps you modify the same using a simple interface. Finally, you can export code in python, so you can start training the network right away.
 
 ## Supports
 - Fully Connected Feed Forward Networks
