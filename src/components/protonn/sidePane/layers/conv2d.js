@@ -12,7 +12,8 @@ import {
   changeKernelSize,
   changeWidth
 } from "src/reducers/layer/conv2dActions";
-import {tabBuild, tabStyle} from "../../architecture";
+import {tabActivations, tabBuild, tabStyle} from "../../architecture";
+import Activation from "../activation";
 
 class Conv2DLayer extends Component {
 
@@ -89,6 +90,10 @@ class Conv2DLayer extends Component {
                  value={featureMaps} inputMode="numeric"
                  param={this.FEATURE_MAPS}
                  onChange={this.handleChangeParam}/>
+        }
+        {
+          (this.props.sidePaneTab===tabActivations) &&
+          <Activation layer={this.props.layer} />
         }
         {
           (this.props.sidePaneTab === tabBuild) &&
