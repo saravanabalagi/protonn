@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import 'font-awesome/css/font-awesome.min.css';
 import 'bulma/css/bulma.css';
-import 'src/assets/bulma-extensions.min.css';
+import 'bulma-extensions/dist/css/bulma-extensions.min.css'
 import './app.css';
 
 import AppNavBar from "src/components/navbar/navbar";
